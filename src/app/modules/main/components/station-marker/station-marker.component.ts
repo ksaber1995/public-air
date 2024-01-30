@@ -1,49 +1,47 @@
-import { Component, Input, NgZone } from '@angular/core';
+import { Component, ElementRef, Input, NgZone } from '@angular/core';
 import { ExtendedStation, Station } from '../../../shared/models/Station';
+import { GoogleMap } from '@angular/google-maps';
 
+const content = '<div class="marker-koko" style="background-color: yellow; padding: 52px;">Custom HTML</div>' ;
 @Component({
   selector: 'app-station-marker',
-  templateUrl: './station-marker.component.html',
+  template: '',
+  // templateUrl: './station-marker.component.html',
   styleUrl: './station-marker.component.scss'
 })
 export class StationMarkerComponent {
-  @Input() position: google.maps.LatLngLiteral | undefined;
-  @Input() label: string | undefined;
-  @Input() station : ExtendedStation;
-  
+  content: string | undefined = content;
+  top: number = 100; // Adjust as needed
+  left: number = 100; // Adjust as needed
+
+  constructor(private el: ElementRef, private ngZone: NgZone) {}
+
   ngOnInit(): void {
-    this.addMarker();
+    this.ngZone.runOutsideAngular(() => {
+      const overlay = new google.maps.OverlayView();
+      overlay.draw = this.drawOverlay.bind(this);
+      overlay.setMap((window as any).map);
+    });
   }
 
-  private addMarker(): void {
-    if (this.position) {
-      const marker = new google.maps.Marker({
-        position: this.position,
-        map: new google.maps.Map(document.createElement('div')),
-        icon: {
-          url: 'data:image/svg+xml;charset=UTF-8,' +
-            encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#ffffff" stroke-width="3" fill="#ff0000"/></svg>'),
-          scaledSize: new google.maps.Size(30, 30),
-        },
-      });
-
-      const overlay = new google.maps.OverlayView();
-      overlay.draw = () => {
-        const projection = overlay.getProjection();
-        if (projection) {
-          const position = projection.fromLatLngToDivPixel(this.position);
-          const element = this.getElement();
-          if (element) {
-            element.style.left = position.x - 15 + 'px'; // Adjust for marker width
-            element.style.top = position.y - 30 + 'px';  // Adjust for marker height
-          }
-        }
-      };
-      overlay.setMap(marker.getMap());
+  drawOverlay(): void {
+    const projection = this.getProjection();
+    if (projection) {
+      const position = projection.fromContainerPixelToLatLng(new google.maps.Point(this.left, this.top));
+      const element = this.el.nativeElement.firstChild as HTMLElement;
+      const point = projection.fromLatLngToDivPixel(position);
+      
+      element.style.top = point.y + 'px';
+      element.style.left = point.x + 'px';
     }
   }
 
-  private getElement(): HTMLElement | null {
-    return document.querySelector('.custom-marker');
+  private getProjection(): google.maps.MapCanvasProjection | null {
+    const overlay = this.getOverlay();
+    return overlay ? overlay.getProjection() : null;
+  }
+
+  private getOverlay(): google.maps.OverlayView | null {
+    return new google.maps.OverlayView();
   }
 }

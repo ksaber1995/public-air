@@ -12,8 +12,11 @@ export class HomeComponent implements OnInit{
   public options: google.maps.MapOptions
   stations$ = this.swagger.getStations()
   breakPoints$ = this.swagger.getBreakPoints()
+
+
   
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
+  isloaded: boolean;
 
 
   
@@ -66,19 +69,51 @@ export class HomeComponent implements OnInit{
   };
 
   openInfoWindow(point: any): void {
-    debugger
     point.open();
   }
 
-  cursorChanged(e){
-    console.log(e,'koko')
-  }
 
 
 
   ngOnInit(): void {
+    setTimeout(res=>{
+      this.isloaded = true;
+    }, 10000)
+
     this.stations$.subscribe(res=>{
       console.log(res,'stations')
+    
+
+      this.map.data.add()
     })
   }
+
+  onMapReady(map: any): void {
+    (window as any).map = map; // Store the map globally for access in CustomOverlayComponent
+    // this.isloaded = true
+    // debugger
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
