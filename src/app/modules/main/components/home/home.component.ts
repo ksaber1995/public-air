@@ -1,16 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SwaggerService } from '../../../shared/services/swagger.service';
+import { GoogleMap } from '@angular/google-maps';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   navigatorPosition
   public options: google.maps.MapOptions
+  stations$ = this.swagger.getStations()
+  breakPoints$ = this.swagger.getBreakPoints()
+  
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
+
 
   
-  constructor() {
+  constructor(private swagger: SwaggerService) {
     // navigator.geolocation.getCurrentPosition((position) => {
       // this.navigatorPosition = position;
       // console.log('here', this.navigatorPosition.coords.latitude)
@@ -49,5 +56,29 @@ export class HomeComponent {
         ]
       };
     // })
+  }
+
+
+  infoWindowOptions: google.maps.InfoWindowOptions = {
+    pixelOffset: { width: 0, height: -30 , equals(other) {
+      return this.width === other.width && this.height === other.height;
+    }, }, // Adjust the position of the info window relative to the marker
+  };
+
+  openInfoWindow(point: any): void {
+    debugger
+    point.open();
+  }
+
+  cursorChanged(e){
+    console.log(e,'koko')
+  }
+
+
+
+  ngOnInit(): void {
+    this.stations$.subscribe(res=>{
+      console.log(res,'stations')
+    })
   }
 }

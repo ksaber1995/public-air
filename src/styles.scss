@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.custom-marker{
+    // background-color: blue($color: #000000);
+    display: none;
+
+    &:hover{
+        display: none ;
+    }
+}
