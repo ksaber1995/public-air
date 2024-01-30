@@ -1,0 +1,131 @@
+.bar-wrapper{
+    position: relative;
+    margin-top: 40px;
+    border-radius: 15px;
+    // padding-top: 40px;
+    
+
+    .bar-items{
+        display: flex;
+        border: 4px solid #fff;
+        border-radius: 15px;
+    }
+
+    &:hover{   
+        padding: 30px 10px 10px;
+        background-color: #fff;
+
+        .end{
+            display: inline-flex !important;
+
+            
+        }
+    }
+
+    &.vertical{
+        // transform: rotate(-90deg);
+        display: flex;
+        flex-direction: column-reverse;
+
+        .level:first-child{
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+
+        }
+
+        .level:last-child{
+            border-top-right-radius: 15px;
+            border-top-left-radius: 15px;
+            border-top: 0;
+
+        }
+
+    
+
+        .level{
+            display: inline-block;
+            width: 20px;
+            height: 90px;
+            position: relative;
+    
+
+
+            &.na::after{
+                content: 'Good';
+                position: absolute;
+                bottom: -20px;
+                right: -30px;
+            }
+        
+    
+            .end{
+                position: absolute;
+                top: -30px;
+                right: 0px;
+                display: inline-flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            
+            .bar-value{
+                position: relative;
+                left: -33px;
+                bottom: -19px;
+                font-weight: 500;
+
+            }
+    
+            
+         
+        }
+    
+    }
+
+
+    &.horizontal{  
+        .level{
+            display: inline-block;
+            width: 90px;
+            height: 20px;
+            position: relative;
+            &.na::after{
+                content: 'Good';
+                position: absolute;
+                bottom: -20px;
+                right: -30px;
+            }
+            
+            
+            .end{
+                position: absolute;
+                top: -20px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: none;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            
+            
+            .level:first-child{
+                .bar-value{
+                    position: relative;
+                    right: 0;
+                }
+                
+            }
+            
+            
+        }
+        
+        .level:first-child{
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+        }
+        .level:last-child{
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            border-right: 0;
+        }
+    }
+}
