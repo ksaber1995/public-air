@@ -1,21 +1,91 @@
-.main-wrapper{
+@import 'colors';
+
+
+.main-wrapper {
     height: 100%;
     width: 100%;
     padding: 50px;
 }
-.map-wrapper{
+
+.map-wrapper {
     position: relative;
     width: 100%;
     height: 100%;
-    .bar-wrapper{
+
+    .bar-wrapper {
         position: absolute;
         // top: 80px;
         bottom: 50px;
         transform: translateX(-50%);
         left: 50%;
     }
+
+    .last-update {
+        position: absolute;
+        top: 50px;
+        left: 30px;
+        padding: .5rem;
+        border-radius: 10px;
+        background-color: #fff;
+
+        font-size: .7rem;
+        font-weight: 600;
+    }
+
+    .controllers {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 70px;
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .item {
+            color: $SeaGreen;
+            background-color: #fff;
+            border-radius: 20px;
+            font-size: .8rem;
+            width: 100%;
+            padding: 0 .5rem;
+            width: 50px;
+
+            &.active {
+                background-color: $SeaGreen;
+                color: #fff;
+                border: 1px solid #000;
+                outline: 2px solid #fff;
+
+                &:hover {
+                    .hidden-text {
+
+                        color: #fff !important;
+                    }
+                }
+            }
+
+            .hidden-text {
+                display: none;
+            }
+
+            &:hover {
+                width: auto;
+                border: 0;
+
+                .hidden-text {
+                    width: 150px;
+                    color: #000;
+                    display: inline-block !important;
+                }
+            }
+        }
+
+    }
+
 }
 
-.station-marker{
+.station-marker {
     display: none;
 }
+

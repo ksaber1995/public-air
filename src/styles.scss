@@ -1,11 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'background';
+@import 'map';
 
 
-.custom-marker{
-    // background-color: blue($color: #000000);
-    display: none;
+*{
+    // direction: r ;
+    // text-align: start;
+}
 
-    &:hover{
-        display: none ;
-    }
+.ar{
+    // direction: rtl;
 }

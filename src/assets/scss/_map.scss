@@ -1,0 +1,62 @@
+@import 'colors';
+
+.gm-style-iw {
+    border: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+}
+
+
+
+.gm-ui-hover-effect {
+    display: none !important;
+}
+
+
+.info-windows-title {
+    margin: 10px;
+    display: inline-block;
+    border-radius: 12px;
+    padding: 5px 20px;
+    box-shadow: 0 2px 7px 1px rgba(0, 0, 0, .3);
+    background-color: #fff;
+    border-bottom-width: 3px !important;
+
+}
+.gm-style-iw-tc{
+    top: -11px !important;
+}
+
+.gm-style-iw-d {
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+.good-station {
+    border: 2px solid $Good !important;
+
+}
+
+.moderate-station {
+    border: 2px solid $Moderate !important;
+
+}
+
+.satisfactory-station {
+    border: 2px solid $Satisfactory !important;
+}
+
+.unhealthy-station {
+    border: 2px solid $Unhealthy !important;
+}
+
+.veryUnhealthy-station {
+    border: 2px solid $VeryUnhealthy !important;
+}
+
+
+
+.hazardous-station {
+    border: 2px solid $Hazardous !important;
+}

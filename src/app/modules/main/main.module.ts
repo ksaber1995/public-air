@@ -6,6 +6,7 @@ import { MainRoutingModule } from './main-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { SeverityBarComponent } from './components/severity-bar/severity-bar.component';
 import { StationMarkerComponent } from './components/station-marker/station-marker.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { StationMarkerComponent } from './components/station-marker/station-mark
     CommonModule,
     MainRoutingModule,
     GoogleMapsModule,
+    SharedModule
 
   ]
 })

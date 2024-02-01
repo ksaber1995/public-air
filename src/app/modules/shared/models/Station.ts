@@ -40,7 +40,7 @@ export interface Station {
     name_en: string;
     name_ar: string | null;
     coordinates: string;
-    aqi: Aqi[];
+    aqi: AqiData[];
     variables: Aqi[];
     weather: WeatherData[];
  

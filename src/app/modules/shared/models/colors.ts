@@ -1,7 +1,7 @@
 export const Colors = {
     Good: '#00C800',
     Moderate: '#FFE12D',
-    Satisfactory: '#FF7E00' ,
+    Satisfactory: '#FF7E00',
     Unhealthy: '#FA0A00',
     VeryUnhealthy: '#8F3F97',
     Hazardous: '#7E0023',
@@ -11,3 +11,14 @@ export const Colors = {
     VeryLightGray: 'rgb(231, 231, 231)',
     LightGray: '#D1D1D1',
 }
+
+export const ColorsSequence
+    = [
+        Colors.Gray,
+        Colors.Good,
+        Colors.Moderate,
+        Colors.Satisfactory,
+        Colors.Unhealthy,
+        Colors.VeryUnhealthy,
+        Colors.Hazardous,
+    ]

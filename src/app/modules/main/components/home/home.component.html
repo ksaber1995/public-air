@@ -2,24 +2,64 @@
 
     <div class="map-wrapper">
 
-        <google-map (mapReady)="onMapReady($event)" [options]="options" height="100%" width="100%" #map>
-         
+        <google-map [options]="options" height="100%" width="100%" #map>
+
+            <div class="last-update">
+                آخر تحديث : {{lastUpdate | date: 'yyyy-MM-dd HH:mm:ss'}}
+            </div>
+
+            <div class="controllers">
+                <div *ngFor="let item of controllerItems" class="item-wrapper">
+
+                    <button (click)="onControllerClick(item)" [class.active]="item.id === activeItemId" class="item"
+                        nz-button>
+
+                        {{item.title}}
+
+                        <span class="hidden-text">
+
+                            {{item.label}}
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+
+
             <app-station-marker *ngFor="let station of stations$ | async">
             </app-station-marker>
 
-             
 
 
 
-                <!-- [icon]="'../../../assets/icons/marker.svg'"  -->
+
+            <!--   -->
+
+            <div  *ngFor="let station of stations$ | async" [title]="station.name_en" class="">
 
 
-                <!-- <map-marker [ngClass]="'custom-marker'" *ngFor="let station of stations$ | async" 
-                        [style]="{ color: 'red', fontSize: '16px', backGround: 'blue' }"
-                        [label]="{ text: station.name_en, color: 'white' }" [title]="station.name_en"
-                        [position]="station.position">
-                    </map-marker> -->
+            <map-marker 
+                
+                [options]="markerOptions"
+                #marker="mapMarker"
+                [label]="{text:  station.name_en, className: 'custom-marker-label' } " 
+                (mapMouseover)="openInfoWindow(marker, infoWindow)"
+                (mapMouseout)="closeInfoWindow(marker, infoWindow)"
 
+                 [ngClass]="'custom-marker'"
+                
+                [icon]="'../../../assets/icons/marker/' + station.aqi[0]?.status[0]?.sequence + '.svg'"
+                [position]="station.position">
+
+
+
+
+                    <map-info-window  [options]="{disableAutoPan: true}" [ngStyle]="{ 'border-color': 'blue' }"  #infoWindow="mapInfoWindow"> 
+                        <span class="info-windows-title" [ngClass]="MapClasses[station.aqi[0].status[0].sequence]" [style.color]="ColorsSequence [station.aqi[0].status[0].sequence]">{{station.name_en}}</span>
+                    </map-info-window>
+            </map-marker>
+
+        </div>
 
 
 
