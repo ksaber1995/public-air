@@ -5,6 +5,7 @@ interface ReadingStatus {
 interface Reading {
     aggregated_at: string;
     status: ReadingStatus[];
+    average?: any
 }
 
 interface Variable {

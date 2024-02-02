@@ -19,16 +19,22 @@ export class HomeComponent implements OnInit {
   breakPoints$ = this.swagger.getBreakPoints()
   controllerItems = ControllerItems
   lastUpdate = new Date()
+  showIcon = true;
 
   VariableIds = VariableIds;
 
   IconPath = 'aqi[0]?.status[0]?.sequence'
 
   markerOptions: google.maps.MarkerOptions = {
-    title: 'Marker Title',
     clickable: true,
     // animation: google.maps.Animation.BOUNCE
-    zIndex: 5000
+    zIndex: 5000,
+
+    label: {
+      text:'',
+      fontSize: '20px',
+      
+    }
   };
 
 
@@ -118,17 +124,23 @@ export class HomeComponent implements OnInit {
 
 
   onControllerClick(item: ControllerItem): void {
+    debugger
     this.activeItemId = item.id
-    
+    this.showIcon = this.activeItemId <= 3
+
+    let karim = this.showIcon ? ('../../../assets/icons/marker/' +
+      '1'
+      + '.svg') : ''
+    console.log(karim)
   }
- 
+
   public openInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow) {
-    infoWindow.open(marker, false );
+    infoWindow.open(marker, false);
   }
 
   public closeInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow) {
     infoWindow.close();
   }
 
-  
+
 }

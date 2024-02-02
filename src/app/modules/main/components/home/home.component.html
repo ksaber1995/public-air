@@ -38,12 +38,12 @@
 
 
                     <map-marker [options]="markerOptions" #marker="mapMarker"
-                        [label]="{text:  station.name_en, className: 'custom-marker-label' } "
+                        [label]="!showIcon? {fontSize: '20px', text:  station.labels?.[activeItemId], className: 'custom-marker-label' } : '' "
                         (mapMouseover)="openInfoWindow(marker, infoWindow)"
                         (mapMouseout)="closeInfoWindow(marker, infoWindow)" [ngClass]="'custom-marker'"
                         [icon]=" '../../../assets/icons/marker/' + 
                                 station.sequences?.[activeItemId] 
-                        + '.svg'"
+                        + '.svg'  "
                         [position]="station.position">
 
 

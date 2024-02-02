@@ -30,6 +30,7 @@ export class SwaggerService {
 
     return this.http.get(url).pipe(
       map((res: StationsResponse) => res.stations.map(res => {
+        const temp = res.weather.find(item=> item.variable.abbreviation_en === 'AT');
         return {
           ...res,
           position: {
@@ -40,6 +41,9 @@ export class SwaggerService {
             [VariableIds.AQI]: res.aqi[0]?.status[0]?.sequence || 0,
             [VariableIds.PM10]: res.variables.find(variable=> variable?.variable?.abbreviation_en === 'PM₁₀')?.readings[0]?.status[0]?.sequence || 0,
             [VariableIds.PM25]: res.variables.find(variable=> variable?.variable?.abbreviation_en === 'PM₂.₅')?.readings[0]?.status[0]?.sequence || 0
+          },
+          labels:{
+            [VariableIds.TEMP] : temp?.readings[0]?.average + ' °C'
           }
         }
       }
