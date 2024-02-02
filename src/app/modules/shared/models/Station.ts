@@ -43,13 +43,21 @@ export interface Station {
     aqi: AqiData[];
     variables: Aqi[];
     weather: WeatherData[];
- 
+
 }
 
-export interface ExtendedStation extends Station{
-    position:{
+export interface ExtendedStation extends Station {
+    position: {
         lat: number,
         lng: number
+    },
+
+    sequences: {
+        aqi: number,
+        pm10: number
+        pm25: number
     }
 }
+
+
 

@@ -1,1 +1,22 @@
-<div [innerHTML]="content" style="position: absolute; top: 100px; left: 100px;"></div>
+
+<div *ngFor="let station of stations$ | async" [title]="station.name_en" class="">
+
+
+    <map-marker [options]="markerOptions" #marker="mapMarker"
+        [label]="{text:  station.name_en, className: 'custom-marker-label' } "
+        (mapMouseover)="openInfoWindow(marker, infoWindow)"
+        (mapMouseout)="closeInfoWindow(marker, infoWindow)" [ngClass]="'custom-marker'"
+        [icon]="'../../../assets/icons/marker/' + station.aqi[0]?.status[0]?.sequence + '.svg'"
+        [position]="station.position">
+
+
+
+
+        <map-info-window [options]="{disableAutoPan: true}" [ngStyle]="{ 'border-color': 'blue' }"
+            #infoWindow="mapInfoWindow">
+            <span class="info-windows-title" [ngClass]="MapClasses[station.aqi[0].status[0].sequence]"
+                [style.color]="ColorsSequence [station.aqi[0].status[0].sequence]">{{station.name_en}}</span>
+        </map-info-window>
+    </map-marker>
+
+</div>

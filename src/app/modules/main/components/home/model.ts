@@ -1,3 +1,4 @@
+
 export const ControllerItems : ControllerItem[] = [
     {
         id: 1,
@@ -8,14 +9,14 @@ export const ControllerItems : ControllerItem[] = [
     
     {
         id: 2,
-        title: 'PM2.5',
+        title: 'PM₁₀',
         icon: '',
         label: 'الجسيمات الدقيقة',
     },
 
     {
         id: 3,
-        title: 'Mini',
+        title: 'PM₂.₅',
         icon: '',
         label: 'الجسيمات الأدق'
         

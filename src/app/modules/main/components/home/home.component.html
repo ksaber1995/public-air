@@ -34,10 +34,6 @@
 
 
 
-
-
-                <!--   -->
-
                 <div *ngFor="let station of stations$ | async" [title]="station.name_en" class="">
 
 
@@ -45,7 +41,9 @@
                         [label]="{text:  station.name_en, className: 'custom-marker-label' } "
                         (mapMouseover)="openInfoWindow(marker, infoWindow)"
                         (mapMouseout)="closeInfoWindow(marker, infoWindow)" [ngClass]="'custom-marker'"
-                        [icon]="'../../../assets/icons/marker/' + station.aqi[0]?.status[0]?.sequence + '.svg'"
+                        [icon]=" '../../../assets/icons/marker/' + 
+                                station.sequences?.[activeItemId] 
+                        + '.svg'"
                         [position]="station.position">
 
 

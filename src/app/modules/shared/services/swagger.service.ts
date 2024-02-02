@@ -1,3 +1,4 @@
+import { VariableIds } from './../models/variables';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ExtendedStation, Station } from '../models/Station';
@@ -28,7 +29,21 @@ export class SwaggerService {
     const url = BaseUrl + '/stations'
 
     return this.http.get(url).pipe(
-      map((res: StationsResponse) => res.stations.map(res => ({ ...res, position: { lng: +res.coordinates.split(',')[0]?.substring(1), lat: +res.coordinates.split(',')[1]?.slice(0, -1) } }))), shareReplay())
+      map((res: StationsResponse) => res.stations.map(res => {
+        return {
+          ...res,
+          position: {
+            lng: +res.coordinates.split(',')[0]?.substring(1),
+            lat: +res.coordinates.split(',')[1]?.slice(0, -1)
+          },
+          sequences:{
+            [VariableIds.AQI]: res.aqi[0]?.status[0]?.sequence || 0,
+            [VariableIds.PM10]: res.variables.find(variable=> variable?.variable?.abbreviation_en === 'PM₁₀')?.readings[0]?.status[0]?.sequence || 0,
+            [VariableIds.PM25]: res.variables.find(variable=> variable?.variable?.abbreviation_en === 'PM₂.₅')?.readings[0]?.status[0]?.sequence || 0
+          }
+        }
+      }
+      )), shareReplay())
   }
 
   getStation(id: string) {

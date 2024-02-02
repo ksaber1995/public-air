@@ -3,6 +3,7 @@ import { SwaggerService } from '../../../shared/services/swagger.service';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { ControllerItem, ControllerItems, MapClasses } from './model';
 import { ColorsSequence } from '../../../shared/models/colors';
+import { VariableIds } from '../../../shared/models/variables';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,9 @@ export class HomeComponent implements OnInit {
   controllerItems = ControllerItems
   lastUpdate = new Date()
 
+  VariableIds = VariableIds;
+
+  IconPath = 'aqi[0]?.status[0]?.sequence'
 
   markerOptions: google.maps.MarkerOptions = {
     title: 'Marker Title',
@@ -30,7 +34,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   isloaded: boolean;
-  activeItemId: number = 1;
+  activeItemId: VariableIds.AQI = 1;
 
 
 
@@ -41,13 +45,13 @@ export class HomeComponent implements OnInit {
 
     this.options = {
       center: {
-        lat: 23.8859,
-        lng: 45.0792
+        lat: 23.49366666666641,
+        lng: 58.24966666666646
         // lng: this.navigatorPosition.coords.longitude,
       },
       // zoomControl: true,
       mapTypeControl: false,
-      zoom: 7,
+      zoom: 9,
       mapTypeId: 'terrain', // Use 'terrain' map type to emphasize borders
 
       streetViewControl: false,
@@ -115,25 +119,16 @@ export class HomeComponent implements OnInit {
 
   onControllerClick(item: ControllerItem): void {
     this.activeItemId = item.id
-
     
   }
-
-
-
-
-
-
  
   public openInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow) {
     infoWindow.open(marker, false );
   }
 
   public closeInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow) {
-    // infoWindow.close();
-
-    // marker.cl 
+    infoWindow.close();
   }
 
-
+  
 }
