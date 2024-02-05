@@ -1,20 +1,39 @@
 <div [class.vertical]="type === 'vertical'" [class.horizontal]="type === 'horizontal'" class="bar-wrapper">
 
     <div class="bar-items">
-        <ng-container *ngFor="let level of levels">
+        <ng-container *ngFor="let breakPoint of breakPoints;index as i; last as isLast">
 
-            <div *ngIf="level.name !=='na'" [class.na]="level.name === 'na'" [ngStyle]="{'background': level.color}"
-                class="level">
-                
+            <div [ngStyle]="{'background': breakPoint.color} " class="level">
+                <span class="text" *ngIf="i === 0 || isLast">
+                    {{breakPoint.message}}
+                </span>
                 <span class="end">
                     <div class="bar-value">
 
-                        {{level.end}}
+                        {{breakPoint.breakpoint_start}}-{{breakPoint.breakpoint_end}}
+
+                        <span *ngIf="i === 0"> {{unit}}</span>
                     </div>
                 </span>
             </div>
         </ng-container>
+
     </div>
 
+    <div class="bar-items">
+
+        <div class="na lightGray-bg level">
+            <span class="text">
+                Not Applicable
+            </span>
+
+            <span class="end">
+                <div class="bar-value">
+
+                </div>
+
+            </span>
+        </div>
+    </div>
 
 </div>

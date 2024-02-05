@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SwaggerService } from '../../../shared/services/swagger.service';
+import { BreakPointsResponse, SwaggerService } from '../../../shared/services/swagger.service';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { ControllerItem, ControllerItems, MapClasses } from './model';
 import { ColorsSequence } from '../../../shared/models/colors';
-import { VariableIds } from '../../../shared/models/variables';
+import { VariableIds, VariablesCodes } from '../../../shared/models/variables';
+import { combineLatest } from 'rxjs';
+import { ExtendedStation } from '../../../shared/models/Station';
+import { BreakPoint, VariableBreakPoint } from '../../../shared/models/breakPoint';
 
 @Component({
   selector: 'app-home',
@@ -22,8 +25,6 @@ export class HomeComponent implements OnInit {
   showIcon = true;
 
   VariableIds = VariableIds;
-
-  IconPath = 'aqi[0]?.status[0]?.sequence'
 
   markerOptions: google.maps.MarkerOptions = {
     clickable: true,
@@ -46,8 +47,13 @@ export class HomeComponent implements OnInit {
   }
 
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
-  isloaded: boolean;
+  isLoaded: boolean;
   activeItemId: VariableIds = 1;
+  stations: ExtendedStation[];
+
+  breakPoints: BreakPointsResponse;
+  activeBreakPoints: BreakPoint[] | VariableBreakPoint[] = [];
+  unit: string = 'ug/m3';
 
   constructor(private swagger: SwaggerService) {
     // navigator.geolocation.getCurrentPosition((position) => {
@@ -93,45 +99,48 @@ export class HomeComponent implements OnInit {
 
   infoWindowOptions: google.maps.InfoWindowOptions = {
     pixelOffset: {
-      width: 0, height: -30, equals(other) {
+      width: 0, 
+      height: 10, 
+      equals(other) {
         return this.width === other.width && this.height === other.height;
       },
     }, // Adjust the position of the info window relative to the marker
   };
 
-
-
-
   ngOnInit(): void {
-    setTimeout(res => {
-      this.isloaded = true;
-    }, 10000)
-
-    this.stations$.subscribe(res => {
-      console.log(res, 'stations')
-
-
-    })
-
-
-    this.breakPoints$.subscribe(res => {
-      console.log(res, 'break points')
-
-
-    })
+    this.getData();
   }
 
+  getData() {
+    combineLatest([this.stations$, this.breakPoints$])
+      .subscribe(([stations, breakpoints])=>{
+        this.stations = stations;
+        this.breakPoints = breakpoints
+        this.getActiveBreakpointsRange()
+        this.isLoaded = true 
+      })
+  }
 
-
-
-
-
-
+  getActiveBreakpointsRange() {
+    if(this.activeItemId === VariableIds.AQI){
+      this.activeBreakPoints = this.breakPoints.aqi_breakpoints?.sort((a,b)=> a.sequence - b.sequence)
+      this.unit = ''
+      
+    }else if([VariableIds.PM25, VariableIds.PM10].includes(this.activeItemId)){
+      // const variableId = 
+      this.unit = 'ug/m3'
+      
+      this.activeBreakPoints = this.breakPoints.variables_breakpoints.filter(breakpoint=> breakpoint.variable_id === VariablesCodes [this.activeItemId] )?.sort((a,b)=> a.sequence - b.sequence)
+    }else{
+      this.activeBreakPoints = []
+    }
+   
+  }
 
   onControllerClick(item: ControllerItem): void {
     this.activeItemId = item.id
     this.showIcon = this.activeItemId <= 3
-
+    this.getActiveBreakpointsRange()
     // console.log(karim)
   }
 

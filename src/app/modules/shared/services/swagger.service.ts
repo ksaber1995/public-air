@@ -13,7 +13,7 @@ interface StationsResponse {
 }
 
 
-interface BreakPointsResponse {
+export interface BreakPointsResponse {
   aqi_breakpoints: BreakPoint[]
   variables_breakpoints: VariableBreakPoint[]
 
@@ -26,7 +26,7 @@ interface BreakPointsResponse {
 export class SwaggerService {
   constructor(private http: HttpClient) { }
 
-  getStations() {
+  getStations()  : Observable<ExtendedStation[]> {
     const url = BaseUrl + '/stations'
 
     return this.http.get(url).pipe(
@@ -50,19 +50,21 @@ export class SwaggerService {
             [VariableIds.TEMP] : {
               label:  temp?.readings[0]?.average ? temp?.readings[0]?.average  + ' °C' : 'NA',
               color:   ColorsSequence [ Math.floor(Math.random() * 6) ],
+              class: 'custom-map-label'
             },
             [VariableIds.WIND] : {
               label:  wind?.readings[0]?.average ? Math.floor(wind?.readings[0]?.average)  + ''   : 'NA', // it Must be string
               isDegree: true,
               color: '#fff', 
-              class: 'wind-label ' + WindClassesSequence[wind?.readings[0]?.average ? Math.floor(wind?.readings[0]?.average / 60) : 0]
+              class: 'custom-map-label wind-label ' + WindClassesSequence[wind?.readings[0]?.average ? Math.floor(wind?.readings[0]?.average / 60) : 0]
             },
             [VariableIds.HUM] : {
               label:   hum?.readings[0]?.average ? hum?.readings[0]?.average  + ' %' : 'NA',
               color:  ColorsSequence [ Math.floor(Math.random() * 6) ],
+              class: 'custom-map-label'
             },
           }
-        }
+        } 
       }
       )), shareReplay())
   }

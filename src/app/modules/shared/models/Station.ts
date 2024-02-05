@@ -54,13 +54,11 @@ export interface ExtendedStation extends Station {
     },
 
     sequences: {
-        aqi: number,
-        pm10: number
-        pm25: number
+        [id: number]: number,
     },
     
     labels: {
-        [id: string]: {
+        [id: number]: {
             label: string,
             color: string,
             isDegree?: boolean

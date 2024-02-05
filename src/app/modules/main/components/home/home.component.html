@@ -53,7 +53,7 @@
 
 
 
-                        <map-info-window [options]="{disableAutoPan: true}" [ngStyle]="{ 'border-color': 'blue' }"
+                        <map-info-window [options]="infoWindowOptions" [ngStyle]="{ 'border-color': 'blue' }"
                             #infoWindow="mapInfoWindow">
                             <span class="info-windows-title" [ngClass]="MapClasses[station.aqi[0].status[0].sequence]"
                                 [style.color]="ColorsSequence [station.aqi[0].status[0].sequence]" >{{station.name_en}}</span>
@@ -64,8 +64,8 @@
 
 
 
-                <div class="bar-wrapper">
-                    <app-severity-bar [type]="'horizontal'"> </app-severity-bar>
+                <div *ngIf="activeItemId <= 3" class="bar-wrapper">
+                    <app-severity-bar [unit]="unit" [breakPoints]="activeBreakPoints" [type]="'horizontal'"> </app-severity-bar>
                 </div>
             </google-map>
         </div>
