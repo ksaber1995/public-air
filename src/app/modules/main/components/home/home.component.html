@@ -38,9 +38,13 @@
 
 
                     <map-marker [options]="markerOptions" #marker="mapMarker"
-                        [label]="!showIcon? {fontSize: '20px', text:  station.labels?.[activeItemId], className: 'custom-marker-label' } : '' "
+                        [label]=" 
+                            !showIcon ?  
+                            { color: activeItemId === VariableIds.WIND ? '#fff' :  ColorsSequence [1], fontSize: '18px', fontWeight: 'bold',  text:  station.labels?.[activeItemId]?.label , className: station.labels?.[activeItemId]?.class } : '' "
+                        
                         (mapMouseover)="openInfoWindow(marker, infoWindow)"
                         (mapMouseout)="closeInfoWindow(marker, infoWindow)" [ngClass]="'custom-marker'"
+                        
                         [icon]=" '../../../assets/icons/marker/' + 
                                 station.sequences?.[activeItemId] 
                         + '.svg'  "
@@ -52,7 +56,7 @@
                         <map-info-window [options]="{disableAutoPan: true}" [ngStyle]="{ 'border-color': 'blue' }"
                             #infoWindow="mapInfoWindow">
                             <span class="info-windows-title" [ngClass]="MapClasses[station.aqi[0].status[0].sequence]"
-                                [style.color]="ColorsSequence [station.aqi[0].status[0].sequence]">{{station.name_en}}</span>
+                                [style.color]="ColorsSequence [station.aqi[0].status[0].sequence]" >{{station.name_en}}</span>
                         </map-info-window>
                     </map-marker>
 

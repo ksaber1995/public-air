@@ -30,19 +30,24 @@ export class HomeComponent implements OnInit {
     // animation: google.maps.Animation.BOUNCE
     zIndex: 5000,
 
-    label: {
-      text:'',
-      fontSize: '20px',
-      
-    }
+      // label: {
+      //   text:'',
+      //   fontSize: '20px',
+      //  fontWeight: 'bold',
+      //  color: 'blue' 
+      // }
   };
 
+  labelConfig =   {
+    text:'',
+    fontSize: '20px',
+   fontWeight: 'bold',
+   color: 'blue' 
+  }
 
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   isloaded: boolean;
-  activeItemId: VariableIds.AQI = 1;
-
-
+  activeItemId: VariableIds = 1;
 
   constructor(private swagger: SwaggerService) {
     // navigator.geolocation.getCurrentPosition((position) => {
@@ -62,15 +67,15 @@ export class HomeComponent implements OnInit {
 
       streetViewControl: false,
       styles: [
-        {
-          "featureType": "water",
-          "elementType": "geometry",
-          "stylers": [
-            { color: '#96cccb99' }
+        // {
+        //   "featureType": "water",
+        //   "elementType": "geometry",
+        //   "stylers": [
+        //     { color: '#96cccb99' }
 
 
-          ]
-        },
+        //   ]
+        // },
         // {
         //   "featureType": "landscape",
         //   "elementType": "geometry",
@@ -124,14 +129,10 @@ export class HomeComponent implements OnInit {
 
 
   onControllerClick(item: ControllerItem): void {
-    debugger
     this.activeItemId = item.id
     this.showIcon = this.activeItemId <= 3
 
-    let karim = this.showIcon ? ('../../../assets/icons/marker/' +
-      '1'
-      + '.svg') : ''
-    console.log(karim)
+    // console.log(karim)
   }
 
   public openInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow) {

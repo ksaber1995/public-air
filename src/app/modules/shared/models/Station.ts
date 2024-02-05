@@ -57,7 +57,16 @@ export interface ExtendedStation extends Station {
         aqi: number,
         pm10: number
         pm25: number
-    }
+    },
+    
+    labels: {
+        [id: string]: {
+            label: string,
+            color: string,
+            isDegree?: boolean
+            class?: string,
+        }
+      }
 }
 
 
