@@ -74,3 +74,32 @@
 .white{
   color: white;
 }
+
+
+.good-border{
+  border-color: $Good !important; 
+}
+.moderate-border{
+  border-color: $Moderate !important;
+}
+.satisfactory-border{
+  border-color: $Satisfactory !important;
+}
+.unhealthy-border{
+  border-color: $Unhealthy !important;
+}
+.veryUnhealthy-border{
+  border-color: $VeryUnhealthy !important;
+}
+.hazardous-border{
+  border-color: $Hazardous !important;
+}
+.gray-border{
+  border-color: $Gray;
+}
+.darkGray-border{
+  border-color: $DarkGray;
+}
+.seaGreen-border{
+  border-color: $SeaGreen
+}

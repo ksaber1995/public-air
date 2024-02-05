@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { ExtendedStation, Station } from '../models/Station';
 import { Observable, combineLatest, map, shareReplay } from 'rxjs';
 import { BreakPoint, VariableBreakPoint } from '../models/breakPoint';
-import { ColorsSequence } from '../models/colors';
+import { WindClassesSequence, ColorsSequence } from '../models/colors';
 
 const BaseUrl = 'https://rm.adv3.com/naqi/v1/public'
 
@@ -33,6 +33,7 @@ export class SwaggerService {
       map((res: StationsResponse) => res.stations.map(res => {
         const temp = res.weather.find(item=> item.variable.abbreviation_en === 'AT');
         const wind = res.weather.find(item=> item.variable.abbreviation_en === 'WD');
+        const hum = res.weather.find(item=> item.variable.abbreviation_en === 'RH');
 
         return {
           ...res,
@@ -48,12 +49,18 @@ export class SwaggerService {
           labels:{
             [VariableIds.TEMP] : {
               label:  temp?.readings[0]?.average ? temp?.readings[0]?.average  + ' °C' : 'NA',
+              color:   ColorsSequence [ Math.floor(Math.random() * 6) ],
             },
             [VariableIds.WIND] : {
               label:  wind?.readings[0]?.average ? Math.floor(wind?.readings[0]?.average)  + ''   : 'NA', // it Must be string
               isDegree: true,
-              class: 'wind-label'
-            }
+              color: '#fff', 
+              class: 'wind-label ' + WindClassesSequence[wind?.readings[0]?.average ? Math.floor(wind?.readings[0]?.average / 60) : 0]
+            },
+            [VariableIds.HUM] : {
+              label:   hum?.readings[0]?.average ? hum?.readings[0]?.average  + ' %' : 'NA',
+              color:  ColorsSequence [ Math.floor(Math.random() * 6) ],
+            },
           }
         }
       }

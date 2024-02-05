@@ -22,3 +22,14 @@ export const ColorsSequence
         Colors.VeryUnhealthy,
         Colors.Hazardous,
     ]
+
+
+export const WindClassesSequence
+    = [
+        'good-bg good-border',
+        'moderate-bg moderate-border',
+        'satisfactory-bg satisfactory-border',
+        'unhealthy-bg unhealthy-border',
+        'veryUnhealthy-bg veryUnhealthy-border',
+        'hazardous-bg hazardous-border',
+    ]
