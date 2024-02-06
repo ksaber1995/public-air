@@ -1,0 +1,32 @@
+<div>
+  <div class="custom-header">
+    <div class="item">
+      <h2>
+        مؤشر جودة الهواء AQI
+      </h2>
+
+      <p>
+        هو مؤشر لجودة الهواء في منطقة محددة، يشيؤ إلى نقاوة الهواء والتأثيرات الصحية المرتبطة به. يحتسب من أعلى تراكيز لخمس ملوثات؛ أول أكسيد الكربون، وثاني أكسيد النيتروجين، وثاني أكسيد الكبريت، والأوزون السطحي، والجسيمات ذات القطر أقل من 10 ميكرون
+      </p>
+    </div>
+ 
+  </div>
+
+  
+    <h2 class="station-name text-center">
+      {{station.name_en}}
+    </h2>
+  
+
+    <div class="divider"></div>
+
+
+    <p class="footer">  
+      <button nz-button class="close-btn" (click)="destroyModal()">
+        <span nz-icon nzType="close" nzTheme="outline"></span>
+        اغلاق
+      
+      </button>
+    </p>
+
+  </div>

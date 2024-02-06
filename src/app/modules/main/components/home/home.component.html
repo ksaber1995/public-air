@@ -37,7 +37,9 @@
                 <div *ngFor="let station of stations$ | async" [title]="station.name_en" class="">
 
 
-                    <map-marker [options]="markerOptions" #marker="mapMarker"
+                    <map-marker 
+                        (mapClick)="onStationClick(station)"
+                        [options]="markerOptions" #marker="mapMarker"
                         [label]=" 
                             !showIcon ?  
                             {  color: station.labels?.[activeItemId]?.color, fontSize: '18px', fontWeight: 'bold',  text:  station.labels?.[activeItemId]?.label , className: station.labels?.[activeItemId]?.class } : '' "
@@ -53,7 +55,7 @@
 
 
 
-                        <map-info-window [options]="infoWindowOptions" [ngStyle]="{ 'border-color': 'blue' }"
+                        <map-info-window  [options]="infoWindowOptions" [ngStyle]="{ 'border-color': 'blue' }"
                             #infoWindow="mapInfoWindow">
                             <span class="info-windows-title" [ngClass]="MapClasses[station.aqi[0].status[0].sequence]"
                                 [style.color]="ColorsSequence [station.aqi[0].status[0].sequence]" >{{station.name_en}}</span>

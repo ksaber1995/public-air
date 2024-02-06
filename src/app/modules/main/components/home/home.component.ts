@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { BreakPointsResponse, SwaggerService } from '../../../shared/services/swagger.service';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { ControllerItem, ControllerItems, MapClasses } from './model';
@@ -7,6 +7,8 @@ import { VariableIds, VariablesCodes } from '../../../shared/models/variables';
 import { combineLatest } from 'rxjs';
 import { ExtendedStation } from '../../../shared/models/Station';
 import { BreakPoint, VariableBreakPoint } from '../../../shared/models/breakPoint';
+import { StationDetailsComponent } from '../station-details/station-details.component';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-home',
@@ -31,19 +33,19 @@ export class HomeComponent implements OnInit {
     // animation: google.maps.Animation.BOUNCE
     zIndex: 5000,
 
-      // label: {
-      //   text:'',
-      //   fontSize: '20px',
-      //  fontWeight: 'bold',
-      //  color: 'blue' 
-      // }
+    // label: {
+    //   text:'',
+    //   fontSize: '20px',
+    //  fontWeight: 'bold',
+    //  color: 'blue' 
+    // }
   };
 
-  labelConfig =   {
-    text:'',
+  labelConfig = {
+    text: '',
     fontSize: '20px',
-   fontWeight: 'bold',
-   color: 'blue' 
+    fontWeight: 'bold',
+    color: 'blue'
   }
 
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
@@ -55,7 +57,7 @@ export class HomeComponent implements OnInit {
   activeBreakPoints: BreakPoint[] | VariableBreakPoint[] = [];
   unit: string = 'ug/m3';
 
-  constructor(private swagger: SwaggerService) {
+  constructor(private swagger: SwaggerService, private modal: NzModalService, private viewContainerRef: ViewContainerRef) {
     // navigator.geolocation.getCurrentPosition((position) => {
     // this.navigatorPosition = position;
     // console.log('here', this.navigatorPosition.coords.latitude)
@@ -99,8 +101,8 @@ export class HomeComponent implements OnInit {
 
   infoWindowOptions: google.maps.InfoWindowOptions = {
     pixelOffset: {
-      width: 0, 
-      height: 10, 
+      width: 0,
+      height: 10,
       equals(other) {
         return this.width === other.width && this.height === other.height;
       },
@@ -113,28 +115,28 @@ export class HomeComponent implements OnInit {
 
   getData() {
     combineLatest([this.stations$, this.breakPoints$])
-      .subscribe(([stations, breakpoints])=>{
+      .subscribe(([stations, breakpoints]) => {
         this.stations = stations;
         this.breakPoints = breakpoints
         this.getActiveBreakpointsRange()
-        this.isLoaded = true 
+        this.isLoaded = true
       })
   }
 
   getActiveBreakpointsRange() {
-    if(this.activeItemId === VariableIds.AQI){
-      this.activeBreakPoints = this.breakPoints.aqi_breakpoints?.sort((a,b)=> a.sequence - b.sequence)
+    if (this.activeItemId === VariableIds.AQI) {
+      this.activeBreakPoints = this.breakPoints.aqi_breakpoints?.sort((a, b) => a.sequence - b.sequence)
       this.unit = ''
-      
-    }else if([VariableIds.PM25, VariableIds.PM10].includes(this.activeItemId)){
+
+    } else if ([VariableIds.PM25, VariableIds.PM10].includes(this.activeItemId)) {
       // const variableId = 
       this.unit = 'ug/m3'
-      
-      this.activeBreakPoints = this.breakPoints.variables_breakpoints.filter(breakpoint=> breakpoint.variable_id === VariablesCodes [this.activeItemId] )?.sort((a,b)=> a.sequence - b.sequence)
-    }else{
+
+      this.activeBreakPoints = this.breakPoints.variables_breakpoints.filter(breakpoint => breakpoint.variable_id === VariablesCodes[this.activeItemId])?.sort((a, b) => a.sequence - b.sequence)
+    } else {
       this.activeBreakPoints = []
     }
-   
+
   }
 
   onControllerClick(item: ControllerItem): void {
@@ -152,5 +154,27 @@ export class HomeComponent implements OnInit {
     infoWindow.close();
   }
 
+  onStationClick(station: ExtendedStation) {
+    console.log(station)
 
+    this.createComponentModal(station)
+  }
+
+
+  createComponentModal(station: ExtendedStation): void {
+    const modal = this.modal.create<StationDetailsComponent, any>({
+      nzContent: StationDetailsComponent,
+      nzViewContainerRef: this.viewContainerRef,
+      nzData: {
+        station,
+      },
+      nzCloseIcon: null,
+      nzFooter: null,
+      nzClassName: 'station-details-modal',
+      nzWidth: '55%',
+
+    });
+
+    const instance = modal.getContentComponent();
+  }
 }

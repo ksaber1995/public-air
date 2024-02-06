@@ -8,6 +8,7 @@ import { SeverityBarComponent } from './components/severity-bar/severity-bar.com
 import { StationMarkerComponent } from './components/station-marker/station-marker.component';
 import { SharedModule } from '../shared/shared.module';
 import { TabComponent } from './components/tab/tab.component';
+import { StationDetailsComponent } from './components/station-details/station-details.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { TabComponent } from './components/tab/tab.component';
     HomeComponent,
     SeverityBarComponent,
     StationMarkerComponent,
-    TabComponent
+    TabComponent,
+    StationDetailsComponent
   ],
 
   imports: [

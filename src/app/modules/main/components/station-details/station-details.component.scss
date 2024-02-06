@@ -1,0 +1,57 @@
+@import 'colors';
+
+::ng-deep .station-details-modal .ant-modal-content {
+    background-image: linear-gradient(to bottom ,  $lightSeaGreen 10%, #fff 90%);
+    
+   
+    border-radius: 20px;
+}
+
+.custom-header{
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+    background-color: #fff;
+    padding:  1rem;
+    color: #333;
+    margin: 0 5rem;
+    .item{
+        p{
+            font-size: .8rem;
+        }
+    }
+}
+
+
+
+.station-name{
+    text-align: center;
+    margin: 1rem 0;
+}
+
+
+
+.divider{
+    background-color: $SeaGreen;
+    height: 1px;
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .close-btn{
+        border-radius: 0px;
+        color: $SeaGreen;
+        border: 1px solid $SeaGreen;
+
+        padding: 10px 30px;
+        border-radius: 8px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
