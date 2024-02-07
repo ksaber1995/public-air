@@ -4,14 +4,16 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
-const Icons =[
+const Icons = [
 
 ]
 
 const importsExports = [
   NzButtonModule,
   NzModalModule,
+  NzDividerModule
 ]
 
 @NgModule({
@@ -19,10 +21,10 @@ const importsExports = [
   imports: [
     CommonModule,
     ...importsExports,
-  NzIconModule.forRoot(Icons)
+    NzIconModule.forRoot(Icons)
 
   ],
-  exports:[
+  exports: [
     ...importsExports,
     NzIconModule
   ]

@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   stations$ = this.swagger.getStations()
   breakPoints$ = this.swagger.getBreakPoints()
   controllerItems = ControllerItems
-  lastUpdate = new Date()
+  lastUpdate : Date  ;
   showIcon = true;
 
   VariableIds = VariableIds;
@@ -117,6 +117,15 @@ export class HomeComponent implements OnInit {
     combineLatest([this.stations$, this.breakPoints$])
       .subscribe(([stations, breakpoints]) => {
         this.stations = stations;
+      
+      const lastUpdateStation =  this.stations.reduce((a,b)=> {
+          let date = a.aqi[0].aggregated_at > b.aqi[0].aggregated_at 
+          
+           if(date) return a; else return b
+        }) 
+    
+        this.lastUpdate = new Date (lastUpdateStation.aqi[0].aggregated_at)
+
         this.breakPoints = breakpoints
         this.getActiveBreakpointsRange()
         this.isLoaded = true
@@ -171,7 +180,7 @@ export class HomeComponent implements OnInit {
       nzCloseIcon: null,
       nzFooter: null,
       nzClassName: 'station-details-modal',
-      nzWidth: '55%',
+      nzWidth: '50%',
 
     });
 

@@ -1,57 +1,59 @@
 
-export const ControllerItems : ControllerItem[] = [
+export const ControllerItems: ControllerItem[] = [
     {
         id: 1,
         title: 'AQI',
-        icon: '',
         label: 'مؤشر جودة الهواء',
     },
-    
+
     {
         id: 2,
         title: 'PM₁₀',
-        icon: '',
         label: 'الجسيمات الدقيقة',
     },
 
     {
         id: 3,
         title: 'PM₂.₅',
-        icon: '',
         label: 'الجسيمات الأدق'
-        
+
     },
-    
+
     {
         id: 4,
-        title: 'Temp',
-        icon: '',
+        icon: true,
+        inactiveIcon: 'assets/icons/home/inactive/temp.svg',
+        activeIcon: 'assets/icons/home/active/temp.svg',
         label: 'درجة الحرارة'
-        
+
     },
 
     {
         id: 5,
-        title: 'Wind',
-        icon: '',
+        icon: true,
+        inactiveIcon: 'assets/icons/home/inactive/wind.svg',
+        activeIcon: 'assets/icons/home/active/wind.svg',
         label: 'الرياح'
-        
+
     },
 
     {
         id: 6,
-        title: 'hum',
-        icon: '',
+        icon: true,
+        inactiveIcon: 'assets/icons/home/inactive/humidity.svg',
+        activeIcon: 'assets/icons/home/active/humidity.svg',
         label: 'الرطوبة النسبية'
-        
+
     },
-    
+
 ]
 
 export interface ControllerItem {
     id: number
     title?: string
-    icon?: string
+    icon?: boolean
+    inactiveIcon?: string
+    activeIcon?: string
     label: string
 }
 

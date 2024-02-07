@@ -17,7 +17,15 @@
                         <button (click)="onControllerClick(item)" [class.active]="item.id === activeItemId" class="item"
                             nz-button>
 
-                            {{item.title}}
+                            <ng-container *ngIf="item.title">
+                                {{item.title}}
+                            </ng-container>
+
+                            <ng-container *ngIf="item.icon">
+                                <img  *ngIf="item.id !== activeItemId" [src]="item.inactiveIcon">
+                                <img *ngIf="item.id === activeItemId" [src]="item.activeIcon">
+                            </ng-container>
+                            
 
                             <span class="hidden-text">
 

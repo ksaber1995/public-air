@@ -22,6 +22,16 @@
 }
 
 
+.content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin: 1rem 3rem;
+    .content-item{
+        flex-grow: 1;
+    }
+}
 
 .station-name{
     text-align: center;
