@@ -24,6 +24,19 @@ export const ColorsSequence
     ]
 
 
+export const LightColorsSequence
+    = [
+        `rgba($color: ${Colors.Gray} , $alpha: .4)` ,
+        `rgba($color: ${Colors.Good} , $alpha: .4)` ,
+        `rgba($color: ${Colors.Moderate} , $alpha: .4)` ,
+        `rgba($color: ${Colors.Satisfactory} , $alpha: .4)` ,
+        `rgba($color: ${Colors.Unhealthy} , $alpha: .4)` ,
+        `rgba($color: ${Colors.VeryUnhealthy} , $alpha: .4)` ,
+        `rgba($color: ${Colors.Hazardous} , $alpha: .4)` ,
+    ]
+       
+
+
 export const WindClassesSequence
     = [
         'good-bg good-border',

@@ -4,24 +4,34 @@ interface ReadingStatus {
 
 interface Reading {
     aggregated_at: string;
-    status: ReadingStatus[];
-    average?: any
+    value?: any
+
+    
 }
 
 interface Variable {
-    id: number;
+    code: string;
     abbreviation_en: string;
     name_en: string | null;
     name_ar: string | null;
 }
 
 interface Unit {
-    code: string;
+    abbreviation_en: string
+    name_ar: string
+    name_en: string
 }
 
 interface AqiData {
     aggregated_at: string;
-    status: ReadingStatus[];
+    color: string,
+    sequence: number,
+    status_ar: string,
+    status_en: string
+    variable: {
+        abbreviation_en: string,
+        code: string
+    }
 }
 
 interface Aqi {
@@ -31,6 +41,10 @@ interface Aqi {
 }
 
 interface WeatherData {
+
+
+
+
     variable: Variable;
     unit: Unit;
     readings: Reading[];
@@ -40,31 +54,25 @@ export interface Station {
     id: number;
     name_en: string;
     name_ar: string | null;
-    coordinates: string;
     aqi: AqiData[];
     variables: Aqi[];
     weather: WeatherData[];
-
+    latitude: number;
+    longitude: number;
 }
 
 export interface ExtendedStation extends Station {
-    position: {
-        lat: number,
-        lng: number
-    },
-
-    sequences: {
-        [id: number]: number,
-    },
-    
-    labels: {
+    brief: {
         [id: number]: {
-            label: string,
             color: string,
+            sequence?: number,
+            label?: string,
             isDegree?: boolean
             class?: string,
         }
-      }
+    },
+
+
 }
 
 

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { ExtendedStation } from '../../../shared/models/Station';
 import { StationContent } from './model';
+import { ColorsSequence, LightColorsSequence } from '../../../shared/models/colors';
 
 interface IModalData {
   station: ExtendedStation
@@ -16,6 +17,8 @@ export class StationDetailsComponent {
   isVisibleMiddle = true;
   title
   subtitle
+  ColorsSequence = ColorsSequence
+  LightColorsSequence = LightColorsSequence
   readonly nzModalData: IModalData = inject(NZ_MODAL_DATA);
   readonly #modal = inject(NzModalRef);
   station: ExtendedStation
@@ -27,7 +30,7 @@ export class StationDetailsComponent {
   constructor(){
     this.station = this.nzModalData.station
 
-    this.content =  StationContent[this.station.aqi[0].status[0].sequence]
+    this.content =  StationContent[this.station.aqi[0].sequence]
     console.log(this.station,'modal data')
   }
 

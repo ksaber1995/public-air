@@ -1,26 +1,27 @@
+import { VariablesCodes } from "../../../shared/models/variables"
 
 export const ControllerItems: ControllerItem[] = [
     {
-        id: 1,
+        id: VariablesCodes.AQI,
         title: 'AQI',
         label: 'مؤشر جودة الهواء',
     },
 
     {
-        id: 2,
+        id: VariablesCodes.PM10,
         title: 'PM₁₀',
         label: 'الجسيمات الدقيقة',
     },
 
     {
-        id: 3,
+        id: VariablesCodes.PM25,
         title: 'PM₂.₅',
         label: 'الجسيمات الأدق'
 
     },
 
     {
-        id: 4,
+        id: VariablesCodes.TEMP,
         icon: true,
         inactiveIcon: 'assets/icons/home/inactive/temp.svg',
         activeIcon: 'assets/icons/home/active/temp.svg',
@@ -29,7 +30,7 @@ export const ControllerItems: ControllerItem[] = [
     },
 
     {
-        id: 5,
+        id: VariablesCodes.WIND,
         icon: true,
         inactiveIcon: 'assets/icons/home/inactive/wind.svg',
         activeIcon: 'assets/icons/home/active/wind.svg',
@@ -38,7 +39,7 @@ export const ControllerItems: ControllerItem[] = [
     },
 
     {
-        id: 6,
+        id: VariablesCodes.HUM,
         icon: true,
         inactiveIcon: 'assets/icons/home/inactive/humidity.svg',
         activeIcon: 'assets/icons/home/active/humidity.svg',
@@ -49,7 +50,7 @@ export const ControllerItems: ControllerItem[] = [
 ]
 
 export interface ControllerItem {
-    id: number
+    id: VariablesCodes
     title?: string
     icon?: boolean
     inactiveIcon?: string

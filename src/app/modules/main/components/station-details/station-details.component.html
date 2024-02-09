@@ -1,39 +1,38 @@
-<div>
+<div >
+  <h2 class="station-name text-center">
+    {{station.name_en}}
+  </h2>
+
   <div class="custom-header">
     <div class="item">
-      <h2>
-        مؤشر جودة الهواء AQI
+      <h2 class="station-name text-center">
+        {{station.name_en}}
       </h2>
-
-      <p>
-        هو مؤشر لجودة الهواء في منطقة محددة، يشيؤ إلى نقاوة الهواء والتأثيرات الصحية المرتبطة به. يحتسب من أعلى تراكيز
-        لخمس ملوثات؛ أول أكسيد الكربون، وثاني أكسيد النيتروجين، وثاني أكسيد الكبريت، والأوزون السطحي، والجسيمات ذات
-        القطر أقل من 10 ميكرون
-      </p>
+    
     </div>
 
   </div>
 
 
-  <h2 class="station-name text-center">
-    {{station.name_en}}
-  </h2>
+ 
+  <div nz-row  class="content">
+    <div class="" nz-col nzSpan="12">
 
-  <div class="content">
-    <div class="index">
-
+      <div [style.background]=" LightColorsSequence [station?.aqi[0].color]"  [style.color]=" ColorsSequence [station?.aqi[0].color] || '#D1D1D1'" [style.border-color]="ColorsSequence [station?.aqi[0]?.color] || '#D1D1D1'"  class="index">
+        
+        karim
+      </div>
     </div>
 
-    <div class="variables">
+    <div nz-col nzSpan="12" class="">
 
-      <div  class="variables">
+      <div  class="variables" nz-row>
 
-        <div *ngFor="let variable of station.variables" class="variable">
-          <p class="title">
-            {{variable.variable.abbreviation_en }} <nz-divider nzType="vertical"></nz-divider>
-             {{variable.readings[0].average}} {{variable.unit.code}}
-          </p>
-        </div>
+
+          <!-- <div *ngFor="let variable of station.variables" [style.background]="ColorsSequence [variable?.readings[0]?.status[0]?.sequence] || '#D1D1D1'"  class="variable">
+              {{variable.variable.abbreviation_en }} <nz-divider style="border-color: #fff;" nzType="vertical"></nz-divider>
+              {{variable.readings[0].average}} {{variable.unit.code}}
+          </div> -->
 
       </div>
     </div>
@@ -42,6 +41,18 @@
 
   <div class="divider"></div>
 
+
+  <div class="aqi-summary">
+    <h2>
+      مؤشر جودة الهواء AQI
+    </h2>
+
+    <p>
+      هو مؤشر لجودة الهواء في منطقة محددة، يشيؤ إلى نقاوة الهواء والتأثيرات الصحية المرتبطة به. يحتسب من أعلى تراكيز
+      لخمس ملوثات؛ أول أكسيد الكربون، وثاني أكسيد النيتروجين، وثاني أكسيد الكبريت، والأوزون السطحي، والجسيمات ذات
+      القطر أقل من 10 ميكرون
+    </p>
+  </div>
 
   <p class="footer">
     <button nz-button class="close-btn" (click)="destroyModal()">

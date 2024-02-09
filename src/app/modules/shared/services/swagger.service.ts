@@ -1,4 +1,4 @@
-import { VariableIds } from './../models/variables';
+import {  VariablesCodes } from './../models/variables';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ExtendedStation, Station } from '../models/Station';
@@ -7,7 +7,6 @@ import { BreakPoint, VariableBreakPoint } from '../models/breakPoint';
 import { WindClassesSequence, ColorsSequence } from '../models/colors';
 
 const BaseUrl = 'https://rm.adv3.com/naqi/v1/public'
-
 interface StationsResponse {
   stations: ExtendedStation[]
 }
@@ -15,7 +14,7 @@ interface StationsResponse {
 
 export interface BreakPointsResponse {
   aqi_breakpoints: BreakPoint[]
-  variables_breakpoints: VariableBreakPoint[]
+  variables: VariableBreakPoint[]
 
 }
 
@@ -31,39 +30,41 @@ export class SwaggerService {
 
     return this.http.get(url).pipe(
       map((res: StationsResponse) => res.stations.map(res => {
-        const temp = res.weather.find(item=> item.variable.abbreviation_en === 'AT');
-        const wind = res.weather.find(item=> item.variable.abbreviation_en === 'WD');
-        const hum = res.weather.find(item=> item.variable.abbreviation_en === 'RH');
+        const temp = res.weather.find(item=> item.variable.code === VariablesCodes.TEMP);
+        const wind = res.weather.find(item=> item.variable.code === VariablesCodes.WIND);
+        const hum = res.weather.find(item=> item.variable.code === VariablesCodes.HUM);
 
+        debugger
         return {
           ...res,
-          position: {
-            lng: +res.coordinates.split(',')[0]?.substring(1),
-            lat: +res.coordinates.split(',')[1]?.slice(0, -1)
-          },
-          sequences:{
-            [VariableIds.AQI]: res.aqi[0]?.status[0]?.sequence || 0,
-            [VariableIds.PM10]: res.variables.find(variable=> variable?.variable?.abbreviation_en === 'PM₁₀')?.readings[0]?.status[0]?.sequence || 0,
-            [VariableIds.PM25]: res.variables.find(variable=> variable?.variable?.abbreviation_en === 'PM₂.₅')?.readings[0]?.status[0]?.sequence || 0
-          },
-          labels:{
-            [VariableIds.TEMP] : {
-              label:  temp?.readings[0]?.average ? temp?.readings[0]?.average  + ' °C' : 'NA',
+
+          brief:{
+            [VariablesCodes.AQI]: {color: res.aqi[0].color, sequence : res.aqi[0].sequence || 0}, 
+            [VariablesCodes.PM25]: {color: res.aqi.find(item=> item?.variable?.code === VariablesCodes.PM25)?.color, sequence : res.aqi.find(item=> item?.variable?.code === 'PM25')?.sequence || 0},
+            [VariablesCodes.PM10]: {color:  res.aqi.find(item=> item?.variable?.code === VariablesCodes.PM10)?.color, sequence : res.aqi.find(item=> item?.variable?.code === 'PM10')?.sequence || 0},
+
+
+            [VariablesCodes.TEMP] : {
+              label:  temp?.readings[0].value ? temp?.readings[0].value  + temp?.unit.abbreviation_en : 'NA',
               color:   ColorsSequence [ Math.floor(Math.random() * 6) ],
               class: 'custom-map-label'
             },
-            [VariableIds.WIND] : {
-              label:  wind?.readings[0]?.average ? Math.floor(wind?.readings[0]?.average)  + ''   : 'NA', // it Must be string
+
+            [VariablesCodes.WIND] : {
+              label:  wind?.readings[0]?.value ? Math.floor(wind?.readings[0]?.value)  + ''   : 'NA', // it Must be string
               isDegree: true,
               color: '#fff', 
-              class: 'custom-map-label wind-label ' + WindClassesSequence[wind?.readings[0]?.average ? Math.floor(wind?.readings[0]?.average / 60) : 0]
+              class: 'custom-map-label wind-label ' + WindClassesSequence[wind?.readings[0]?.value ? Math.floor(wind?.readings[0]?.value / 60) : 0]
             },
-            [VariableIds.HUM] : {
-              label:   hum?.readings[0]?.average ? hum?.readings[0]?.average  + ' %' : 'NA',
+
+            [VariablesCodes.HUM] : {
+              label:   hum?.readings[0]?.value ? hum?.readings[0]?.value  + hum?.unit.abbreviation_en : 'NA',
               color:  ColorsSequence [ Math.floor(Math.random() * 6) ],
               class: 'custom-map-label'
             },
-          }
+          },
+
+         
         } 
       }
       )), shareReplay())
@@ -76,39 +77,6 @@ export class SwaggerService {
   }
 
 
-  getBreakPointsStations(){
-    const stations$ = this.getStations();
-    const breakPoints$ = this.getBreakPoints();
-
-    combineLatest([stations$, breakPoints$])
-      .pipe(map(([stations, breakpoints])=>{
-
-        const mappedStations = stations.map(res=>{
-            const temp = res.weather.find(item=> item.variable.abbreviation_en === 'AT');
-
-           return {
-            ...res,
-            position: {
-              lng: +res.coordinates.split(',')[0]?.substring(1),
-              lat: +res.coordinates.split(',')[1]?.slice(0, -1)
-            },
-            sequences:{
-              [VariableIds.AQI]: res.aqi[0]?.status[0]?.sequence || 0,
-              [VariableIds.PM10]: res.variables.find(variable=> variable?.variable?.abbreviation_en === 'PM₁₀')?.readings[0]?.status[0]?.sequence || 0,
-              [VariableIds.PM25]: res.variables.find(variable=> variable?.variable?.abbreviation_en === 'PM₂.₅')?.readings[0]?.status[0]?.sequence || 0
-            },
-            labels:{
-              [VariableIds.TEMP] : {
-                label:  temp?.readings[0]?.average + ' °C' ,
-                // color: breakpoints.,
-              }
-            }
-          }
-        })
-
-
-      }))
-  }
 
   getBreakPoints(): Observable<BreakPointsResponse> {
     const url = BaseUrl + '/breakpoints'

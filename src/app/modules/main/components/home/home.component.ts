@@ -3,7 +3,7 @@ import { BreakPointsResponse, SwaggerService } from '../../../shared/services/sw
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { ControllerItem, ControllerItems, MapClasses } from './model';
 import { ColorsSequence } from '../../../shared/models/colors';
-import { VariableIds, VariablesCodes } from '../../../shared/models/variables';
+import { VariablesCodes } from '../../../shared/models/variables';
 import { combineLatest } from 'rxjs';
 import { ExtendedStation } from '../../../shared/models/Station';
 import { BreakPoint, VariableBreakPoint } from '../../../shared/models/breakPoint';
@@ -23,10 +23,9 @@ export class HomeComponent implements OnInit {
   stations$ = this.swagger.getStations()
   breakPoints$ = this.swagger.getBreakPoints()
   controllerItems = ControllerItems
-  lastUpdate : Date  ;
-  showIcon = true;
+  lastUpdate: Date;
 
-  VariableIds = VariableIds;
+  VariablesCodes = VariablesCodes;
 
   markerOptions: google.maps.MarkerOptions = {
     clickable: true,
@@ -50,11 +49,12 @@ export class HomeComponent implements OnInit {
 
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   isLoaded: boolean;
-  activeItemId: VariableIds = 1;
+  activeItemId: VariablesCodes = VariablesCodes.AQI;
+
   stations: ExtendedStation[];
 
   breakPoints: BreakPointsResponse;
-  activeBreakPoints: BreakPoint[] | VariableBreakPoint[] = [];
+  activeBreakPoints: BreakPoint[] = [];
   unit: string = 'ug/m3';
 
   constructor(private swagger: SwaggerService, private modal: NzModalService, private viewContainerRef: ViewContainerRef) {
@@ -117,14 +117,14 @@ export class HomeComponent implements OnInit {
     combineLatest([this.stations$, this.breakPoints$])
       .subscribe(([stations, breakpoints]) => {
         this.stations = stations;
-      
-      const lastUpdateStation =  this.stations.reduce((a,b)=> {
-          let date = a.aqi[0].aggregated_at > b.aqi[0].aggregated_at 
-          
-           if(date) return a; else return b
-        }) 
-    
-        this.lastUpdate = new Date (lastUpdateStation.aqi[0].aggregated_at)
+        console.log(this.stations)
+        const lastUpdateStation = this.stations.reduce((a, b) => {
+          let date = a.aqi[0].aggregated_at > b.aqi[0].aggregated_at
+
+          if (date) return a; else return b
+        })
+
+        this.lastUpdate = new Date(lastUpdateStation.aqi[0].aggregated_at)
 
         this.breakPoints = breakpoints
         this.getActiveBreakpointsRange()
@@ -133,15 +133,19 @@ export class HomeComponent implements OnInit {
   }
 
   getActiveBreakpointsRange() {
-    if (this.activeItemId === VariableIds.AQI) {
+    if (this.activeItemId === VariablesCodes.AQI) {
       this.activeBreakPoints = this.breakPoints.aqi_breakpoints?.sort((a, b) => a.sequence - b.sequence)
       this.unit = ''
 
-    } else if ([VariableIds.PM25, VariableIds.PM10].includes(this.activeItemId)) {
+    } else if ([VariablesCodes.PM25, VariablesCodes.PM10].includes(this.activeItemId)) {
       // const variableId = 
       this.unit = 'ug/m3'
 
-      this.activeBreakPoints = this.breakPoints.variables_breakpoints.filter(breakpoint => breakpoint.variable_id === VariablesCodes[this.activeItemId])?.sort((a, b) => a.sequence - b.sequence)
+
+      this.activeBreakPoints =
+        this.breakPoints.variables.filter(breakpoint => breakpoint.code === VariablesCodes[this.activeItemId])?.sort((a, b) => a.variable_breakpoints.sequence - b.variable_breakpoints.sequence)
+          ?.map(res => res.variable_breakpoints)
+
     } else {
       this.activeBreakPoints = []
     }
@@ -150,9 +154,9 @@ export class HomeComponent implements OnInit {
 
   onControllerClick(item: ControllerItem): void {
     this.activeItemId = item.id
-    this.showIcon = this.activeItemId <= 3
+
+    
     this.getActiveBreakpointsRange()
-    // console.log(karim)
   }
 
   public openInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow) {
