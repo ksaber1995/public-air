@@ -69,6 +69,7 @@ export interface ExtendedStation extends Station {
             label?: string,
             isDegree?: boolean
             class?: string,
+            iconPath?: string
         }
     },
 

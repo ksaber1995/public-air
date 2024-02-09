@@ -12,21 +12,37 @@
 }
 
 
-.wind-label{
-    border-radius: 50%;
-    padding: .5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    // border: 2px  dashed !important;
-    border-style: dashed !important;
-    border-width: 2px !important;
-    font-size: 10px !important;
-    width: 33px;
-    height: 33px;
-    background-clip: content-box;
-    padding: 1px;
+.pointer:hover{
+    cursor: pointer;
 }
+
+.wind-label{
+    // border-radius: 50%;
+    // padding: .5rem;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // border: 2px  dashed !important;
+    // border-style: dashed !important;
+    // border-width: 2px !important;
+    font-size: 14px !important;
+    position: relative;
+    top: -4px;
+    left: -3px;
+    // width: 33px;
+    // height: 33px;
+    // background-clip: content-box;
+    // padding: 1px;
+}
+
+.centered-label{
+    font-size: 14px !important;
+    position: relative;
+    top: -4px;
+    left: -3px;
+    
+}
+
 
 .custom-map-label{
     direction: ltr;

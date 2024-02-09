@@ -11,7 +11,7 @@
                     آخر تحديث : {{lastUpdate | date: 'yyyy-MM-dd HH:mm:ss'}}
                 </div>
 
-                <div class="controllers">
+                <div class="controllers pointer">
                     <div *ngFor="let item of controllerItems" class="item-wrapper">
 
                         <button (click)="onControllerClick(item)" [class.active]="item.id === activeItemId" class="item"
@@ -45,12 +45,10 @@
                 <div *ngFor="let station of stations$ | async" [title]="station.name_en" class="">
 
 
-                    <!-- [label]=" 
-                    !showIcon ?  
-                    {  color: station.labels?.[activeItemId]?.color, fontSize: '18px', fontWeight: 'bold',  text:  station.labels?.[activeItemId]?.label , className: station.labels?.[activeItemId]?.class } : '' "
-                 -->
+                    
 
                     <map-marker 
+                        
                         (mapClick)="onStationClick(station)"
                         [options]="markerOptions" #marker="mapMarker"
                         [label]=" 
@@ -60,10 +58,8 @@
                         (mapMouseover)="openInfoWindow(marker, infoWindow)"
                         (mapMouseout)="closeInfoWindow(marker, infoWindow)" [ngClass]="'custom-marker'"
                         
-                        [icon]=" '../../../assets/icons/marker/' + 
-                                station.brief?.[activeItemId]?.sequence 
-                        + '.svg'  "
-
+                        [icon]=" station.brief?.[activeItemId]?.iconPath  || '..'"
+                    id="karim"
                         [position]="{lat: +station.latitude, lng: +station.longitude}">
 
 

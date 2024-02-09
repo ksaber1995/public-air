@@ -14,5 +14,5 @@ export interface VariableBreakPoint {
     description_ar: string
     description_en: string
     name_ar: string
-    variable_breakpoints: BreakPoint
+    variable_breakpoints: BreakPoint []
 }

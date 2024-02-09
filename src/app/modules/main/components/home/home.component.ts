@@ -36,16 +36,9 @@ export class HomeComponent implements OnInit {
     //   text:'',
     //   fontSize: '20px',
     //  fontWeight: 'bold',
-    //  color: 'blue' 
+      
     // }
   };
-
-  labelConfig = {
-    text: '',
-    fontSize: '20px',
-    fontWeight: 'bold',
-    color: 'blue'
-  }
 
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   isLoaded: boolean;
@@ -143,9 +136,8 @@ export class HomeComponent implements OnInit {
 
 
       this.activeBreakPoints =
-        this.breakPoints.variables.filter(breakpoint => breakpoint.code === VariablesCodes[this.activeItemId])?.sort((a, b) => a.variable_breakpoints.sequence - b.variable_breakpoints.sequence)
-          ?.map(res => res.variable_breakpoints)
-
+        this.breakPoints.variables.find(breakpoint => breakpoint.code === VariablesCodes[this.activeItemId])?.variable_breakpoints
+        ?.sort((a, b) => a.sequence - b.sequence)
     } else {
       this.activeBreakPoints = []
     }
