@@ -1,49 +1,74 @@
-<div >
-  <h2 class="station-name text-center">
+<div>
+  <h1 class="station-name text-center">
     {{station.name_en}}
-  </h2>
+  </h1>
 
-  <div class="custom-header">
-    <div class="item">
-      <h2 class="station-name text-center">
-        {{station.name_en}}
-      </h2>
-    
+
+
+  <div class="content">
+    <div [style.background]="lightColors [station.aqi[0].sequence || 0]" class="img">
+      <img [src]="'assets/icons/details/' + station.aqi[0].sequence + '.svg'" alt="">
+
+      <span [style.color]="station.aqi[0].color" class="aqi">AQI</span>
     </div>
 
+    <div class="variables-wrapper">
+
+      <div class="variables">
+
+
+
+        <div *ngFor="let variable of station.variables" [style.background]="variable?.readings[0]?.color || '#d1d1d1'"
+          class="variable">
+          <span [style.color]=" variable.readings[0].sequence == 2 ? 'black' : 'white'" class="variable-name">
+
+            {{variable.variable.abbreviation_en }}
+          </span>
+
+          <span class="variable-value">
+
+            <!-- {{variable.readings[0].average}} {{variable.unit.code}} -->
+          </span>
+        </div>
+      </div>
+
+      <div class="brief text-center">
+        {{content.description}}
+      </div>
+    </div>
   </div>
 
 
- 
-  <div nz-row  class="content">
-    <div class="" nz-col nzSpan="12">
 
-      <div [style.background]=" LightColorsSequence [station?.aqi[0].color]"  [style.color]=" ColorsSequence [station?.aqi[0].color] || '#D1D1D1'" [style.border-color]="ColorsSequence [station?.aqi[0]?.color] || '#D1D1D1'"  class="index">
+  <div class="aqi-instructions d-flex">
+
+    <div *ngFor="let item of content.instructions" class="instruct-item d-flex flex-direction-column ">
+
+      <div [style.background]="lightColors [station.aqi[0].sequence || 0]"  class="instruct-img-wrapper">
         
-        karim
+        <img width="45" height="45" [src]="item.icon" alt="">
       </div>
+      
+      <p class="instruction-title">
+        {{item.content}}
+      </p>
     </div>
-
-    <div nz-col nzSpan="12" class="">
-
-      <div  class="variables" nz-row>
-
-
-          <!-- <div *ngFor="let variable of station.variables" [style.background]="ColorsSequence [variable?.readings[0]?.status[0]?.sequence] || '#D1D1D1'"  class="variable">
-              {{variable.variable.abbreviation_en }} <nz-divider style="border-color: #fff;" nzType="vertical"></nz-divider>
-              {{variable.readings[0].average}} {{variable.unit.code}}
-          </div> -->
-
-      </div>
-    </div>
+    
   </div>
 
 
-  <div class="divider"></div>
+  <ng-container *ngIf="history">
+
+
+    <div  class="history">
+        
+        <app-history-chart [history]="history"></app-history-chart>
+    </div>
+  </ng-container>
 
 
   <div class="aqi-summary">
-    <h2>
+    <h2 class="aqi-title">
       مؤشر جودة الهواء AQI
     </h2>
 
@@ -52,6 +77,12 @@
       لخمس ملوثات؛ أول أكسيد الكربون، وثاني أكسيد النيتروجين، وثاني أكسيد الكبريت، والأوزون السطحي، والجسيمات ذات
       القطر أقل من 10 ميكرون
     </p>
+
+    <a (click)="downloadPdf()"  style="font-size: 1rem;" class="seaGreen download ">
+      <img src="assets/icons/pdf.svg" alt="">
+    
+      لتحميل الدليل الإرشادي لمؤشر جودة الهواء
+    </a>
   </div>
 
   <p class="footer">

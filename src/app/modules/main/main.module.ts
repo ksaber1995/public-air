@@ -9,6 +9,8 @@ import { StationMarkerComponent } from './components/station-marker/station-mark
 import { SharedModule } from '../shared/shared.module';
 import { TabComponent } from './components/tab/tab.component';
 import { StationDetailsComponent } from './components/station-details/station-details.component';
+import { HistoryChartComponent } from './components/history-chart/history-chart.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -17,14 +19,16 @@ import { StationDetailsComponent } from './components/station-details/station-de
     SeverityBarComponent,
     StationMarkerComponent,
     TabComponent,
-    StationDetailsComponent
+    StationDetailsComponent,
+    HistoryChartComponent
   ],
 
   imports: [
     CommonModule,
     MainRoutingModule,
     GoogleMapsModule,
-    SharedModule
+    SharedModule,
+    NgChartsModule
 
   ]
 })

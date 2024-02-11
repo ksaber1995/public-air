@@ -4,9 +4,9 @@ interface ReadingStatus {
 
 interface Reading {
     aggregated_at: string;
+    color?: string
+    sequence? : number
     value?: any
-
-    
 }
 
 interface Variable {
@@ -22,7 +22,7 @@ interface Unit {
     name_en: string
 }
 
-interface AqiData {
+export interface AqiData {
     aggregated_at: string;
     color: string,
     sequence: number,
@@ -41,17 +41,17 @@ interface Aqi {
 }
 
 interface WeatherData {
-
-
-
-
     variable: Variable;
     unit: Unit;
     readings: Reading[];
 }
 
+export interface HistoryData extends Station{
+    dates : Array< {date: string , data : AqiData[]} >
+}
+
 export interface Station {
-    id: number;
+    code: string;
     name_en: string;
     name_ar: string | null;
     aqi: AqiData[];

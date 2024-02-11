@@ -22,7 +22,7 @@ export const StationContent = {
         description: 'قد تعاني الفئات الحساسة من تأثيرات صحية',
         instructions: [
             { icon: 'assets/icons/satisfactory/1.svg', content: 'مرضى الربو: اتبع التوصيات الطبية' },
-            { icon: 'assets/icons/satisfactory/2.svg', content: 'يمكن أن يعاني الأفراد الحساسين جدًا من علامات السعال وضيق التنفس أو التعب غير المعتاد'  },
+            { icon: 'assets/icons/satisfactory/2.svg', content: 'يمكن أن يعاني الأفراد الحساسين جدًا من علامات السعال وضيق التنفس أو التعب غير المعتاد' },
             { icon: 'assets/icons/satisfactory/3.svg', content: 'يجب على الفئات الحساسة الحد من الأنشطة المطولة أو المكثفة الخارجية' },
             { icon: 'assets/icons/satisfactory/4.svg', content: 'اغلق النوافذ لتجنب الهواء الخارجي الملوث' },
         ]
@@ -32,7 +32,7 @@ export const StationContent = {
         description: 'غير صحية - تأثيرات صحية للجميع',
         instructions: [
             { icon: 'assets/icons/unhealthy/1.svg', content: 'ارتد القناع الطبي بالخارج' },
-            { icon: 'assets/icons/unhealthy/2.svg', content: 'يمكن أن يعاني الأفراد الحساسين جدًا من علامات السعال وضيق التنفس أو التعب غير المعتاد'  },
+            { icon: 'assets/icons/unhealthy/2.svg', content: 'يمكن أن يعاني الأفراد الحساسين جدًا من علامات السعال وضيق التنفس أو التعب غير المعتاد' },
             { icon: 'assets/icons/unhealthy/3.svg', content: 'تجنب الأنشطة الخارجية' },
             { icon: 'assets/icons/unhealthy/4.svg', content: 'اغلق النوافذ لتجنب الهواء الخارجي الملوث' },
         ]
@@ -57,8 +57,18 @@ export const StationContent = {
             { icon: 'assets/icons/hazardous/2.svg', content: 'قم بتشغيل جهاز تنقية الهواء' },
             { icon: 'assets/icons/hazardous/3.svg', content: 'تجنب الأنشطة الخارجية' },
             { icon: 'assets/icons/hazardous/4.svg', content: 'اغلق النوافذ لتجنب الهواء الخارجي الملوث' },
-         
+
         ]
     },
 
 }
+
+export const lightColors = [
+    '#D1D1D1',
+    '#DBFFDB',
+    '#FFF7C4',
+    '#FFF6F1',
+    '#FFEEED',
+    '#FDEBFF',
+    '#FFE8EF'
+]

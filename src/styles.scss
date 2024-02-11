@@ -8,12 +8,25 @@
 }
 
 .ar{
+
     // direction: rtl;
+}
+
+.text-center{
+    text-align: center;
 }
 
 
 .pointer:hover{
     cursor: pointer;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.flex-direction-column{
+    flex-direction: column;
 }
 
 .wind-label{
@@ -46,4 +59,8 @@
 
 .custom-map-label{
     direction: ltr;
+}
+
+.rounded{
+    border-radius: 50%;
 }

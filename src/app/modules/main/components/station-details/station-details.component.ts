@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { ExtendedStation } from '../../../shared/models/Station';
-import { StationContent } from './model';
-import { ColorsSequence, LightColorsSequence } from '../../../shared/models/colors';
-
+import { ColorsSequence } from '../../../shared/models/colors';
+import { SwaggerService } from './../../../shared/services/swagger.service';
+import { StationContent, lightColors } from './model';
+import { HttpClient } from '@angular/common/http';
 interface IModalData {
   station: ExtendedStation
 }
@@ -13,32 +14,67 @@ interface IModalData {
   templateUrl: './station-details.component.html',
   styleUrl: './station-details.component.scss'
 })
-export class StationDetailsComponent {
+
+export class StationDetailsComponent implements OnInit{
   isVisibleMiddle = true;
   title
   subtitle
+  lightColors = lightColors
   ColorsSequence = ColorsSequence
-  LightColorsSequence = LightColorsSequence
   readonly nzModalData: IModalData = inject(NZ_MODAL_DATA);
   readonly #modal = inject(NzModalRef);
   station: ExtendedStation
-  content: any;
+  history: any;
+  content ;
   handleCancelMiddle(){
 
   }
 
-  constructor(){
+  constructor(private swagger: SwaggerService, private http: HttpClient){
     this.station = this.nzModalData.station
 
-    this.content =  StationContent[this.station.aqi[0].sequence]
-    console.log(this.station,'modal data')
+    this.content = StationContent[this.station.aqi[0].sequence || 0]
+
+    console.log(this.nzModalData,'modal data')
   }
 
-  handleOkMiddle(){
-
+  ngOnInit(): void {
+    this. swagger.getHistory(this.nzModalData.station.code).subscribe(res=>{      
+      this.history = res;
+    })
   }
+
+
 
   destroyModal(): void {
     this.#modal.destroy({ data: 'this the result data' });
+  }
+
+  downloadPdf() {
+    // Path to the PDF file within the assets folder
+    const pdfUrl = 'assets/pdf/aqi.pdf';
+
+    // Make a GET request to fetch the PDF file as a blob
+    this.http.get(pdfUrl, { responseType: 'blob' }).subscribe((blob: Blob) => {
+      // Create a URL for the blob
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a temporary link element
+      const link = document.createElement('a');
+      link.href = url;
+
+      // Set the filename for the downloaded file
+      link.setAttribute('download', 'aqi.pdf');
+
+      // Append the link to the body
+      document.body.appendChild(link);
+
+      // Trigger the download
+      link.click();
+
+      // Clean up
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    });
   }
 }

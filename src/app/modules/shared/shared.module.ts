@@ -15,7 +15,7 @@ const importsExports = [
   NzButtonModule,
   NzModalModule,
   NzDividerModule,
-  NzGridModule
+  NzGridModule,
 ]
 
 @NgModule({

@@ -1,14 +1,18 @@
-import { VariablesCodes } from './../models/variables';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ExtendedStation, Station } from '../models/Station';
-import { Observable, combineLatest, map, shareReplay } from 'rxjs';
+import { Observable, map, shareReplay } from 'rxjs';
+import { AqiData, ExtendedStation, HistoryData, Station } from '../models/Station';
 import { BreakPoint, VariableBreakPoint } from '../models/breakPoint';
-import { WindClassesSequence, ColorsSequence } from '../models/colors';
+import { ColorsSequence } from '../models/colors';
+import { VariablesCodes } from './../models/variables';
 
 const BaseUrl = 'https://rm.adv3.com/naqi/v1/public'
 interface StationsResponse {
   stations: ExtendedStation[]
+}
+
+interface HistoryResponse {
+  stations: HistoryData[]
 }
 
 export function getRandomNumber(max = 1000) {
@@ -54,14 +58,14 @@ export class SwaggerService {
               color: PM25?.color,
               sequence: PM25?.sequence || 0,
               iconPath: 'assets/icons/marker/' +
-               ( PM25?.sequence || 0) + '.svg'
+                (PM25?.sequence || 0) + '.svg'
 
             },
             [VariablesCodes.PM10]: {
               color: PM10?.color,
               sequence: PM10?.sequence || 0,
               iconPath: 'assets/icons/marker/' +
-                (PM10?.sequence || 0 )+ '.svg'
+                (PM10?.sequence || 0) + '.svg'
             },
 
             [VariablesCodes.TEMP]: {
@@ -74,9 +78,9 @@ export class SwaggerService {
               label: wind?.readings[0]?.value ? Math.floor(wind?.readings[0]?.value) + '' : 'NA', // it Must be string
               isDegree: true,
               color: '#fff',
-              
+
               iconPath: 'assets/icons/marker/wind/' +
-              (getRandomNumber(5) )+ '.svg',
+                (getRandomNumber(5)) + '.svg',
               class: 'centered-label'
               // class: 'custom-map-label wind-label ' + WindClassesSequence[wind?.readings[0]?.value ? Math.floor(wind?.readings[0]?.value / 60) : 0]
             },
@@ -84,7 +88,7 @@ export class SwaggerService {
             [VariablesCodes.HUM]: {
               label: hum?.readings[0]?.value ? hum?.readings[0]?.value + hum?.unit.abbreviation_en : 'NA',
               color: ColorsSequence[Math.floor(Math.random() * 6)],
-              class: 'custom-map-label'
+              // class: 'custom-map-label'
             },
           },
 
@@ -94,18 +98,45 @@ export class SwaggerService {
       )), shareReplay())
   }
 
-  getStation(id: string) {
-    const url = BaseUrl + '/stations/' + id
+  getHistory(code: string): Observable<HistoryData[]> {
+    const url = BaseUrl + '/stations/' + code + '/history'
 
-    return this.http.get(url)
-  }
+    return this.http.get<any>(url).pipe(map(res => res.stations[0]))
+      .pipe(map(station => {
+
+        const dates = {}
+
+        station.aqi.forEach(item => {
+          const date = new Date(item.aggregated_at)
+          const year = date.getFullYear()
+          const month = date.getMonth() + 1
+          const day = date.getDate()
+
+          const obj = year + '-' + month + '-' + day
+
+          if (dates[obj]) {
+            dates[obj].push(item)
+          } else {
+            dates[obj] = [item]
+          }
+        })
+
+
+        const datesArray: { date: string, data : AqiData[]} [] = Object.entries(dates).map(([key, value]) => ({ date:  key , data: value as AqiData[]}));
+
+
+        
+        return {...station, dates: datesArray}
+  }))
+
+}
 
 
 
-  getBreakPoints(): Observable<BreakPointsResponse> {
-    const url = BaseUrl + '/breakpoints'
+getBreakPoints(): Observable < BreakPointsResponse > {
+  const url = BaseUrl + '/breakpoints'
 
     return this.http.get<BreakPointsResponse>(url)
-  }
+}
 }
 

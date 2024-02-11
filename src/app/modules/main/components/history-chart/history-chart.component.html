@@ -1,0 +1,25 @@
+<div class="main-wrapper">
+
+    <button class="rounded btn-wrapper" (click)="changeDataSet('prev')" [disabled]="currentIndex === 0" nz-button>
+        <span class="seaGreen" nz-icon nzType="left" nzTheme="outline"></span>
+    </button>
+
+
+    <div class="chart-wrapper">
+        <h3 class="map-title">{{history.dates[this.currentIndex].date}}</h3>
+
+        <div  style="width: 100%; height: 250px; direction: ltr;">
+
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                [legend]="barChartLegend" [type]="'bar'">
+            </canvas>
+
+        </div>
+
+    </div>
+
+    <button class="rounded btn-wrapper" (click)="changeDataSet('next')"
+        [disabled]="currentIndex === (history.dates.length - 1)" nz-button>
+        <span class="seaGreen" nz-icon nzType="right" nzTheme="outline"></span>
+    </button>
+</div>
