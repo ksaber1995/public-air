@@ -7,13 +7,17 @@
 
     .chart-wrapper{
         position: relative;
-        flex-grow: 1;
+        // flex-grow: 1;
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 }
 
 
 .btn-wrapper{
     width: 40px;
+    min-width: 40px;
     height: 40px;
     display: flex;
     align-items: center;

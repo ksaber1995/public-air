@@ -52,9 +52,11 @@ export class HomeComponent implements OnInit {
   activeBreakPoints: BreakPoint[] = [];
   unit: string = 'ug/m3';
   satelliteViewEnabled: boolean;
+  mapType : google.maps.MapTypeId = google.maps.MapTypeId.TERRAIN
 
   anchor = new  google.maps.Point(30, 30);
   scaledSize = new google.maps.Size(60, 60)
+
 
   constructor(private swagger: SwaggerService, private modal: NzModalService, private viewContainerRef: ViewContainerRef) {
 
@@ -67,14 +69,15 @@ export class HomeComponent implements OnInit {
       fullscreenControl: false,
       
       // zoomControl: true,
-      mapTypeControl: true,
-      mapTypeControlOptions:{
-        position: google.maps.ControlPosition.RIGHT_BOTTOM
-      },
+      // mapTypeControl: true,
+      // mapTypeControlOptions:{
+      //   position: google.maps.ControlPosition.RIGHT_BOTTOM,
+        
+      // },
       zoom: 7,
       mapTypeId: 'terrain', // Use 'terrain' map type to emphasize borders
 
-      
+      mapTypeControl: false,
 
       streetViewControl: false,
       styles: [
@@ -160,13 +163,9 @@ export class HomeComponent implements OnInit {
     this.getActiveBreakpointsRange()
   }
 
-  toggleSatelliteView(): void {
-    this.satelliteViewEnabled = !this.satelliteViewEnabled;
-    if (this.satelliteViewEnabled) {
-      this.map.mapTypeId = google.maps.MapTypeId.SATELLITE   
-    } else {
-      this.map.mapTypeId =  google.maps.MapTypeId.TERRAIN;
-    }
+  toggleSatelliteView(map: GoogleMap): void {
+    this.mapType = this.mapType === google.maps.MapTypeId.TERRAIN? google.maps.MapTypeId.SATELLITE: google.maps.MapTypeId.TERRAIN;
+
   }
 
   public openInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow) {
@@ -198,4 +197,6 @@ export class HomeComponent implements OnInit {
 
     const instance = modal.getContentComponent();
   }
+
+ 
 }

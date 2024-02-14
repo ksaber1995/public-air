@@ -54,13 +54,13 @@
     </div>
 
     <div class="brief text-center">
-      {{content.description}}
+      {{content?.description}}
     </div>
   </div>
 
   <div class="aqi-instructions d-flex">
 
-    <div *ngFor="let item of content.instructions" class="instruct-item d-flex flex-direction-column ">
+    <div *ngFor="let item of content?.instructions" class="instruct-item d-flex flex-direction-column ">
 
       <div [style.background]="lightColors [station.aqi[0].sequence || 0]" class="instruct-img-wrapper">
 

@@ -6,6 +6,15 @@
     width: 100%;
 }
 
+.satellite-wrapper{
+    position: absolute;
+    bottom: 120px;
+    right: 15px;
+    z-index: 1000;
+    border: 4px solid #fff;
+    border-radius: 5px;
+}
+
 .map-wrapper {
     position: relative;
     width: 100%;

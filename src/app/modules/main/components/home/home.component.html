@@ -5,7 +5,12 @@
 
         <div class="map-wrapper">
 
-            <google-map #googleMap [options]="options" height="100%" width="100%" #map>
+            <google-map [mapTypeId]="mapType" #googleMap [options]="options"  height="100%" width="100%" #map>
+
+                <div (click)="toggleSatelliteView(googleMap)" class="pointer satellite-wrapper">
+                    <img  *ngIf="mapType === 'terrain'"  src="assets/icons/satellite.svg">
+                    <img  *ngIf="mapType === 'satellite'" src="assets/icons/terrain.svg">
+                </div>
 
                 <div class="last-update">
                     آخر تحديث : {{lastUpdate | date: 'yyyy-MM-dd HH:mm:ss'}}

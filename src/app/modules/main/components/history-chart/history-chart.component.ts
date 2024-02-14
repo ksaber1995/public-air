@@ -29,7 +29,6 @@ export class HistoryChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.history$.subscribe(res=>{
-      debugger
       this.history = res;
        this.currentIndex = 0;
        this.setDataSets()
@@ -41,8 +40,8 @@ export class HistoryChartComponent implements OnInit {
     this.barChartLabels = this.history.dates[this.currentIndex].data.map(res => formatTime(new Date(res.aggregated_at)))
     this.barChartData = [
       {
-        data: [...this.history.dates[this.currentIndex].data.map(res => res.sequence), 5] ,
-        backgroundColor: this.history.dates[this.currentIndex].data.map(res => res.color),
+        data: [...this.history.dates[this.currentIndex].data.map(res => res.sequence || 0), 5] ,
+        backgroundColor: this.history.dates[this.currentIndex].data.map(res => res.color ),
         label: this.history.dates[this.currentIndex].date,
         borderRadius: 7,
         barThickness: 15,
