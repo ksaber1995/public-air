@@ -1,68 +1,86 @@
 <div>
+  <button nz-button class="close-btn" (click)="destroyModal()">
+    <span nz-icon nzType="close" nzTheme="outline"></span>
+  </button>
+
   <h1 class="station-name text-center">
     {{station.name_en}}
   </h1>
 
+  <div class="content-wrapper">
 
-
-  <div class="content">
-    <div [style.background]="lightColors [station.aqi[0].sequence || 0]" class="img">
+    <div class="content">
+      <!-- <div [style.background]="lightColors [station.aqi[0].sequence || 0]" class="img">
       <img [src]="'assets/icons/details/' + station.aqi[0].sequence + '.svg'" alt="">
 
       <span [style.color]="station.aqi[0].color" class="aqi">AQI</span>
-    </div>
+    </div> -->
 
-    <div class="variables-wrapper">
+      <button (click)="changeActiveItem(null)" [style.background]="station.variables[0]?.readings[0]?.color || '#d1d1d1'"  [style.border-color]="'transparent'" [class.active]="!activeCode" class="variable aqi pointer">
+        <span [style.color]=" station.variables[0].readings[0].sequence == 2 ? 'black' : 'white'" class="variable-name">
+          AQI
 
-      <div class="variables">
+        </span>
+
+        <span class="variable-value">
+
+          <!-- {{variable.readings[0].average}} {{variable.unit.code}} -->
+        </span>
+      </button>
 
 
+      <div class="variables-wrapper">
 
-        <div *ngFor="let variable of station.variables" [style.background]="variable?.readings[0]?.color || '#d1d1d1'"
-          class="variable">
-          <span [style.color]=" variable.readings[0].sequence == 2 ? 'black' : 'white'" class="variable-name">
 
-            {{variable.variable.abbreviation_en }}
-          </span>
+        <div class="variables">
 
-          <span class="variable-value">
 
-            <!-- {{variable.readings[0].average}} {{variable.unit.code}} -->
-          </span>
+          <button (click)="changeActiveItem(variable.variable.code)" *ngFor="let variable of station.variables" [class.active]="variable.variable.code === activeCode" [style.border-color]="'transparent'" [style.background]="variable?.readings[0]?.color || '#d1d1d1'"
+            class="variable pointer">
+            <span [style.color]=" variable.readings[0].sequence == 2 ? 'black' : 'white'" class="variable-name">
+
+              {{variable.variable.abbreviation_en }}
+            </span>
+
+            <span class="variable-value">
+
+              <!-- {{variable.readings[0].average}} {{variable.unit.code}} -->
+            </span>
+          </button>
         </div>
       </div>
 
-      <div class="brief text-center">
-        {{content.description}}
-      </div>
+
+    </div>
+
+    <div class="brief text-center">
+      {{content.description}}
     </div>
   </div>
-
-
 
   <div class="aqi-instructions d-flex">
 
     <div *ngFor="let item of content.instructions" class="instruct-item d-flex flex-direction-column ">
 
-      <div [style.background]="lightColors [station.aqi[0].sequence || 0]"  class="instruct-img-wrapper">
-        
+      <div [style.background]="lightColors [station.aqi[0].sequence || 0]" class="instruct-img-wrapper">
+
         <img width="45" height="45" [src]="item.icon" alt="">
       </div>
-      
+
       <p class="instruction-title">
         {{item.content}}
       </p>
     </div>
-    
+
   </div>
 
 
   <ng-container *ngIf="history">
 
 
-    <div  class="history">
-        
-        <app-history-chart [history]="history"></app-history-chart>
+    <div class="history">
+
+      <app-history-chart [history]="history"></app-history-chart>
     </div>
   </ng-container>
 
@@ -78,19 +96,19 @@
       القطر أقل من 10 ميكرون
     </p>
 
-    <a (click)="downloadPdf()"  style="font-size: 1rem;" class="seaGreen download ">
+    <a (click)="downloadPdf()" style="font-size: 1rem;" class="seaGreen download ">
       <img src="assets/icons/pdf.svg" alt="">
-    
+
       لتحميل الدليل الإرشادي لمؤشر جودة الهواء
     </a>
   </div>
 
-  <p class="footer">
+  <!-- <p class="footer">
     <button nz-button class="close-btn" (click)="destroyModal()">
       <span nz-icon nzType="close" nzTheme="outline"></span>
       اغلاق
 
     </button>
-  </p>
+  </p> -->
 
 </div>

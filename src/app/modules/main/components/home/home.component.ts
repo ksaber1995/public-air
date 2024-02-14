@@ -16,6 +16,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('googleMap') googleMap: GoogleMap
+
   ColorsSequence = ColorsSequence
   MapClasses = MapClasses
   navigatorPosition
@@ -49,22 +51,30 @@ export class HomeComponent implements OnInit {
   breakPoints: BreakPointsResponse;
   activeBreakPoints: BreakPoint[] = [];
   unit: string = 'ug/m3';
+  satelliteViewEnabled: boolean;
+
+  anchor = new  google.maps.Point(30, 30);
+  scaledSize = new google.maps.Size(60, 60)
 
   constructor(private swagger: SwaggerService, private modal: NzModalService, private viewContainerRef: ViewContainerRef) {
-    // navigator.geolocation.getCurrentPosition((position) => {
-    // this.navigatorPosition = position;
-    // console.log('here', this.navigatorPosition.coords.latitude)
 
     this.options = {
       center: {
-        lat: 23.49366666666641,
-        lng: 58.24966666666646
-        // lng: this.navigatorPosition.coords.longitude,
+        lat: 21.4735, 
+        lng: 55.9754         
       },
+
+      fullscreenControl: false,
+      
       // zoomControl: true,
-      mapTypeControl: false,
-      zoom: 9,
+      mapTypeControl: true,
+      mapTypeControlOptions:{
+        position: google.maps.ControlPosition.RIGHT_BOTTOM
+      },
+      zoom: 7,
       mapTypeId: 'terrain', // Use 'terrain' map type to emphasize borders
+
+      
 
       streetViewControl: false,
       styles: [
@@ -110,7 +120,6 @@ export class HomeComponent implements OnInit {
     combineLatest([this.stations$, this.breakPoints$])
       .subscribe(([stations, breakpoints]) => {
         this.stations = stations;
-        console.log(this.stations)
         const lastUpdateStation = this.stations.reduce((a, b) => {
           let date = a.aqi[0].aggregated_at > b.aqi[0].aggregated_at
 
@@ -151,6 +160,15 @@ export class HomeComponent implements OnInit {
     this.getActiveBreakpointsRange()
   }
 
+  toggleSatelliteView(): void {
+    this.satelliteViewEnabled = !this.satelliteViewEnabled;
+    if (this.satelliteViewEnabled) {
+      this.map.mapTypeId = google.maps.MapTypeId.SATELLITE   
+    } else {
+      this.map.mapTypeId =  google.maps.MapTypeId.TERRAIN;
+    }
+  }
+
   public openInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow) {
     infoWindow.open(marker, false);
   }
@@ -160,8 +178,6 @@ export class HomeComponent implements OnInit {
   }
 
   onStationClick(station: ExtendedStation) {
-    console.log(station)
-
     this.createComponentModal(station)
   }
 
@@ -176,7 +192,7 @@ export class HomeComponent implements OnInit {
       nzCloseIcon: null,
       nzFooter: null,
       nzClassName: 'station-details-modal',
-      nzWidth: '50%',
+      nzWidth: '60%',
 
     });
 

@@ -16,7 +16,8 @@ interface IModalData {
 })
 
 export class StationDetailsComponent implements OnInit{
-  isVisibleMiddle = true;
+  activeCode;
+
   title
   subtitle
   lightColors = lightColors
@@ -76,5 +77,9 @@ export class StationDetailsComponent implements OnInit{
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
     });
+  }
+
+  changeActiveItem(code){
+    this.activeCode = code
   }
 }

@@ -5,7 +5,7 @@
 
         <div class="map-wrapper">
 
-            <google-map [options]="options" height="100%" width="100%" #map>
+            <google-map #googleMap [options]="options" height="100%" width="100%" #map>
 
                 <div class="last-update">
                     آخر تحديث : {{lastUpdate | date: 'yyyy-MM-dd HH:mm:ss'}}
@@ -22,10 +22,10 @@
                             </ng-container>
 
                             <ng-container *ngIf="item.icon">
-                                <img  *ngIf="item.id !== activeItemId" [src]="item.inactiveIcon">
+                                <img *ngIf="item.id !== activeItemId" [src]="item.inactiveIcon">
                                 <img *ngIf="item.id === activeItemId" [src]="item.activeIcon">
                             </ng-container>
-                            
+
 
                             <span class="hidden-text">
 
@@ -45,30 +45,24 @@
                 <div *ngFor="let station of stations$ | async" [title]="station.name_en" class="">
 
 
-                    
 
-                    <map-marker 
-                        
-                        (mapClick)="onStationClick(station)"
-                        [options]="markerOptions" #marker="mapMarker"
+
+                    <map-marker (mapClick)="onStationClick(station)" [options]="markerOptions" #marker="mapMarker"
                         [label]=" 
                             [VariablesCodes.TEMP, VariablesCodes.WIND, VariablesCodes.HUM].includes(this.activeItemId) ?  
                             {  color: station.brief?.[activeItemId]?.color, fontSize: '18px', fontWeight: 'bold',  text:  station.brief?.[activeItemId]?.label , className: station.brief?.[activeItemId]?.class } : '' "
-                        
                         (mapMouseover)="openInfoWindow(marker, infoWindow)"
                         (mapMouseout)="closeInfoWindow(marker, infoWindow)" [ngClass]="'custom-marker'"
-                        
-                        [icon]=" station.brief?.[activeItemId]?.iconPath  || '..'"
-                    id="karim"
-                        [position]="{lat: +station.latitude, lng: +station.longitude}">
+                        [icon]=" station.brief?.[activeItemId]?.iconPath  ?  {url:  station.brief?.[activeItemId]?.iconPath, anchor: anchor, scaledSize: scaledSize} : '..'"
+                        id="karim" [position]="{lat: +station.latitude, lng: +station.longitude}">
 
 
 
 
-                        <map-info-window  [options]="infoWindowOptions" [ngStyle]="{ 'border-color': 'blue' }"
+                        <map-info-window [options]="infoWindowOptions" [ngStyle]="{ 'border-color': 'blue' }"
                             #infoWindow="mapInfoWindow">
                             <span class="info-windows-title" [ngClass]="MapClasses[station.aqi[0].sequence]"
-                                [style.color]="ColorsSequence [station.aqi[0].sequence]" >{{station.name_en}}</span>
+                                [style.color]="ColorsSequence [station.aqi[0].sequence]">{{station.name_en}}</span>
                         </map-info-window>
                     </map-marker>
 
@@ -76,8 +70,10 @@
 
 
 
-                <div *ngIf=" [VariablesCodes.AQI, VariablesCodes.PM10, VariablesCodes.PM25].includes(this.activeItemId)" class="bar-wrapper">
-                    <app-severity-bar [unit]="unit" [breakPoints]="activeBreakPoints" [type]="'horizontal'"> </app-severity-bar>
+                <div *ngIf=" [VariablesCodes.AQI, VariablesCodes.PM10, VariablesCodes.PM25].includes(this.activeItemId)"
+                    class="bar-wrapper">
+                    <app-severity-bar [unit]="unit" [breakPoints]="activeBreakPoints" [type]="'horizontal'">
+                    </app-severity-bar>
                 </div>
             </google-map>
         </div>

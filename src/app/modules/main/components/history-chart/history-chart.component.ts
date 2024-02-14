@@ -1,8 +1,6 @@
-import { map } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataset, ChartOptions } from 'chart.js';
 import { HistoryData } from '../../../shared/models/Station';
-import { FADE_CLASS_NAME_MAP } from 'ng-zorro-antd/modal';
 
 function formatTime(date: Date) {
   let hours = date.getHours();
@@ -32,13 +30,14 @@ export class HistoryChartComponent implements OnInit {
     this.barChartLabels = this.history.dates[this.currentIndex].data.map(res => formatTime(new Date(res.aggregated_at)))
     this.barChartData = [
       {
-        data: this.history.dates[this.currentIndex].data.map(res => res.sequence),
+        data: [...this.history.dates[this.currentIndex] .data.map(res => res.sequence), 5] ,
         backgroundColor: this.history.dates[this.currentIndex].data.map(res => res.color),
         label: this.history.dates[this.currentIndex].date,
         borderRadius: 7,
         barThickness: 15,
-
-
+        
+        // minBarLength: 7
+        
       }
     ]
   }
@@ -60,12 +59,19 @@ export class HistoryChartComponent implements OnInit {
       },
       y: {
         ticks: {
-          display: false
+          display: false,
+          maxTicksLimit: 6,
+          stepSize: 1,
+          count : 6,
+          includeBounds: true,
+          
+          // step 
         },
 
-
         grid: {
-          display: false
+          display: false,
+          
+          
         }
       }
     }
