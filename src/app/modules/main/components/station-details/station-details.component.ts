@@ -5,6 +5,7 @@ import { ColorsSequence } from '../../../shared/models/colors';
 import { SwaggerService } from './../../../shared/services/swagger.service';
 import { StationContent, lightColors } from './model';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 interface IModalData {
   station: ExtendedStation
 }
@@ -27,21 +28,21 @@ export class StationDetailsComponent implements OnInit{
   station: ExtendedStation
   history: any;
   content ;
-  handleCancelMiddle(){
+  activeHistoryData$ = new BehaviorSubject(null)
 
-  }
 
   constructor(private swagger: SwaggerService, private http: HttpClient){
     this.station = this.nzModalData.station
 
     this.content = StationContent[this.station.aqi[0].sequence || 0]
 
-    console.log(this.nzModalData,'modal data')
   }
 
   ngOnInit(): void {
+
     this. swagger.getHistory(this.nzModalData.station.code).subscribe(res=>{      
       this.history = res;
+      this.activeHistoryData$.next(this.history);
     })
   }
 
@@ -80,6 +81,19 @@ export class StationDetailsComponent implements OnInit{
   }
 
   changeActiveItem(code){
-    this.activeCode = code
+    this.activeCode = code;
+
+    if(!this.activeCode){
+      this.activeHistoryData$.next(this.history);
+
+
+    }else{
+      
+      const activeHistoryData = this.history.variables.find(item => item.variable.code === code)
+      this.activeHistoryData$.next(activeHistoryData);
+    
+
+    }
+
   }
 }

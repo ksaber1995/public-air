@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataset, ChartOptions } from 'chart.js';
 import { HistoryData } from '../../../shared/models/Station';
+import { Observable } from 'rxjs';
 
 function formatTime(date: Date) {
   let hours = date.getHours();
@@ -16,21 +17,31 @@ function formatTime(date: Date) {
   styleUrl: './history-chart.component.scss'
 })
 export class HistoryChartComponent implements OnInit {
-  @Input() history: HistoryData;
+  @Input() history$: Observable< HistoryData>;
+  history: HistoryData;
 
   currentIndex = 0;
 
   constructor() {
+  
+   
   }
+
   ngOnInit(): void {
-    this.setDataSets()
+    this.history$.subscribe(res=>{
+      debugger
+      this.history = res;
+       this.currentIndex = 0;
+       this.setDataSets()
+    })
+
   }
 
   setDataSets() {
     this.barChartLabels = this.history.dates[this.currentIndex].data.map(res => formatTime(new Date(res.aggregated_at)))
     this.barChartData = [
       {
-        data: [...this.history.dates[this.currentIndex] .data.map(res => res.sequence), 5] ,
+        data: [...this.history.dates[this.currentIndex].data.map(res => res.sequence), 5] ,
         backgroundColor: this.history.dates[this.currentIndex].data.map(res => res.color),
         label: this.history.dates[this.currentIndex].date,
         borderRadius: 7,

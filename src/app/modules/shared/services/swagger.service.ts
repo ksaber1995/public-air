@@ -76,7 +76,7 @@ export class SwaggerService {
 
             [VariablesCodes.WIND]: {
               label: wind?.readings[0]?.value ? Math.floor(wind?.readings[0]?.value) + '' : 'NA', // it Must be string
-              isDegree: true,
+              // isDegree: true,
               color: '#fff',
 
               iconPath: 'assets/icons/marker/wind/' +
@@ -88,7 +88,7 @@ export class SwaggerService {
             [VariablesCodes.HUM]: {
               label: hum?.readings[0]?.value ? hum?.readings[0]?.value + hum?.unit.abbreviation_en : 'NA',
               color: ColorsSequence[Math.floor(Math.random() * 6)],
-              // class: 'custom-map-label'
+              // class: 'custom-map-label',
             },
           },
 
@@ -122,21 +122,46 @@ export class SwaggerService {
         })
 
 
-        const datesArray: { date: string, data : AqiData[]} [] = Object.entries(dates).map(([key, value]) => ({ date:  key , data: value as AqiData[]}));
+        const datesArray: { date: string, data: AqiData[] }[] = Object.entries(dates).map(([key, value]) => ({ date: key, data: value as AqiData[] }));
 
+
+        station.variables.forEach(variable => {
+          const v_dates = {}
+          variable.readings.forEach(read => {
+
+            const v_date = new Date(read.aggregated_at)
+            const v_year = v_date.getFullYear()
+            const v_month = v_date.getMonth() + 1
+            const v_day = v_date.getDate()
+            const v_obj = v_year + '-' + v_month + '-' + v_day
+
+            if (v_dates[v_obj]) {
+              v_dates[v_obj].push(read)
+            } else {
+              v_dates[v_obj] = [read]
+            }
+
+
+          })
+
+          console.log(v_dates,'dates')
+
+          variable.dates = Object.entries(v_dates).map(([key, value]) => ({ date: key, data: value as AqiData[] }));
+        })
 
         
-        return {...station, dates: datesArray}
-  }))
 
-}
+        return { ...station, dates: datesArray }
+      }))
+
+  }
 
 
 
-getBreakPoints(): Observable < BreakPointsResponse > {
-  const url = BaseUrl + '/breakpoints'
+  getBreakPoints(): Observable<BreakPointsResponse> {
+    const url = BaseUrl + '/breakpoints'
 
     return this.http.get<BreakPointsResponse>(url)
-}
+  }
 }
 
