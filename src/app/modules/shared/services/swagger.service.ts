@@ -6,7 +6,8 @@ import { BreakPoint, VariableBreakPoint } from '../models/breakPoint';
 import { ColorsSequence } from '../models/colors';
 import { VariablesCodes } from './../models/variables';
 
-const BaseUrl = 'https://rm.adv3.com/naqi/v1/public'
+
+const BaseUrl = 'https://graphql.naqi.dal2.com/api/rest/v1/public'
 interface StationsResponse {
   stations: ExtendedStation[]
 }
@@ -33,7 +34,7 @@ export class SwaggerService {
   constructor(private http: HttpClient) { }
 
   getStations(): Observable<ExtendedStation[]> {
-    const url = BaseUrl + '/stations'
+    const url = BaseUrl + '/public/stations'
 
     return this.http.get(url).pipe(
       map((res: StationsResponse) => res.stations.map(res => {
@@ -99,7 +100,7 @@ export class SwaggerService {
   }
 
   getHistory(code: string): Observable<HistoryData[]> {
-    const url = BaseUrl + '/stations/' + code + '/history'
+    const url = BaseUrl + '/public/stations' + code + '/history'
 
     return this.http.get<any>(url).pipe(map(res => res.stations[0]))
       .pipe(map(station => {
