@@ -34,7 +34,7 @@ export class SwaggerService {
   constructor(private http: HttpClient) { }
 
   getStations(): Observable<ExtendedStation[]> {
-    const url = BaseUrl + '/public/stations'
+    const url = BaseUrl + '/stations'
 
     return this.http.get(url).pipe(
       map((res: StationsResponse) => res.stations.map(res => {
@@ -100,7 +100,7 @@ export class SwaggerService {
   }
 
   getHistory(code: string): Observable<HistoryData[]> {
-    const url = BaseUrl + '/public/stations' + code + '/history'
+    const url = BaseUrl + '/stations/' + code + '/history'
 
     return this.http.get<any>(url).pipe(map(res => res.stations[0]))
       .pipe(map(station => {
