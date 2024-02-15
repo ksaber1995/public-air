@@ -90,6 +90,7 @@ export class SwaggerService {
               label: hum?.readings[0]?.value ? hum?.readings[0]?.value + hum?.unit.abbreviation_en : 'NA',
               color: ColorsSequence[Math.floor(Math.random() * 6)],
               // class: 'custom-map-label',
+              iconPath: null
             },
           },
 

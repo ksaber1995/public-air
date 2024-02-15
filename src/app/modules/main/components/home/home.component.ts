@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
 
   anchor = new  google.maps.Point(30, 30);
   scaledSize = new google.maps.Size(60, 60)
+  zeroSize = new google.maps.Size(1, 1)
 
 
   constructor(private swagger: SwaggerService, private modal: NzModalService, private viewContainerRef: ViewContainerRef) {
