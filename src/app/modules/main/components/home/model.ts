@@ -59,7 +59,7 @@ export interface ControllerItem {
 }
 
 export const MapClasses = [
-    'na',
+    'na-station',
     'good-station',
     'moderate-station',
     'satisfactory-station',

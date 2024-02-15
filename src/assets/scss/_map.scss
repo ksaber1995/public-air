@@ -22,6 +22,10 @@
     box-shadow: 0 2px 7px 1px rgba(0, 0, 0, .3);
     background-color: #fff;
     border-bottom-width: 3px !important;
+    // font-weight: bold;
+    // font-size: 1rem;
+    font-weight: lighter;
+    font-family: 'Courier New', Courier, monospace;
 
 }
 .gm-style-iw-tc{
@@ -31,6 +35,11 @@
 .gm-style-iw-d {
     padding: 0 !important;
     overflow: hidden !important;
+}
+
+.na-station{
+    border: 2px solid gray !important;
+
 }
 
 .good-station {

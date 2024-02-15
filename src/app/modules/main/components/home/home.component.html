@@ -49,9 +49,6 @@
 
                 <div *ngFor="let station of stations$ | async" [title]="station.name_en" class="">
 
-
-
-
                     <map-marker (mapClick)="onStationClick(station)" [options]="markerOptions" #marker="mapMarker"
                         [label]=" 
                             [VariablesCodes.TEMP, VariablesCodes.WIND, VariablesCodes.HUM].includes(this.activeItemId) ?  
@@ -64,10 +61,10 @@
 
 
 
-                        <map-info-window [options]="infoWindowOptions" [ngStyle]="{ 'border-color': 'blue' }"
+                        <map-info-window [options]="infoWindowOptions"
                             #infoWindow="mapInfoWindow">
-                            <span class="info-windows-title" [ngClass]="MapClasses[station.aqi[0].sequence]"
-                                [style.color]="ColorsSequence [station.aqi[0].sequence]">{{station.name_en}}</span>
+                            <span class="info-windows-title" [ngClass]="MapClasses[station.brief?.[activeItemId]?.sequence]"
+                                [style.color]="station.brief?.[activeItemId]?.color || 'gray'">{{station.name_en}}</span>
                         </map-info-window>
                     </map-marker>
 
