@@ -164,6 +164,15 @@ export class HomeComponent implements OnInit {
   onControllerClick(item: ControllerItem): void {
     this.activeItemId = item.id
 
+    if(this.activeItemId === VariablesCodes.AQI || this.activeItemId === VariablesCodes.PM25 || this.activeItemId === VariablesCodes.PM10){
+      
+      this.anchor = new google.maps.Point(15, 15);
+      this.scaledSize = new google.maps.Size(30, 30)
+    }else{
+      this.anchor = new google.maps.Point(20, 20);
+      this.scaledSize = new google.maps.Size(40, 40)
+
+    }
 
     this.getActiveBreakpointsRange()
   }

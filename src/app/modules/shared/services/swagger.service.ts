@@ -76,7 +76,7 @@ export class SwaggerService {
               color: '#fff',
               iconPath: 'assets/icons/marker/wrapper.svg',
 
-              // class: 'custom-map-label wind-label' 
+              class: 'custom-map-label wind-label' 
 
             },
 
@@ -88,7 +88,7 @@ export class SwaggerService {
               iconPath: 'assets/icons/marker/wrapper.svg',
               // class: 'centered-label',
               // class: 'custom-map-label wind-label ' + WindClassesSequence[wind?.readings[0]?.value ? Math.floor(wind?.readings[0]?.value / 60) : 0]
-              class: 'custom-map-label' 
+              class: 'custom-map-label wind-label' 
             },
 
             [VariablesCodes.HUM]: {
