@@ -11,4 +11,7 @@ export class SeverityBarComponent {
   @Input() unit: string
 
   @Input() breakPoints : BreakPoint[] = [];
+
+  constructor(){
+  }
 }

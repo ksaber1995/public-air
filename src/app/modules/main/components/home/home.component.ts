@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { BreakPointsResponse, SwaggerService } from '../../../shared/services/swagger.service';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
-import { ControllerItem, ControllerItems, MapClasses } from './model';
-import { ColorsSequence } from '../../../shared/models/colors';
-import { VariablesCodes } from '../../../shared/models/variables';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { combineLatest } from 'rxjs';
 import { ExtendedStation } from '../../../shared/models/Station';
-import { BreakPoint, VariableBreakPoint } from '../../../shared/models/breakPoint';
-import { StationDetailsComponent } from '../station-details/station-details.component';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { BreakPoint } from '../../../shared/models/breakPoint';
+import { ColorsSequence } from '../../../shared/models/colors';
+import { VariablesCodes } from '../../../shared/models/variables';
+import { BreakPointsResponse, SwaggerService } from '../../../shared/services/swagger.service';
 import { convertToUTC4 } from '../../../shared/services/utilities/date';
+import { StationDetailsComponent } from '../station-details/station-details.component';
+import { ControllerItem, ControllerItems, MapClasses } from './model';
 
 @Component({
   selector: 'app-home',
@@ -157,6 +157,8 @@ export class HomeComponent implements OnInit {
           ?.sort((a, b) => a.sequence - b.sequence)
     } else {
       this.activeBreakPoints = []
+      this.unit = ''
+
     }
 
   }

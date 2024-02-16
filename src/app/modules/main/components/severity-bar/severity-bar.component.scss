@@ -8,7 +8,7 @@
     transition: all cubic-bezier(0.55, 0.055, 0.675, 0.19) .2s;
     display: flex;
     gap: 15px;
-
+    transform: rotate(90deg);
 
     .bar-items{
         display: flex;
@@ -18,7 +18,7 @@
     }
 
     &:hover{   
-        padding: 15px 0 0;
+        padding: 20px 0 0;
         background-color: #fff;
             
 
@@ -98,7 +98,7 @@
             width: 95px;
             height: 20px;
             position: relative;
-            font-size: .7rem;
+            font-size: .8rem;
             // font-weight: 600;
             
             .text{
@@ -107,13 +107,7 @@
             }
 
 
-            &.na::after{
-                content: 'Good';
-                position: absolute;
-                bottom: -20px;
-                right: -30px;
-            }
-            
+       
             
             .end{
 
@@ -123,7 +117,7 @@
                 transform: translateX(-50%);
                 display: none;
                 flex-direction: column;
-                font-size: .6rem;
+                font-size: .8rem;
                 align-items: flex-end;
             
                 font-weight: 600;
