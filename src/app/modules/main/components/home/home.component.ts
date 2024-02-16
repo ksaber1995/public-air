@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { combineLatest } from 'rxjs';
+import { combineLatest, map } from 'rxjs';
 import { ExtendedStation } from '../../../shared/models/Station';
 import { BreakPoint } from '../../../shared/models/breakPoint';
 import { ColorsSequence } from '../../../shared/models/colors';
@@ -10,6 +10,14 @@ import { BreakPointsResponse, SwaggerService } from '../../../shared/services/sw
 import { convertToUTC4 } from '../../../shared/services/utilities/date';
 import { StationDetailsComponent } from '../station-details/station-details.component';
 import { ControllerItem, ControllerItems, MapClasses } from './model';
+
+var omanBounds = {
+  north: 26.387812,
+  south: 16.645589,
+  west: 52.0,
+  east: 59.8363
+};
+
 
 @Component({
   selector: 'app-home',
@@ -63,10 +71,12 @@ export class HomeComponent implements OnInit {
   constructor(private swagger: SwaggerService, private modal: NzModalService, private viewContainerRef: ViewContainerRef) {
 
     this.options = {
-      center: {
-        lat: 21.4735,
-        lng: 55.9754
-      },
+      // center: {
+      //   lat: 21.4735,
+      //   lng: 55.9754
+      // },
+
+      center:  { lat: 21.4735, lng: 58.545284 },
 
       fullscreenControl: false,
 
@@ -76,6 +86,7 @@ export class HomeComponent implements OnInit {
       //   position: google.maps.ControlPosition.RIGHT_BOTTOM,
 
       // },
+
 
 
 
@@ -166,11 +177,11 @@ export class HomeComponent implements OnInit {
   onControllerClick(item: ControllerItem): void {
     this.activeItemId = item.id
 
-    if(this.activeItemId === VariablesCodes.AQI || this.activeItemId === VariablesCodes.PM25 || this.activeItemId === VariablesCodes.PM10){
-      
+    if (this.activeItemId === VariablesCodes.AQI || this.activeItemId === VariablesCodes.PM25 || this.activeItemId === VariablesCodes.PM10) {
+
       this.anchor = new google.maps.Point(15, 15);
       this.scaledSize = new google.maps.Size(30, 30)
-    }else{
+    } else {
       this.anchor = new google.maps.Point(20, 20);
       this.scaledSize = new google.maps.Size(40, 40)
 

@@ -38,17 +38,18 @@
 
 .variable {
     border-radius: 5px;
-    width: 120px;
     height: 35px;
     font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     direction: ltr;
-
+    flex-grow: 1;
+    min-width: 70px;
+    max-width: 90px;
     &.active {
-        width: 140px;
-        height: 45px;
+
+        height: 50px;
         box-shadow: 0 3px 0px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
         border: 1px solid #333 !important;
     }
@@ -95,7 +96,7 @@
 
 
     .variables-wrapper {
-        // flex-grow: 1;
+        flex-grow: 1;
 
 
     }
@@ -103,7 +104,7 @@
     .variables {
         width: 100%;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
         padding: 2rem;
         gap: 1rem;
