@@ -8,7 +8,7 @@
     transition: all cubic-bezier(0.55, 0.055, 0.675, 0.19) .2s;
     display: flex;
     gap: 15px;
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
 
     .bar-items{
         display: flex;

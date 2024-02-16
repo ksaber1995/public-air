@@ -6,6 +6,7 @@ import { BreakPoint, VariableBreakPoint } from '../models/breakPoint';
 import { ColorsSequence } from '../models/colors';
 import { VariablesCodes } from './../models/variables';
 import { convertToUTC4 } from './utilities/date';
+import { WindConverter } from './utilities/wind-converter';
 
 
 const BaseUrl = 'https://graphql.naqi.dal2.com/api/rest/v1/public'
@@ -81,7 +82,7 @@ export class SwaggerService {
             },
 
             [VariablesCodes.WIND]: {
-              label: wind?.readings[0]?.value ? Math.floor(wind?.readings[0]?.value) + '' : 'NA', // it Must be string
+              label: wind?.readings[0]?.value ? WindConverter(wind?.readings[0]?.value) : 'NA', 
               // isDegree: true,
               color: '#fff',
 
