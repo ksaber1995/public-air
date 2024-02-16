@@ -1,5 +1,5 @@
 @import 'colors';
-
+$right_position: 70px;
 
 .main-wrapper {
     height: 100%;
@@ -8,11 +8,48 @@
 
 .satellite-wrapper{
     position: absolute;
-    bottom: 120px;
-    right: 15px;
+    bottom: 140px;
+    right: $right_position;
     z-index: 1000;
     border: 4px solid #fff;
     border-radius: 5px;
+}
+
+.zoom-inout{
+    position: absolute;
+    bottom: 40px;
+    right: $right_position;
+    z-index: 1000;
+    border: 4px solid #fff;
+    border-radius: 2px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+
+    button{
+        background: transparent;
+        border: 0;
+    
+    }   
+
+    .plus,.minus{
+        font-size: 1.4rem;
+        font-weight: bold;
+        
+    }
+
+    .plus:hover{
+        font-size: 1.6rem;
+        cursor: pointer;
+    }
+
+    
+    .minus:hover{
+        font-size: 1.6rem;
+        cursor: pointer;
+
+    
+    }
 }
 
 .map-wrapper {
@@ -43,7 +80,7 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        right: 70px;
+        right: $right_position;
         gap: 10px;
         display: flex;
         flex-direction: column;

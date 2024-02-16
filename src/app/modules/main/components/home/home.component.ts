@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
     //   text:'',
     //   fontSize: '20px',
     //  fontWeight: 'bold',
-      
+
     // }
   };
 
@@ -53,30 +53,33 @@ export class HomeComponent implements OnInit {
   activeBreakPoints: BreakPoint[] = [];
   unit: string = 'ug/m3';
   satelliteViewEnabled: boolean;
-  mapType : google.maps.MapTypeId = google.maps.MapTypeId.ROADMAP
+  mapType: google.maps.MapTypeId = google.maps.MapTypeId.ROADMAP
 
-  anchor = new  google.maps.Point(15, 15);
+  anchor = new google.maps.Point(15, 15);
   scaledSize = new google.maps.Size(30, 30)
   zeroSize = new google.maps.Size(1, 1)
-
+  zoom = 7
 
   constructor(private swagger: SwaggerService, private modal: NzModalService, private viewContainerRef: ViewContainerRef) {
 
     this.options = {
       center: {
-        lat: 21.4735, 
-        lng: 55.9754         
+        lat: 21.4735,
+        lng: 55.9754
       },
 
       fullscreenControl: false,
-      
-      // zoomControl: true,
+
+      zoomControl: false,
       // mapTypeControl: true,
       // mapTypeControlOptions:{
       //   position: google.maps.ControlPosition.RIGHT_BOTTOM,
-        
+
       // },
-      zoom: 7,
+
+
+
+      zoom: this.zoom,
       mapTypeId: google.maps.MapTypeId.ROADMAP,  // Use 'terrain' map type to emphasize borders
 
       mapTypeControl: false,
@@ -131,7 +134,7 @@ export class HomeComponent implements OnInit {
           if (date) return a; else return b
         })
 
-        this.lastUpdate = convertToUTC4(new Date( lastUpdateStation.aqi[0].aggregated_at))
+        this.lastUpdate = convertToUTC4(new Date(lastUpdateStation.aqi[0].aggregated_at))
 
         this.breakPoints = breakpoints
         this.getActiveBreakpointsRange()
@@ -151,7 +154,7 @@ export class HomeComponent implements OnInit {
 
       this.activeBreakPoints =
         this.breakPoints.variables.find(breakpoint => breakpoint.code === VariablesCodes[this.activeItemId])?.variable_breakpoints
-        ?.sort((a, b) => a.sequence - b.sequence)
+          ?.sort((a, b) => a.sequence - b.sequence)
     } else {
       this.activeBreakPoints = []
     }
@@ -161,12 +164,24 @@ export class HomeComponent implements OnInit {
   onControllerClick(item: ControllerItem): void {
     this.activeItemId = item.id
 
-    
+
     this.getActiveBreakpointsRange()
   }
 
   toggleSatelliteView(map: GoogleMap): void {
-    this.mapType = this.mapType === google.maps.MapTypeId.ROADMAP? google.maps.MapTypeId.SATELLITE: google.maps.MapTypeId.ROADMAP;
+    this.mapType = this.mapType === google.maps.MapTypeId.ROADMAP ? google.maps.MapTypeId.SATELLITE : google.maps.MapTypeId.ROADMAP;
+
+  }
+
+  zoomIn(map: GoogleMap) {
+    if (this.zoom < 22)
+      this.zoom++
+  }
+
+  zoomOut(map: GoogleMap) {
+
+    if (this.zoom >= 1)
+      this.zoom--
 
   }
 
@@ -200,5 +215,5 @@ export class HomeComponent implements OnInit {
     const instance = modal.getContentComponent();
   }
 
- 
+
 }
