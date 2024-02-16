@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataset, ChartOptions } from 'chart.js';
 import { HistoryData } from '../../../shared/models/Station';
 import { Observable } from 'rxjs';
+import { convertToUTC4 } from '../../../shared/services/utilities/date';
 
 function formatTime(date: Date) {
   let hours = date.getHours();
@@ -37,7 +38,7 @@ export class HistoryChartComponent implements OnInit {
   }
 
   setDataSets() {
-    this.barChartLabels = this.history.dates[this.currentIndex].data.map(res => formatTime(new Date(res.aggregated_at)))
+    this.barChartLabels = this.history.dates[this.currentIndex].data.map(res => formatTime( convertToUTC4( new Date(res.aggregated_at) ) ))
     this.barChartData = [
       {
         data: [...this.history.dates[this.currentIndex].data.map(res => res.sequence || 0), 5] ,

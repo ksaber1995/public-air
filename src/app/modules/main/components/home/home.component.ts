@@ -9,6 +9,7 @@ import { ExtendedStation } from '../../../shared/models/Station';
 import { BreakPoint, VariableBreakPoint } from '../../../shared/models/breakPoint';
 import { StationDetailsComponent } from '../station-details/station-details.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { convertToUTC4 } from '../../../shared/services/utilities/date';
 
 @Component({
   selector: 'app-home',
@@ -52,10 +53,10 @@ export class HomeComponent implements OnInit {
   activeBreakPoints: BreakPoint[] = [];
   unit: string = 'ug/m3';
   satelliteViewEnabled: boolean;
-  mapType : google.maps.MapTypeId = google.maps.MapTypeId.TERRAIN
+  mapType : google.maps.MapTypeId = google.maps.MapTypeId.ROADMAP
 
-  anchor = new  google.maps.Point(30, 30);
-  scaledSize = new google.maps.Size(60, 60)
+  anchor = new  google.maps.Point(15, 15);
+  scaledSize = new google.maps.Size(30, 30)
   zeroSize = new google.maps.Size(1, 1)
 
 
@@ -76,7 +77,7 @@ export class HomeComponent implements OnInit {
         
       // },
       zoom: 7,
-      mapTypeId: 'terrain', // Use 'terrain' map type to emphasize borders
+      mapTypeId: google.maps.MapTypeId.ROADMAP,  // Use 'terrain' map type to emphasize borders
 
       mapTypeControl: false,
 
@@ -130,7 +131,7 @@ export class HomeComponent implements OnInit {
           if (date) return a; else return b
         })
 
-        this.lastUpdate = new Date(lastUpdateStation.aqi[0].aggregated_at)
+        this.lastUpdate = convertToUTC4(new Date( lastUpdateStation.aqi[0].aggregated_at))
 
         this.breakPoints = breakpoints
         this.getActiveBreakpointsRange()
@@ -165,7 +166,7 @@ export class HomeComponent implements OnInit {
   }
 
   toggleSatelliteView(map: GoogleMap): void {
-    this.mapType = this.mapType === google.maps.MapTypeId.TERRAIN? google.maps.MapTypeId.SATELLITE: google.maps.MapTypeId.TERRAIN;
+    this.mapType = this.mapType === google.maps.MapTypeId.ROADMAP? google.maps.MapTypeId.SATELLITE: google.maps.MapTypeId.ROADMAP;
 
   }
 

@@ -8,7 +8,7 @@
             <google-map [mapTypeId]="mapType" #googleMap [options]="options"  height="100%" width="100%" #map>
 
                 <div (click)="toggleSatelliteView(googleMap)" class="pointer satellite-wrapper">
-                    <img  *ngIf="mapType === 'terrain'"  src="assets/icons/satellite.svg">
+                    <img  *ngIf="mapType === 'roadmap'"  src="assets/icons/satellite.svg">
                     <img  *ngIf="mapType === 'satellite'" src="assets/icons/terrain.svg">
                 </div>
 
@@ -65,7 +65,7 @@
                         <map-info-window [options]="infoWindowOptions"
                             #infoWindow="mapInfoWindow">
                             <span class="info-windows-title" [ngClass]="MapClasses[station.brief?.[activeItemId]?.sequence]"
-                                [style.color]="station.brief?.[activeItemId]?.color || 'gray'">{{station.name_en}}</span>
+                                [style.color]="'#7B706A'">{{station.name_en}}</span>
                         </map-info-window>
                     </map-marker>
 

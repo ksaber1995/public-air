@@ -5,6 +5,7 @@ import { AqiData, ExtendedStation, HistoryData, Station } from '../models/Statio
 import { BreakPoint, VariableBreakPoint } from '../models/breakPoint';
 import { ColorsSequence } from '../models/colors';
 import { VariablesCodes } from './../models/variables';
+import { convertToUTC4 } from './utilities/date';
 
 
 const BaseUrl = 'https://graphql.naqi.dal2.com/api/rest/v1/public'
@@ -71,8 +72,12 @@ export class SwaggerService {
 
             [VariablesCodes.TEMP]: {
               label: temp?.readings[0].value ? temp?.readings[0].value + temp?.unit.abbreviation_en : 'NA',
-              color: ColorsSequence[Math.floor(Math.random() * 6)],
-              class: 'custom-map-label'
+              // color: ColorsSequence[Math.floor(Math.random() * 6)],
+              color: '#fff',
+              iconPath: 'assets/icons/marker/wrapper.svg',
+
+              // class: 'custom-map-label wind-label' 
+
             },
 
             [VariablesCodes.WIND]: {
@@ -80,17 +85,19 @@ export class SwaggerService {
               // isDegree: true,
               color: '#fff',
 
-              iconPath: 'assets/icons/marker/wind/' +
-                (getRandomNumber(5)) + '.svg',
-              class: 'centered-label'
+              iconPath: 'assets/icons/marker/wrapper.svg',
+              // class: 'centered-label',
               // class: 'custom-map-label wind-label ' + WindClassesSequence[wind?.readings[0]?.value ? Math.floor(wind?.readings[0]?.value / 60) : 0]
+              class: 'custom-map-label' 
             },
 
             [VariablesCodes.HUM]: {
               label: hum?.readings[0]?.value ? hum?.readings[0]?.value + hum?.unit.abbreviation_en : 'NA',
-              color: ColorsSequence[Math.floor(Math.random() * 6)],
+              // color: ColorsSequence[Math.floor(Math.random() * 6)],
+              color: '#fff',
+              iconPath: 'assets/icons/marker/wrapper.svg',
               // class: 'custom-map-label',
-              iconPath: null
+              class: 'custom-map-label wind-label ' ,
             },
           },
 
@@ -109,7 +116,7 @@ export class SwaggerService {
         const dates = {}
 
         station.aqi.forEach(item => {
-          const date = new Date(item.aggregated_at)
+          const date = convertToUTC4( new Date(item.aggregated_at))
           const year = date.getFullYear()
           const month = date.getMonth() + 1
           const day = date.getDate()
@@ -131,7 +138,7 @@ export class SwaggerService {
           const v_dates = {}
           variable.readings.forEach(read => {
 
-            const v_date = new Date(read.aggregated_at)
+            const v_date = convertToUTC4( new Date(read.aggregated_at))
             const v_year = v_date.getFullYear()
             const v_month = v_date.getMonth() + 1
             const v_day = v_date.getDate()
