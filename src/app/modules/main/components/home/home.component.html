@@ -1,8 +1,8 @@
 <!-- <app-tab> -->
-    <div class="main-wrapper">
-        <div class="map-wrapper">
+    <div class="main-wrapper" [class.ltr-body]="lang === 'en'">
+        <div *ngIf="lang$ | async as lang" class="map-wrapper">
 
-            <google-map id="custom-map" [mapTypeId]="mapType" [zoom]="zoom" #googleMap [options]="options"  height="100%" width="100%" #map>
+            <google-map [lang]="'en'" id="custom-map" [mapTypeId]="mapType" [zoom]="zoom" #googleMap [options]="options"  height="100%" width="100%" #map>
 
                 <div class="zoom-inout">
                     <button (click)="zoomIn(googleMap)" nz-button nzType="text">
@@ -20,8 +20,12 @@
                     <img  *ngIf="mapType === 'satellite'" src="assets/icons/terrain.svg">
                 </div>
 
-                <div class="last-update">
+                <div *ngIf="lang == 'ar'" class="last-update">
                     آخر تحديث : {{lastUpdate | date: 'yyyy-MM-dd HH:mm:ss'}}
+                </div>
+
+                <div *ngIf="lang == 'en'" class="last-update">
+                    Last Update : {{lastUpdate | date: 'yyyy-MM-dd HH:mm:ss'}}
                 </div>
 
                 <div class="controllers pointer">
@@ -55,7 +59,7 @@
 
 
 
-                <div *ngFor="let station of stations$ | async" [title]="station.name_en" class="">
+                <div *ngFor="let station of stations$ | async" [title]="lang == 'ar' ? station.name_ar : station.name_en" class="">
 
                     <map-marker (mapClick)="onStationClick(station)" [options]="markerOptions" #marker="mapMarker"
                         [label]=" 
@@ -73,7 +77,7 @@
                         <map-info-window [options]="infoWindowOptions"
                             #infoWindow="mapInfoWindow">
                             <span class="info-windows-title" [ngClass]="MapClasses[station.brief?.[activeItemId]?.sequence]"
-                                [style.color]="'#7B706A'">{{station.name_en}}</span>
+                                [style.color]="'#7B706A'">{{lang === 'ar' ? station.name_ar : station.name_en}}</span>
                         </map-info-window>
                     </map-marker>
 

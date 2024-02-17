@@ -10,6 +10,7 @@ import { BreakPointsResponse, SwaggerService } from '../../../shared/services/sw
 import { convertToUTC4 } from '../../../shared/services/utilities/date';
 import { StationDetailsComponent } from '../station-details/station-details.component';
 import { ControllerItem, ControllerItems, MapClasses } from './model';
+import { LocalizationService } from '../../../shared/services/localization.service';
 
 var omanBounds = {
   north: 26.387812,
@@ -26,6 +27,9 @@ var omanBounds = {
 })
 export class HomeComponent implements OnInit {
   @ViewChild('googleMap') googleMap: GoogleMap
+
+  lang$ = this.localization.getCurrentLanguage();
+  lang = this.localization.getCurrentLanguageValue()
 
   ColorsSequence = ColorsSequence
   MapClasses = MapClasses
@@ -66,9 +70,17 @@ export class HomeComponent implements OnInit {
   anchor = new google.maps.Point(15, 15);
   scaledSize = new google.maps.Size(30, 30)
   zeroSize = new google.maps.Size(1, 1)
-  zoom = 7
+  zoom = 6.5
 
-  constructor(private swagger: SwaggerService, private modal: NzModalService, private viewContainerRef: ViewContainerRef) {
+ 
+
+  constructor(
+    private swagger: SwaggerService, 
+    private modal: NzModalService, 
+    private viewContainerRef: ViewContainerRef,
+    private localization: LocalizationService
+    
+    ) {
 
     this.options = {
       // center: {
@@ -88,7 +100,7 @@ export class HomeComponent implements OnInit {
       // },
 
 
-
+      
 
       zoom: this.zoom,
       mapTypeId: google.maps.MapTypeId.ROADMAP,  // Use 'terrain' map type to emphasize borders
