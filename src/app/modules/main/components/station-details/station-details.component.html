@@ -1,4 +1,4 @@
-<div>
+<div [dir]="lang === 'ar' ? 'rtl' : 'ltr'" *ngIf="lang$ | async as lang">
   <button nz-button class="close-btn" (click)="destroyModal()">
     <span nz-icon nzType="close" nzTheme="outline"></span>
   </button>
@@ -16,7 +16,9 @@
       <span [style.color]="station.aqi[0].color" class="aqi">AQI</span>
     </div> -->
 
-      <button (click)="changeActiveItem(null)" [style.background]="station.variables[0]?.readings[0]?.color || '#d1d1d1'"  [style.border-color]="'transparent'" [class.active]="!activeCode" class="variable aqi pointer">
+      <button (click)="changeActiveItem(null)"
+        [style.background]="station.variables[0]?.readings[0]?.color || '#d1d1d1'" [style.border-color]="'transparent'"
+        [class.active]="!activeCode" class="variable aqi pointer">
         <span [style.color]=" station.variables[0].readings[0].sequence == 2 ? 'black' : 'white'" class="variable-name">
           AQI
 
@@ -35,8 +37,9 @@
         <div class="variables">
 
 
-          <button (click)="changeActiveItem(variable.variable.code)" *ngFor="let variable of station.variables" [class.active]="variable.variable.code === activeCode" [style.border-color]="'transparent'" [style.background]="variable?.readings[0]?.color || '#d1d1d1'"
-            class="variable pointer">
+          <button (click)="changeActiveItem(variable.variable.code)" *ngFor="let variable of station.variables"
+            [class.active]="variable.variable.code === activeCode" [style.border-color]="'transparent'"
+            [style.background]="variable?.readings[0]?.color || '#d1d1d1'" class="variable pointer">
             <span [style.color]=" variable.readings[0].sequence == 2 ? 'black' : 'white'" class="variable-name">
 
               {{variable.variable.abbreviation_en }}
@@ -86,20 +89,37 @@
 
 
   <div class="aqi-summary">
-    <h2 class="aqi-title">
+    <h2 *ngIf="lang === 'ar'" class="aqi-title">
       مؤشر جودة الهواء AQI
     </h2>
 
-    <p>
+    <h2 *ngIf="lang === 'en'" class="aqi-title">
+      Air Quality Index
+    </h2>
+
+
+    <p *ngIf="lang == 'ar'">
       هو مؤشر لجودة الهواء في منطقة محددة، يشيؤ إلى نقاوة الهواء والتأثيرات الصحية المرتبطة به. يحتسب من أعلى تراكيز
       لخمس ملوثات؛ أول أكسيد الكربون، وثاني أكسيد النيتروجين، وثاني أكسيد الكبريت، والأوزون السطحي، والجسيمات ذات
       القطر أقل من 10 ميكرون
     </p>
 
-    <a (click)="downloadPdf()" style="font-size: 1rem;" class="seaGreen download ">
+    <p *ngIf="lang == 'en'">
+      It is an indicator of air quality in a specific area, indicating the cleanliness of the air and the associated
+      health effects. It is calculated from the highest concentrations of five pollutants: carbon monoxide, nitrogen
+      dioxide, sulfur dioxide, surface ozone, and particles with a diameter of less than 10 microns.
+    </p>
+
+    <a *ngIf="lang === 'ar'" (click)="downloadPdf()" style="font-size: 1rem;" class="seaGreen download ">
       <img src="assets/icons/pdf.svg" alt="">
 
       لتحميل الدليل الإرشادي لمؤشر جودة الهواء
+    </a>
+
+    <a *ngIf="lang === 'en'" (click)="downloadPdf()" style="font-size: 1rem;" class="seaGreen download ">
+      <img src="assets/icons/pdf.svg" alt="">
+
+      To download the guidance manual for the air quality index.
     </a>
   </div>
 

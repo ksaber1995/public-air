@@ -1,6 +1,11 @@
 @import 'background';
 @import 'map';
 
+.ltr-body{
+    .ant-btn-rtl{
+        direction: ltr;
+    }
+}
 
 *{
     // direction: r ;

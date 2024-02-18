@@ -1,5 +1,5 @@
 <!-- <app-tab> -->
-    <div class="main-wrapper" [class.ltr-body]="lang === 'en'">
+    <div class="main-wrapper" [class.ltr-body]=" (lang$ | async) === 'en'">
         <div *ngIf="lang$ | async as lang" class="map-wrapper">
 
             <google-map [lang]="'en'" id="custom-map" [mapTypeId]="mapType" [zoom]="zoom" #googleMap [options]="options"  height="100%" width="100%" #map>
@@ -31,7 +31,7 @@
                 <div class="controllers pointer">
                     <div *ngFor="let item of controllerItems" class="item-wrapper">
 
-                        <button (click)="onControllerClick(item)" [class.active]="item.id === activeItemId" class="item"
+                        <button  (click)="onControllerClick(item)" [class.active]="item.id === activeItemId" class="item"
                             nz-button>
 
                             <ng-container *ngIf="item.title">
@@ -46,7 +46,7 @@
 
                             <span class="hidden-text">
 
-                                {{item.label}}
+                                {{lang === 'en' ? item.labelEn : item.label}}
                             </span>
                         </button>
                     </div>

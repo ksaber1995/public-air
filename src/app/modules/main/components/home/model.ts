@@ -5,18 +5,21 @@ export const ControllerItems: ControllerItem[] = [
         id: VariablesCodes.AQI,
         title: 'AQI',
         label: 'مؤشر جودة الهواء',
+        labelEn: 'Air Quality Index'
     },
 
     {
         id: VariablesCodes.PM10,
         title: 'PM₁₀',
         label: 'الجسيمات الدقيقة',
+        labelEn: 'PM₁₀'
     },
 
     {
         id: VariablesCodes.PM25,
         title: 'PM₂.₅',
-        label: 'الجسيمات الأدق'
+        label: 'الجسيمات الأدق',
+        labelEn: 'PM₂.₅'
 
     },
 
@@ -25,7 +28,8 @@ export const ControllerItems: ControllerItem[] = [
         icon: true,
         inactiveIcon: 'assets/icons/home/inactive/temp.svg',
         activeIcon: 'assets/icons/home/active/temp.svg',
-        label: 'درجة الحرارة'
+        label: 'درجة الحرارة',
+        labelEn: 'Atmospheric Temperature'
 
     },
 
@@ -34,7 +38,8 @@ export const ControllerItems: ControllerItem[] = [
         icon: true,
         inactiveIcon: 'assets/icons/home/inactive/wind.svg',
         activeIcon: 'assets/icons/home/active/wind.svg',
-        label: 'الرياح'
+        label: 'الرياح',
+        labelEn: 'Wind Direction'
 
     },
 
@@ -43,7 +48,8 @@ export const ControllerItems: ControllerItem[] = [
         icon: true,
         inactiveIcon: 'assets/icons/home/inactive/humidity.svg',
         activeIcon: 'assets/icons/home/active/humidity.svg',
-        label: 'الرطوبة النسبية'
+        label: 'الرطوبة النسبية',
+        labelEn: 'Relative Humidity'
 
     },
 
@@ -55,7 +61,8 @@ export interface ControllerItem {
     icon?: boolean
     inactiveIcon?: string
     activeIcon?: string
-    label: string
+    label: string,
+    labelEn: string
 }
 
 export const MapClasses = [

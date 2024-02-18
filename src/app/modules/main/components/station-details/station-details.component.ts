@@ -3,9 +3,10 @@ import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { ExtendedStation } from '../../../shared/models/Station';
 import { ColorsSequence } from '../../../shared/models/colors';
 import { SwaggerService } from './../../../shared/services/swagger.service';
-import { StationContent, lightColors } from './model';
+import { EnStationContent, StationContent, lightColors } from './model';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { LocalizationService } from '../../../shared/services/localization.service';
 interface IModalData {
   station: ExtendedStation
 }
@@ -16,9 +17,9 @@ interface IModalData {
   styleUrl: './station-details.component.scss'
 })
 
-export class StationDetailsComponent implements OnInit{
+export class StationDetailsComponent implements OnInit {
   activeCode;
-
+  lang$ = this.localization.getCurrentLanguage()
   title
   subtitle
   lightColors = lightColors
@@ -27,20 +28,28 @@ export class StationDetailsComponent implements OnInit{
   readonly #modal = inject(NzModalRef);
   station: ExtendedStation
   history: any;
-  content ;
+  content;
   activeHistoryData$ = new BehaviorSubject(null)
 
 
-  constructor(private swagger: SwaggerService, private http: HttpClient){
+  constructor(private swagger: SwaggerService, private http: HttpClient, private localization: LocalizationService) {
     this.station = this.nzModalData.station
 
-    this.content = StationContent[this.station.aqi[0].sequence || 0]
+    this.lang$.subscribe(res=>{
+      if(res === 'ar'){
+
+        this.content = StationContent[this.station.aqi[0].sequence || 0]
+      }else{
+        this.content = EnStationContent[this.station.aqi[0].sequence || 0]
+
+      }
+    })
 
   }
 
   ngOnInit(): void {
 
-    this. swagger.getHistory(this.nzModalData.station.code).subscribe(res=>{      
+    this.swagger.getHistory(this.nzModalData.station.code).subscribe(res => {
       this.history = res;
       this.activeHistoryData$.next(this.history);
     })
@@ -80,18 +89,18 @@ export class StationDetailsComponent implements OnInit{
     });
   }
 
-  changeActiveItem(code){
+  changeActiveItem(code) {
     this.activeCode = code;
 
-    if(!this.activeCode){
+    if (!this.activeCode) {
       this.activeHistoryData$.next(this.history);
 
 
-    }else{
-      
+    } else {
+
       const activeHistoryData = this.history.variables.find(item => item.variable.code === code)
       this.activeHistoryData$.next(activeHistoryData);
-    
+
 
     }
 

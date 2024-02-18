@@ -20,7 +20,7 @@ import { NgChartsModule } from 'ng2-charts';
     StationMarkerComponent,
     TabComponent,
     StationDetailsComponent,
-    HistoryChartComponent
+    HistoryChartComponent,
   ],
 
   imports: [

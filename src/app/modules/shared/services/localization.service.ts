@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Observable, of } from "rxjs";
+import { Injectable, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Observable, map, of } from "rxjs";
 
 export enum Lang {
   ar = 'ar',
@@ -10,31 +10,33 @@ export enum Lang {
 @Injectable({
   providedIn: 'root'
 })
-export class LocalizationService {
-  constructor(private route : ActivatedRoute) { }
+export class LocalizationService implements OnInit {
+  constructor(private route: ActivatedRoute, private router: Router) {
+  }
 
-  getCurrentLanguage(): Observable<Lang>{
-    const lang : Lang  = this.route.snapshot.queryParamMap.get('lang') as Lang
-    if(!lang){
-      return of(Lang.ar)
-    }
+  ngOnInit(): void {
     
-    return of(lang)
+  }
+
+  getCurrentLanguage(): Observable<Lang> {
+    const lang: Lang = this.route.snapshot.queryParams?.['lang'] as Lang
+    
+    if (!lang) this.router.navigate([], { queryParams: { lang: 'ar' } })
+
+    return this.route.queryParams.pipe(map(res => {
+      
+      const lang: Lang = res?.['lang'] as Lang
+
+      if (!lang) {
+        return Lang.ar
+      }
+
+      return lang
+    }))
+
     // return this.route.queryParamMap.
   }
 
-
-  getCurrentLanguageValue(): Lang{
-    const lang : Lang  = this.route.snapshot.queryParamMap.get('lang') as Lang
-    return Lang.ar;
-    
-    if(!lang){
-      return Lang.ar
-    }
-    
-    return lang
-    // return this.route.queryParamMap.
-  }
 
 
 }

@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('googleMap') googleMap: GoogleMap
 
   lang$ = this.localization.getCurrentLanguage();
-  lang = this.localization.getCurrentLanguageValue()
+  // lang = this.localization.getCurrentLanguageValue()
 
   ColorsSequence = ColorsSequence
   MapClasses = MapClasses
@@ -144,7 +144,32 @@ export class HomeComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.setLangs()
     this.getData();
+  }
+  setLangs() 
+  {
+    this.localization.getCurrentLanguage().subscribe(lang => {
+      const title = document.getElementById('app-title');
+      const body = document.getElementById('app-body');
+
+
+      const html = document.getElementById('main-html');
+
+      if (lang === 'ar') {
+        title.innerText = 'نقي'
+        body.className = 'rtl-body'
+        html.setAttribute('dir', 'rtl')
+        html.setAttribute('lang', 'ar')
+
+      } else {
+        title.innerText = 'NAQI'
+        body.className = 'ltr-body'
+        html.setAttribute('dir', 'ltr')
+        html.setAttribute('lang', 'en')
+
+      }
+    })
   }
 
   getData() {
