@@ -83,7 +83,9 @@
 
     <div class="history">
 
-      <app-history-chart [history$]="activeHistoryData$"></app-history-chart>
+      <app-history-chart  cdkDrag (cdkDragStarted)="onDragStarted($event)" 
+      (cdkDragMoved)="onDragMoved($event)" 
+      (cdkDragEnded)="onDragEnded($event)" [history$]="activeHistoryData$"></app-history-chart>
     </div>
   </ng-container>
 

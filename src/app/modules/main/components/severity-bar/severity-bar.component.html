@@ -5,7 +5,7 @@
 
             <div [ngStyle]="{'background': breakPoint.color} " class="level">
                 <span class="text" *ngIf="i === 0 || isLast">
-                    {{breakPoint.status_ar}}
+                    {{lang === 'ar' ? breakPoint.status_ar : breakPoint.status_en}}
                 </span>
                 <span class="end">
                     <div class="bar-value">
@@ -23,8 +23,12 @@
     <div class="bar-items">
 
         <div class="na lightGray-bg level">
-            <span class="text">
+            <span *ngIf="lang =='en'" class="text">
                 Not Available
+            </span>
+
+            <span *ngIf="lang =='ar'" class="text">
+                غير متاح
             </span>
 
             <!-- <span class="end">

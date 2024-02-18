@@ -29,7 +29,7 @@ export const ControllerItems: ControllerItem[] = [
         inactiveIcon: 'assets/icons/home/inactive/temp.svg',
         activeIcon: 'assets/icons/home/active/temp.svg',
         label: ' درجة الحرارة C°',
-        labelEn: 'Atmospheric Temperature °C'
+        labelEn: 'Temperature °C'
 
     },
 

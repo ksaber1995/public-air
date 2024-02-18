@@ -77,7 +77,7 @@
                         <map-info-window [options]="infoWindowOptions"
                             #infoWindow="mapInfoWindow">
                             <span class="info-windows-title" [ngClass]="MapClasses[station.brief?.[activeItemId]?.sequence]"
-                                [style.color]="'#7B706A'">{{lang === 'ar' ? station.name_ar : station.name_en}}</span>
+                                [style.color]="'#000'">{{lang === 'ar' ? station.name_ar : station.name_en}}</span>
                         </map-info-window>
                     </map-marker>
 
@@ -87,7 +87,7 @@
 
                 <div *ngIf=" [VariablesCodes.AQI, VariablesCodes.PM10, VariablesCodes.PM25].includes(this.activeItemId)"
                     class="bar-wrapper">
-                    <app-severity-bar [unit]="unit" [breakPoints]="activeBreakPoints" [type]="'horizontal'">
+                    <app-severity-bar [lang]="lang" [unit]="unit" [breakPoints]="activeBreakPoints" [type]="'horizontal'">
                     </app-severity-bar>
                 </div>
             </google-map>

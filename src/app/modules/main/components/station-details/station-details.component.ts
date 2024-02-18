@@ -7,6 +7,8 @@ import { EnStationContent, StationContent, lightColors } from './model';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { LocalizationService } from '../../../shared/services/localization.service';
+import { CdkDrag, CdkDragStart, CdkDragMove, CdkDragEnd } from '@angular/cdk/drag-drop';
+
 interface IModalData {
   station: ExtendedStation
 }
@@ -35,11 +37,11 @@ export class StationDetailsComponent implements OnInit {
   constructor(private swagger: SwaggerService, private http: HttpClient, private localization: LocalizationService) {
     this.station = this.nzModalData.station
 
-    this.lang$.subscribe(res=>{
-      if(res === 'ar'){
+    this.lang$.subscribe(res => {
+      if (res === 'ar') {
 
         this.content = StationContent[this.station.aqi[0].sequence || 0]
-      }else{
+      } else {
         this.content = EnStationContent[this.station.aqi[0].sequence || 0]
 
       }
@@ -104,5 +106,19 @@ export class StationDetailsComponent implements OnInit {
 
     }
 
+  }
+
+  onDragStarted(event: any) {
+    console.log(event, 'Drag started');
+  }
+
+  // Drag move event handler
+  onDragMoved(event: any) {
+    console.log(event, 'Dragging');
+  }
+
+  // Drag end event handler
+  onDragEnded( event:any) {
+    console.log( event, 'Drag ended');
   }
 }

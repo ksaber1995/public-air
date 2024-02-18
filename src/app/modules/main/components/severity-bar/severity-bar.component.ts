@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BreakPoint } from '../../../shared/models/breakPoint';
+import { Lang } from '../../../shared/services/localization.service';
 
 @Component({
   selector: 'app-severity-bar',
@@ -9,7 +10,8 @@ import { BreakPoint } from '../../../shared/models/breakPoint';
 export class SeverityBarComponent {  
   @Input() type : 'horizontal' | 'vertical' = 'horizontal' // horizontal or vertical 
   @Input() unit: string
-
+  @Input() lang : Lang;
+  
   @Input() breakPoints : BreakPoint[] = [];
 
   constructor(){

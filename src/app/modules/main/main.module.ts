@@ -11,6 +11,7 @@ import { TabComponent } from './components/tab/tab.component';
 import { StationDetailsComponent } from './components/station-details/station-details.component';
 import { HistoryChartComponent } from './components/history-chart/history-chart.component';
 import { NgChartsModule } from 'ng2-charts';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { NgChartsModule } from 'ng2-charts';
 
   imports: [
     CommonModule,
+    CarouselModule,
     MainRoutingModule,
     GoogleMapsModule,
     SharedModule,
