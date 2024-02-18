@@ -72,7 +72,7 @@ export class SwaggerService {
             },
 
             [VariablesCodes.TEMP]: {
-              label: temp?.readings[0].value ? temp?.readings[0].value + temp?.unit.abbreviation_en : 'NA',
+              label: temp?.readings[0].value ? temp?.readings[0].value + '' : 'NA',
               // color: ColorsSequence[Math.floor(Math.random() * 6)],
               color: '#fff',
               iconPath: 'assets/icons/marker/wrapper.svg',
@@ -93,7 +93,7 @@ export class SwaggerService {
             },
 
             [VariablesCodes.HUM]: {
-              label: hum?.readings[0]?.value ? hum?.readings[0]?.value + hum?.unit.abbreviation_en : 'NA',
+              label: hum?.readings[0]?.value ? hum?.readings[0]?.value + '' : 'NA',
               // color: ColorsSequence[Math.floor(Math.random() * 6)],
               color: '#fff',
               iconPath: 'assets/icons/marker/wrapper.svg',

@@ -28,8 +28,8 @@ export const ControllerItems: ControllerItem[] = [
         icon: true,
         inactiveIcon: 'assets/icons/home/inactive/temp.svg',
         activeIcon: 'assets/icons/home/active/temp.svg',
-        label: 'درجة الحرارة',
-        labelEn: 'Atmospheric Temperature'
+        label: ' درجة الحرارة C°',
+        labelEn: 'Atmospheric Temperature °C'
 
     },
 
@@ -48,8 +48,8 @@ export const ControllerItems: ControllerItem[] = [
         icon: true,
         inactiveIcon: 'assets/icons/home/inactive/humidity.svg',
         activeIcon: 'assets/icons/home/active/humidity.svg',
-        label: 'الرطوبة النسبية',
-        labelEn: 'Relative Humidity'
+        label: 'الرطوبة النسبية %',
+        labelEn: 'Relative Humidity %'
 
     },
 
