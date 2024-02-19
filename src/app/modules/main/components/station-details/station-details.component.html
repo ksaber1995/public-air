@@ -16,10 +16,11 @@
       <span [style.color]="station.aqi[0].color" class="aqi">AQI</span>
     </div> -->
 
+
       <button (click)="changeActiveItem(null)"
-        [style.background]="station.variables[0]?.readings[0]?.color || '#d1d1d1'" [style.border-color]="'transparent'"
+        [style.background]="station.brief?.['AQI']?.color || '#d1d1d1'" [style.border-color]="'transparent'"
         [class.active]="!activeCode" class="variable aqi pointer">
-        <span [style.color]=" station.variables[0].readings[0].sequence == 2 ? 'black' : 'white'" class="variable-name">
+        <span [style.color]=" station.brief?.['AQI']?.sequence == 2 ? 'black' : 'white'" class="variable-name">
           AQI
 
         </span>
