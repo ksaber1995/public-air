@@ -5,12 +5,14 @@ import { ColorsSequence } from '../../../shared/models/colors';
 import { SwaggerService } from './../../../shared/services/swagger.service';
 import { EnStationContent, StationContent, lightColors } from './model';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { LocalizationService } from '../../../shared/services/localization.service';
 import { CdkDrag, CdkDragStart, CdkDragMove, CdkDragEnd } from '@angular/cdk/drag-drop';
+import { VariablesCodes } from '../../../shared/models/variables';
 
 interface IModalData {
-  station: ExtendedStation
+  station: ExtendedStation,
+  activeItemId: VariablesCodes
 }
 
 @Component({
@@ -36,6 +38,12 @@ export class StationDetailsComponent implements OnInit {
 
   constructor(private swagger: SwaggerService, private http: HttpClient, private localization: LocalizationService) {
     this.station = this.nzModalData.station
+    this.activeCode = this.nzModalData.activeItemId
+    
+    const pm10 = this.station.variables.find(res=> res.variable.code === VariablesCodes.PM10)
+    const pm25 = this.station.variables.find(res=> res.variable.code === VariablesCodes.PM25)
+
+    this.station.variables = [pm10, pm25, ...this.station.variables.filter(res=> res.variable.code !== VariablesCodes.PM10 && res.variable.code !== VariablesCodes.PM25)]
 
     this.lang$.subscribe(res => {
       if (res === 'ar') {
@@ -52,8 +60,10 @@ export class StationDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     this.swagger.getHistory(this.nzModalData.station.code).subscribe(res => {
+      
       this.history = res;
-      this.activeHistoryData$.next(this.history);
+      
+      this.changeActiveItem(this.activeCode)
     })
   }
 

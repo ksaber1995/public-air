@@ -263,6 +263,7 @@ export class HomeComponent implements OnInit {
       nzViewContainerRef: this.viewContainerRef,
       nzData: {
         station,
+        activeItemId  : [VariablesCodes.PM25, VariablesCodes.PM10].includes(this.activeItemId) ? this.activeItemId : null
       },
       nzCloseIcon: null,
       nzFooter: null,

@@ -1,5 +1,5 @@
 <!-- <app-tab> -->
-    <div class="main-wrapper" [class.ltr-body]=" (lang$ | async) === 'en'">
+    <div *ngIf="isLoaded" class="main-wrapper" [class.ltr-body]=" (lang$ | async) === 'en'">
         <div *ngIf="lang$ | async as lang" class="map-wrapper">
 
             <google-map [lang]="'en'" id="custom-map" [mapTypeId]="mapType" [zoom]="zoom" #googleMap [options]="options"  height="100%" width="100%" #map>
