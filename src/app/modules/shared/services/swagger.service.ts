@@ -100,9 +100,7 @@ export class SwaggerService {
               // class: 'custom-map-label',
               class: 'custom-map-label wind-label ' ,
             },
-          },
-
-
+          }
         }
       }
       )), shareReplay())
