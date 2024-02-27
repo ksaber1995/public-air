@@ -12,6 +12,7 @@ import { StationDetailsComponent } from './components/station-details/station-de
 import { HistoryChartComponent } from './components/history-chart/history-chart.component';
 import { NgChartsModule } from 'ng2-charts';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { HeadersComponent } from './component/headers/headers.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     TabComponent,
     StationDetailsComponent,
     HistoryChartComponent,
+    HeadersComponent
   ],
 
   imports: [

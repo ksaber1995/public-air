@@ -1,6 +1,8 @@
 import { Injectable, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Observable, map, of } from "rxjs";
+import { arContent } from "../../../lang/ar";
+import { enContent } from "../../../lang/en";
 
 export enum Lang {
   ar = 'ar',
@@ -15,6 +17,10 @@ export class LocalizationService implements OnInit {
   }
 
   ngOnInit(): void {
+    
+  }
+
+  toggleLang(){
     
   }
 
@@ -38,6 +44,17 @@ export class LocalizationService implements OnInit {
   }
 
 
+  getCurrentContent(){
+   const lang$ = this.getCurrentLanguage()
+
+   return lang$
+    .pipe(map(lang=>{
+      const content = lang === Lang.ar ? arContent : enContent;
+
+      return content;
+    }))
+    
+  }
 
 }
 

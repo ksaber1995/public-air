@@ -1,4 +1,6 @@
 <!-- <app-tab> -->
+ <app-headers></app-headers>
+ 
     <div *ngIf="isLoaded" class="main-wrapper" [class.ltr-body]=" (lang$ | async) === 'en'">
         <div *ngIf="lang$ | async as lang" class="map-wrapper">
 
