@@ -13,6 +13,9 @@ import { HistoryChartComponent } from './components/history-chart/history-chart.
 import { NgChartsModule } from 'ng2-charts';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { HeadersComponent } from './component/headers/headers.component';
+import { SuccessMessageComponent } from './components/success-message/success-message.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { RequestDataComponent } from './components/request-data/request-data.component';
 
 
 @NgModule({
@@ -23,7 +26,11 @@ import { HeadersComponent } from './component/headers/headers.component';
     TabComponent,
     StationDetailsComponent,
     HistoryChartComponent,
-    HeadersComponent
+    HeadersComponent,
+    SuccessMessageComponent,
+    ContactUsComponent,
+    RequestDataComponent
+
   ],
 
   imports: [

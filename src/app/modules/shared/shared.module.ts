@@ -6,7 +6,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 const Icons = [
 
 ]
