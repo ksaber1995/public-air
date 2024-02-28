@@ -72,14 +72,14 @@ export class HomeComponent implements OnInit {
   zeroSize = new google.maps.Size(1, 1)
   zoom = 6.5
 
- 
+
 
   constructor(
-    private swagger: SwaggerService, 
-    private modal: NzModalService, 
+    private swagger: SwaggerService,
+    private modal: NzModalService,
     private viewContainerRef: ViewContainerRef,
     private localization: LocalizationService
-    
+
     ) {
 
     this.options = {
@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit {
       // },
 
 
-      
+
 
       zoom: this.zoom,
       mapTypeId: google.maps.MapTypeId.ROADMAP,  // Use 'terrain' map type to emphasize borders
@@ -144,33 +144,9 @@ export class HomeComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.setLangs()
     this.getData();
   }
-  setLangs() 
-  {
-    this.localization.getCurrentLanguage().subscribe(lang => {
-      const title = document.getElementById('app-title');
-      const body = document.getElementById('app-body');
 
-
-      const html = document.getElementById('main-html');
-
-      if (lang === 'ar') {
-        title.innerText = 'نقي'
-        body.className = 'rtl-body'
-        html.setAttribute('dir', 'rtl')
-        html.setAttribute('lang', 'ar')
-
-      } else {
-        title.innerText = 'NAQI'
-        body.className = 'ltr-body'
-        html.setAttribute('dir', 'ltr')
-        html.setAttribute('lang', 'en')
-
-      }
-    })
-  }
 
   getData() {
     combineLatest([this.stations$, this.breakPoints$])
@@ -196,7 +172,7 @@ export class HomeComponent implements OnInit {
       this.unit = ''
 
     } else if ([VariablesCodes.PM25, VariablesCodes.PM10].includes(this.activeItemId)) {
-      // const variableId = 
+      // const variableId =
       this.unit = 'ug/m3'
 
 

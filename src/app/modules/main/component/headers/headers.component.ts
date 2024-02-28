@@ -20,8 +20,6 @@ export class HeadersComponent {
   ngOnInit(): void {
     this.local.getCurrentContent().subscribe((res) => {
       this.content = res;
-
-      console.log(this.content, 'content');
     });
   }
 

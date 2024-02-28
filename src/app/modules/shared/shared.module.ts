@@ -7,6 +7,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { ReactiveFormsModule } from '@angular/forms';
 const Icons = [
 
 ]
@@ -16,6 +17,8 @@ const importsExports = [
   NzModalModule,
   NzDividerModule,
   NzGridModule,
+  NzDropDownModule,
+  ReactiveFormsModule
 ]
 
 @NgModule({
@@ -23,7 +26,8 @@ const importsExports = [
   imports: [
     CommonModule,
     ...importsExports,
-    NzIconModule.forRoot(Icons)
+    NzIconModule.forRoot(Icons),
+    ReactiveFormsModule
 
   ],
   exports: [

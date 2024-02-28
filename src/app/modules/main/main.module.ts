@@ -16,6 +16,7 @@ import { HeadersComponent } from './component/headers/headers.component';
 import { SuccessMessageComponent } from './components/success-message/success-message.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { RequestDataComponent } from './components/request-data/request-data.component';
+import { ContainerComponent } from './components/container/container.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { RequestDataComponent } from './components/request-data/request-data.com
     HeadersComponent,
     SuccessMessageComponent,
     ContactUsComponent,
-    RequestDataComponent
+    RequestDataComponent,
+    ContainerComponent,
 
   ],
 

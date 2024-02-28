@@ -1,0 +1,81 @@
+.container{
+  height:  calc(100vh - 82px);
+
+  display: flex;
+  justify-content: space-between;
+
+  form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 22px;
+    width: 1072px;
+    height: fit-content;
+    padding-right: 50px;
+    h1{
+      font-size: 40px;
+      color: #4F4F4F;
+      font-weight: 700;
+      letter-spacing: 1%;
+      width: 100%;
+    }
+    div{
+      width: 500px;
+      display: flex;
+      flex-direction: column;
+      height: fit-content;
+      margin: 0;
+      label{
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 0.3px;
+        color:#4F4F4F;
+        margin-bottom: 10px;
+      }
+      input , select  {
+        width: 100%;
+        height: 56px;
+        border-radius: 8px;
+        border:1px solid #A4A4A4 ;
+        padding: 20px;
+      }
+      select{
+        padding: 0 30px;
+      }
+
+    }
+    .itemsContainer{
+      width: 100%;
+    }
+    button {
+      width: 40%;
+      height: 54px;
+      background-color: #2BA49E;
+      border-radius: 10px;
+      color: #FFFFFF;
+      font-size: 18px;
+      font-weight: 700;
+      border: none;
+      &:hover{
+        cursor: pointer;
+        border: 2px solid #2BA49E;
+        color: #2BA49E;
+        background-color: #FFFFFF;
+      }
+    }
+  }
+
+  .left{
+    position: relative;
+    width: 221px;
+    height: 100%;
+    background-color:#54C3BD;
+    img{
+      position: absolute;
+      top: 75px;
+      left: 104px;
+      height: 760px;
+      width: 508px;
+    }
+  }
+}

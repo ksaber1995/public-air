@@ -1,1 +1,49 @@
-<app-headers></app-headers>
+<div class="container" *ngIf="lang$ | async as lang">
+  <form [formGroup]="informationForm">
+  <h1>{{content.requestInformation}}</h1>
+
+    <div>
+      <label for="name">{{content.name}}</label>
+      <input id="name" type="text" formControlName="name">
+    </div>
+
+    <div>
+      <label for="phoneNumber">{{content.phoneNumber}}</label>
+      <input id="phoneNumber" type="tel" formControlName="phoneNumber">
+    </div>
+
+    <div>
+      <label for="email">{{content.email}}</label>
+      <input id="email" type="email" formControlName="email">
+    </div>
+    <div>
+      <label for="staion">{{content.station}}</label>
+      <select id="station" formControlName="station">
+        <option value="" disabled selected>{{content.stationPlaceholder}}</option>
+        <option *ngFor="let station of stations">{{ lang ==='ar' ? station.name_ar : station.name_en }}</option>
+
+      </select>
+    </div>
+
+    <div>
+      <label for="startDate">{{content.startDate}}</label>
+      <input id="startDate" type="date" [placeholder]="content.datePlaceholder"  formControlName="startDate">
+    </div>
+
+    <div>
+      <label for="endDate">{{content.endDate}}</label>
+      <input id="endDate" type="date" formControlName="endDate">
+    </div>
+
+    <div class="itemsContainer">
+      <h3>{{content.items}}</h3>
+
+    </div>
+
+    <button routerLink="/successMessage">{{content.send}}</button>
+  </form>
+
+
+  <div class="left">
+  </div>
+</div>
