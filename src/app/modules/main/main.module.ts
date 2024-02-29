@@ -17,6 +17,8 @@ import { SuccessMessageComponent } from './components/success-message/success-me
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { RequestDataComponent } from './components/request-data/request-data.component';
 import { ContainerComponent } from './components/container/container.component';
+import { FormsModule } from '@angular/forms';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { ContainerComponent } from './components/container/container.component';
     MainRoutingModule,
     GoogleMapsModule,
     SharedModule,
-    NgChartsModule
+    NgChartsModule,
+    FormsModule,
+    NzCheckboxModule
 
   ]
 })

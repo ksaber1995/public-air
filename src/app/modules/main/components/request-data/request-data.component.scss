@@ -1,37 +1,45 @@
+@import 'colors';
 .container{
   height:  calc(100vh - 82px);
 
   display: flex;
   justify-content: space-between;
+  h1{
+    font-size: 40px;
+    color: #4F4F4F;
+    font-weight: 700;
+    letter-spacing: 1%;
+    width: 100%;
+  }
 
-  form{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 22px;
-    width: 1072px;
-    height: fit-content;
-    padding-right: 50px;
-    h1{
-      font-size: 40px;
-      color: #4F4F4F;
-      font-weight: 700;
-      letter-spacing: 1%;
-      width: 100%;
-    }
-    div{
-      width: 500px;
-      display: flex;
-      flex-direction: column;
+  .form-wrapper{
+    padding: 50px;
+    width: calc(100% - 280px);
+
+
+    form{
+      justify-content: center;
       height: fit-content;
-      margin: 0;
-      label{
-        font-weight: 700;
-        font-size: 16px;
+
+      .select-option{
+        padding: 20px 5px;
+        height: 30px ;
+        font-size: 1.1rem;
+      }
+
+
+      .form-item-wrapper{
+        margin-bottom: 10px;
+
+        .form-label{
+          margin-bottom: 5px;
+          font-weight: 700;
+          font-size: 16px;
         letter-spacing: 0.3px;
         color:#4F4F4F;
-        margin-bottom: 10px;
+        display: inline-block;
       }
+
       input , select  {
         width: 100%;
         height: 56px;
@@ -44,38 +52,96 @@
       }
 
     }
-    .itemsContainer{
-      width: 100%;
+
+  }
+}
+
+.inline-flex{
+  display: inline-flex !important;
+}
+
+.itemsContainer{
+  height: fit-content;
+  width: 100%;
+  margin-bottom: 30px ;
+  h3{
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .3px;
+  }
+  nz-radio-group{
+
+    label{
+      width:250px;
+      height: 56px;
+      background-color: red;
     }
-    button {
-      width: 40%;
-      height: 54px;
-      background-color: #2BA49E;
-      border-radius: 10px;
-      color: #FFFFFF;
-      font-size: 18px;
-      font-weight: 700;
-      border: none;
-      &:hover{
-        cursor: pointer;
-        border: 2px solid #2BA49E;
-        color: #2BA49E;
-        background-color: #FFFFFF;
-      }
+  }
+}
+
+
+  button {
+    display: block;
+    width: 40%;
+    height: 54px;
+    background-color: #2BA49E;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    margin: auto;
+    &:hover{
+      cursor: pointer;
+      border: 2px solid #2BA49E;
+      color: #2BA49E;
+      background-color: #FFFFFF;
     }
   }
 
   .left{
-    position: relative;
-    width: 221px;
+    width: 220px;
     height: 100%;
     background-color:#54C3BD;
-    img{
-      position: absolute;
-      top: 75px;
-      left: 104px;
-      height: 760px;
-      width: 508px;
-    }
+
   }
 }
+
+.check-item{
+  margin-bottom: 20px;
+  .check-value{
+    height: 40px;
+    border: 1px solid $LightGray;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+  }
+}
+
+:host ::ng-deep  .ant-checkbox-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .ant-checkbox-inner{
+  border-radius: 50% !important;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:host ::ng-deep .ant-checkbox-inner::after {
+left: 34.5%;
+}
+
+:host ::ng-deep .ant-checkbox-checked .ant-checkbox-inner
+{
+  background-color: $SeaGreen !important;
+  border-color: $SeaGreen !important;
+}
+
+

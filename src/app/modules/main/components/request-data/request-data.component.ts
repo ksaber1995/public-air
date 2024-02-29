@@ -16,6 +16,10 @@ export class RequestDataComponent {
   lang$ = this.local.getCurrentLanguage();
   stations;
   content;
+
+
+  allVariablesChecked
+
   informationForm = new FormGroup({
     name: new FormControl('' , [Validators.required]),
     phoneNumber: new FormControl('', [Validators.required]),
@@ -23,7 +27,7 @@ export class RequestDataComponent {
     station: new FormControl('',[Validators.required]),
     startDate: new FormControl('',[Validators.required]),
     endDate: new FormControl('',[Validators.required]),
-
+    variables: new FormControl('')
   });
 
 
@@ -43,5 +47,8 @@ export class RequestDataComponent {
       console.log(this.stations , 'station')
     })
   }
+
+
+
 
 }

@@ -1,3 +1,4 @@
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -18,7 +19,9 @@ const importsExports = [
   NzDividerModule,
   NzGridModule,
   NzDropDownModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  NzRadioModule
+
 ]
 
 @NgModule({
