@@ -109,20 +109,21 @@
 
 .check-item{
   margin-bottom: 20px;
-  .check-value{
-    height: 40px;
-    border: 1px solid $LightGray;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-  }
+
 }
 
 :host ::ng-deep  .ant-checkbox-wrapper{
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid $LightGray;
+  width: 150px;
+  border-radius: 20px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+
 }
 
 :host ::ng-deep .ant-checkbox-inner{
@@ -141,6 +142,12 @@ left: 34.5%;
 :host ::ng-deep .ant-checkbox-checked .ant-checkbox-inner
 {
   background-color: $SeaGreen !important;
+  border-color: $SeaGreen !important;
+}
+
+
+:host ::ng-deep .ant-checkbox-wrapper-checked
+{
   border-color: $SeaGreen !important;
 }
 

@@ -55,28 +55,17 @@
       <!-- [(ngModel)]="allVariablesChecked" -->
       <!-- [nzIndeterminate]="indeterminate" -->
 
-      <nz-checkbox-wrapper style="width: 100%;">
-        <div class="inline-flex" nz-row [nzGutter]="35">
+      <nz-checkbox-wrapper (nzOnChange)="onVariablesChange()">
+        <div class="inline-flex" style="max-width: 600px;" nz-row [nzGutter]="5">
           <div nzSpan="8" nz-col class="check-item">
-            <div class="check-value"><label nz-checkbox nzValue="all">{{content.all}}</label></div>
-          </div>
-          <div nzSpan="8" nz-col class="check-item">
-            <div class="check-value"><label nz-checkbox nzValue="PM10">PM10</label></div>
+            <label nz-checkbox (ngModelChange)="toggleSelectAll()" [(ngModel)]="allValuesChecked">{{content.all}}</label>
           </div>
 
-          <div nzSpan="8" nz-col class="check-item">
-            <div class="check-value"><label nz-checkbox nzValue="PM2.5">PM2.5</label></div>
+          <div *ngFor="let variable of variables" nzSpan="8" nz-col class="check-item">
+            <label   nz-checkbox [(ngModel)]="variable.checked" >{{variable.name}}</label>
           </div>
 
-          <div nzSpan="8" nz-col class="check-item">
-            <div class="check-value checked"><label nz-checkbox nzValue="SO3">SO3</label></div>
-          </div>
-          <div nzSpan="8" nz-col class="check-item ">
-            <div class="check-value check-value"><label nz-checkbox nzValue="CO">CO</label></div>
-          </div>
-          <div nzSpan="8" nz-col class="check-item">
-            <div class="check-value"><label nz-checkbox nzValue="SO2">SO2</label></div>
-          </div>
+         
 
         </div>
       </nz-checkbox-wrapper>
