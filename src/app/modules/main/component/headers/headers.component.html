@@ -5,13 +5,44 @@
       {{content.information}} </button>
     <button routerLink="/contact"><img src="assets/icons/contactIcon.svg"> {{content.contact}}</button>
 
-    <a nz-dropdown [nzDropdownMenu]="menu">
-      <div class="language">
-        <img src="assets/icons/languageIcon.svg" class="lang">
-        العربية
-        <img src="assets/icons/arrowDown.svg" class="arrow">
-      </div>
-    </a>
+    <ul *ngIf="lang$ | async as lang">
+      <li *ngIf="lang === 'ar'">
+  
+        <a nz-dropdown [nzDropdownMenu]="menu">
+          <div class="language">
+            <img src="../../../../../assets/icons/languageIcon.svg" class="lang">
+           العربية 
+            <img src="../../../../../assets/icons/arrowDown.svg" class="arrow">
+          </div>
+        </a>
+  
+  
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li (click)="setLang('en')" nz-menu-item>الانجليزية</li>
+          </ul>
+        </nz-dropdown-menu>
+      </li>
+  
+      <li *ngIf="lang === 'en'">
+  
+        <a nz-dropdown [nzDropdownMenu]="menu">
+          <div class="language">
+            English
+            <img src="../../../../../assets/icons/arrowDown.svg" class="arrow">
+          </div>
+        </a>
+  
+  
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li (click)="setLang('ar')" nz-menu-item>العربية</li>
+          </ul>
+        </nz-dropdown-menu>
+      </li>
+    </ul>
+
+
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <ul nz-menu>
         <li nz-menu-item>الانجليزية</li>

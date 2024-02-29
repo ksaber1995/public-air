@@ -3,6 +3,19 @@
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 
+
+@font-face {
+    font-family: 'Neo Sans Arabic Regular';
+    src: url('assets/fonts/Neo Sans Arabic Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body,
+* {
+    font-family: 'Neo Sans Arabic Regular', sans-serif;
+}
+
 .ltr-body{
     .ant-btn-rtl{
         direction: ltr;
@@ -35,6 +48,10 @@
 
 .flex-direction-column{
     flex-direction: column;
+}
+
+li{
+    list-style-type: none;
 }
 
 .wind-label{
@@ -78,4 +95,9 @@
     .station-details-modal{
         min-width: 90% !important;
     }
+}
+
+
+.ant-row-rtl{
+    direction: unset;
 }

@@ -20,7 +20,7 @@
       <button (click)="changeActiveItem(null)"
         [style.background]="station.brief?.['AQI']?.color || '#d1d1d1'" [style.border-color]="'transparent'"
         [class.active]="!activeCode" class="variable aqi pointer">
-        <span [style.color]=" station.brief?.['AQI']?.sequence == 2 ? 'black' : 'white'" class="variable-name">
+        <span [style.color]="  'black' " class="variable-name">
           AQI
 
         </span>
@@ -41,7 +41,7 @@
           <button (click)="changeActiveItem(variable.variable.code)" *ngFor="let variable of station.variables"
             [class.active]="variable.variable.code === activeCode" [style.border-color]="'transparent'"
             [style.background]="variable?.readings[0]?.color || '#d1d1d1'" class="variable pointer">
-            <span [style.color]=" variable.readings[0].sequence == 2 ? 'black' : 'white'" class="variable-name">
+            <span [style.color]="  'black' " class="variable-name">
 
               {{variable.variable.abbreviation_en }}
             </span>
@@ -113,7 +113,7 @@
       dioxide, sulfur dioxide, surface ozone, and particles with a diameter of less than 10 microns.
     </p>
 
-    <a *ngIf="lang === 'ar'" (click)="downloadPdf()" style="font-size: 1rem;" class="seaGreen download ">
+    <!-- <a *ngIf="lang === 'ar'" (click)="downloadPdf()" style="font-size: 1rem;" class="seaGreen download ">
       <img src="assets/icons/pdf.svg" alt="">
 
       لتحميل الدليل الإرشادي لمؤشر جودة الهواء
@@ -123,7 +123,7 @@
       <img src="assets/icons/pdf.svg" alt="">
 
       To download the guidance manual for the air quality index.
-    </a>
+    </a> -->
   </div>
 
   <!-- <p class="footer">

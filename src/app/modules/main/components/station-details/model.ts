@@ -2,7 +2,7 @@ import { OwlOptions } from "ngx-owl-carousel-o"
 
 export const StationContent = {
     1: {
-        description:  'جودة الهواء جيدة جدًا، ولا يشكل تلوث الهواء خطرًا على الأفراد',
+        description:  'جودة الهواء جيدة، ولا يشكل تلوث الهواء خطرًا على الأفراد',
         instructions: [
             { icon: 'assets/icons/good/1.svg', content: 'افتح النوافذ الخاصة بك لجلب الهواء النقي والنظيف إلى الداخل' },
             { icon: 'assets/icons/good/2.svg', content: 'استمتع بالأنشطة الخارجية' },

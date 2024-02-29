@@ -12,15 +12,19 @@ import { Component } from '@angular/core';
   styleUrl: './headers.component.scss',
 })
 export class HeadersComponent {
-  lang = this.local.getCurrentLanguage();
+  lang$ = this.localization.getCurrentLanguage();
   content;
 
-  constructor(private local: LocalizationService) {}
+  constructor(private localization: LocalizationService) {}
 
   ngOnInit(): void {
-    this.local.getCurrentContent().subscribe((res) => {
+    this.localization.getCurrentContent().subscribe((res) => {
       this.content = res;
     });
+  }
+
+  setLang(lang){
+    this.localization.setLang(lang)
   }
 
 }

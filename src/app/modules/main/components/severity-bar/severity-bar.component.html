@@ -4,7 +4,7 @@
         <ng-container *ngFor="let breakPoint of breakPoints;index as i; last as isLast">
 
             <div [ngStyle]="{'background': breakPoint.color} " class="level">
-                <span class="text" *ngIf="i === 0 || isLast">
+                <span class="text" [ngStyle]="{'color': i == 1 ? 'black' : 'white'}" >
                     {{lang === 'ar' ? breakPoint.status_ar : breakPoint.status_en}}
                 </span>
                 <span class="end">

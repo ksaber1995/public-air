@@ -1,22 +1,25 @@
 <div class="container">
-  <form [formGroup]="informationForm" >
-    <h1>{{content.title}}</h1>
+  <div class="form-wrapper">
 
-    <label for="name">{{content.name}}</label>
-    <input id="name" type="text" formControlName="name">
+    <form [formGroup]="informationForm">
+      <h1>{{content.title}}</h1>
 
-    <label for="phoneNumber">{{content.phoneNumber}}</label>
-    <input id="phoneNumber" type="tel" formControlName="phoneNumber">
+      <label for="name">{{content.name}}</label>
+      <input id="name" type="text" formControlName="name">
 
-    <label for="email">{{content.email}}</label>
-    <input id="email" type="email" formControlName="email">
+      <label for="phoneNumber">{{content.phoneNumber}}</label>
+      <input id="phoneNumber" type="tel" formControlName="phoneNumber">
 
-    <label for="notes">{{content.notes}}</label>
-    <textarea type="text" id="notes" cols="105" rows="10" formControlName="notes"></textarea>
-    <button routerLink="/successMessage">{{content.send}}</button>
-  </form>
+      <label for="email">{{content.email}}</label>
+      <input id="email" type="email" formControlName="email">
+
+      <label for="notes">{{content.notes}}</label>
+      <textarea type="text" id="notes" cols="105" rows="10" formControlName="notes"></textarea>
+      <button routerLink="/successMessage">{{content.send}}</button>
+    </form>
+  </div>
 
   <div class="left">
-    <img src="assets/icons/contact-image.png" alt="">
+    <img  src="assets/icons/contact-image.png" alt="">
   </div>
 </div>

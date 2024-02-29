@@ -1,8 +1,9 @@
 import { Injectable, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Observable, map, of } from "rxjs";
+import { BehaviorSubject, Observable, map, of } from "rxjs";
 import { arContent } from "../../../lang/ar";
 import { enContent } from "../../../lang/en";
+import { CookieService } from "ngx-cookie-service";
 
 export enum Lang {
   ar = 'ar',
@@ -13,36 +14,21 @@ export enum Lang {
   providedIn: 'root'
 })
 export class LocalizationService implements OnInit {
-  constructor(private route: ActivatedRoute, private router: Router) {
+  lang$ = new BehaviorSubject(this.cookieService.get('lang') as Lang || Lang.en)
+
+  constructor(private route: ActivatedRoute, private router: Router,  private cookieService: CookieService) {
   }
+
+
 
   ngOnInit(): void {
     
   }
 
-  toggleLang(){
-    
-  }
-
+ 
   getCurrentLanguage(): Observable<Lang> {
-    const lang: Lang = this.route.snapshot.queryParams?.['lang'] as Lang
-    
-    if (!lang) this.router.navigate([], { queryParams: { lang: 'ar' } })
-
-    return this.route.queryParams.pipe(map(res => {
-      
-      const lang: Lang = res?.['lang'] as Lang
-
-      if (!lang) {
-        return Lang.ar
-      }
-
-      return lang
-    }))
-
-    // return this.route.queryParamMap.
+    return this.lang$.asObservable();
   }
-
 
   getCurrentContent(){
    const lang$ = this.getCurrentLanguage()
@@ -55,6 +41,12 @@ export class LocalizationService implements OnInit {
     }))
     
   }
+
+  setLang(lang){
+    this.cookieService.set('lang', lang)
+    this.lang$.next(lang)
+  }
+
 
 }
 

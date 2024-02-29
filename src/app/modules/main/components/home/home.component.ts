@@ -241,6 +241,7 @@ export class HomeComponent implements OnInit {
         station,
         activeItemId  : [VariablesCodes.PM25, VariablesCodes.PM10].includes(this.activeItemId) ? this.activeItemId : null
       },
+      nzCentered: true,
       nzCloseIcon: null,
       nzFooter: null,
       nzClassName: 'station-details-modal',

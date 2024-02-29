@@ -11,14 +11,14 @@ export const ControllerItems: ControllerItem[] = [
     {
         id: VariablesCodes.PM10,
         title: 'PM₁₀',
-        label: 'الجسيمات الدقيقة',
+        label: 'الدقائق العالقة',
         labelEn: 'PM₁₀'
     },
 
     {
         id: VariablesCodes.PM25,
         title: 'PM₂.₅',
-        label: 'الجسيمات الأدق',
+        label: 'الدقائق العالقة',
         labelEn: 'PM₂.₅'
 
     },

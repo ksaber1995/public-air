@@ -19,6 +19,7 @@ import { RequestDataComponent } from './components/request-data/request-data.com
 import { ContainerComponent } from './components/container/container.component';
 import { FormsModule } from '@angular/forms';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -45,8 +46,11 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
     SharedModule,
     NgChartsModule,
     FormsModule,
-    NzCheckboxModule
+    NzCheckboxModule,
 
+  ],
+  providers:[
+    CookieService
   ]
 })
 export class MainModule { }
