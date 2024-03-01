@@ -1,0 +1,41 @@
+@for $i from 1 through 360 {
+  .rounded-label-#{$i} {
+    position: relative;
+    width: 60px;
+    height: 60px;
+
+    &::before {
+      transform: rotate(#{$i}deg);
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 55px;
+      height: 55px;
+      background-image: url('../../assets/icons/wind-indicator.png');
+
+      background-size: cover;
+      /* Ensures the image covers the entire pseudo-element */
+      background-repeat: no-repeat;
+      /* Prevents image from repeating */
+      transform-origin: center;
+      /* Rotates around the center */
+    }
+
+    
+    &::after {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      content: "#{$i}";
+      position: absolute;
+      color: #fff;
+      top: -8%;
+      left: -6%;
+      font-size: .8rem;
+      // transform: translateY( -12%);
+    }
+  }
+}

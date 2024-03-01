@@ -195,8 +195,15 @@ export class HomeComponent implements OnInit {
       this.anchor = new google.maps.Point(15, 15);
       this.scaledSize = new google.maps.Size(30, 30)
     } else {
-      this.anchor = new google.maps.Point(20, 20);
-      this.scaledSize = new google.maps.Size(40, 40)
+      if(this.activeItemId === VariablesCodes.WIND ){
+        this.anchor = new google.maps.Point(5, 5);
+        this.scaledSize = new google.maps.Size(10, 10)
+     
+      }else{
+
+        this.anchor = new google.maps.Point(20, 20);
+        this.scaledSize = new google.maps.Size(40, 40)
+      }
 
     }
 

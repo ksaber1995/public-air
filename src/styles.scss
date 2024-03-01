@@ -2,7 +2,7 @@
 @import 'map';
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
-
+@import 'rounded-label';
 
 @font-face {
     font-family: 'Neo Sans Arabic Regular';
@@ -16,45 +16,45 @@ body,
     font-family: 'Neo Sans Arabic Regular', sans-serif;
 }
 
-.ltr-body{
-    .ant-btn-rtl{
+.ltr-body {
+    .ant-btn-rtl {
         direction: ltr;
     }
 }
 
 
-*{
+* {
     // direction: r ;
     // text-align: start;
 }
 
-.ar{
+.ar {
 
     // direction: rtl;
 }
 
-.text-center{
+.text-center {
     text-align: center;
 }
 
 
-.pointer:hover{
+.pointer:hover {
     cursor: pointer;
 }
 
-.d-flex{
+.d-flex {
     display: flex;
 }
 
-.flex-direction-column{
+.flex-direction-column {
     flex-direction: column;
 }
 
-li{
+li {
     list-style-type: none;
 }
 
-.wind-label{
+.wind-label {
     // border-radius: 50%;
     padding: .5rem;
     display: flex;
@@ -74,7 +74,7 @@ li{
     // background-color: $Gray;
 }
 
-.centered-label{
+.centered-label {
     font-size: 14px !important;
     position: relative;
     top: -4px;
@@ -83,21 +83,23 @@ li{
 }
 
 
-.custom-map-label{
+.custom-map-label {
     direction: ltr;
 }
 
-.rounded{
+.rounded {
     border-radius: 50%;
 }
 
-@media (min-width: 800){
-    .station-details-modal{
+@media (min-width: 800) {
+    .station-details-modal {
         min-width: 90% !important;
     }
 }
 
 
-.ant-row-rtl{
+.ant-row-rtl {
     direction: unset;
 }
+
+

@@ -82,14 +82,14 @@ export class SwaggerService {
             },
 
             [VariablesCodes.WIND]: {
-              label: wind?.readings[0]?.value ? WindConverter(wind?.readings[0]?.value) : 'NA', 
+              label:  ' ' , 
               // isDegree: true,
               color: '#fff',
 
-              iconPath: 'assets/icons/marker/wrapper.svg',
+              iconPath: 'assets/icons/arrowDown.svg',
               // class: 'centered-label',
               // class: 'custom-map-label wind-label ' + WindClassesSequence[wind?.readings[0]?.value ? Math.floor(wind?.readings[0]?.value / 60) : 0]
-              class: 'custom-map-label wind-label' 
+              class: 'custom-arrow ' + 'rounded-label-' + (wind?.readings[0]?.value ? Math.floor(wind?.readings[0]?.value) : 0)
             },
 
             [VariablesCodes.HUM]: {
