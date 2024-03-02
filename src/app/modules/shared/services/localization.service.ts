@@ -14,7 +14,7 @@ export enum Lang {
   providedIn: 'root'
 })
 export class LocalizationService implements OnInit {
-  lang$ = new BehaviorSubject(this.cookieService.get('lang') as Lang || Lang.en)
+  lang$ = new BehaviorSubject(this.cookieService.get('lang') as Lang || Lang.ar)
 
   constructor(private route: ActivatedRoute, private router: Router,  private cookieService: CookieService) {
   }

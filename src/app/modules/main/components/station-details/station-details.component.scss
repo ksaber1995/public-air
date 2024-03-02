@@ -75,7 +75,8 @@
     overflow: hidden;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
+    gap: 40px;
 
     .img {
         display: flex;
@@ -94,11 +95,6 @@
 
 
 
-    .variables-wrapper {
-        flex-grow: 1;
-
-
-    }
 
     .variables {
         width: 100%;
@@ -108,6 +104,10 @@
         padding: 2rem;
         gap: 1rem;
 
+
+        .variable:nth-child(2){
+            margin-left: 50px;
+        }
 
     }
 
@@ -210,6 +210,11 @@
 // }
 
 
+.content-body{
+    display: flex;
+    justify-content: center;
+}
+
 .close-btn {
     color: $SeaGreen;
     border: 1px solid $SeaGreen;
@@ -220,4 +225,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.ltr-body{
+    
+    .variables {
+
+        .variable:nth-child(2){
+            margin-right: 50px;
+            margin-left: 0px !important;
+        }
+
+    }
 }

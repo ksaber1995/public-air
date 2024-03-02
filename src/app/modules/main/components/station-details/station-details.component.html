@@ -7,6 +7,8 @@
     {{station.name_en}}
   </h1>
 
+  <div class="content-body">
+
   <div class="content-wrapper">
 
     <div class="content">
@@ -39,8 +41,9 @@
 
 
           <button (click)="changeActiveItem(variable.variable.code)" *ngFor="let variable of station.variables"
-            [class.active]="variable.variable.code === activeCode" [style.border-color]="'transparent'"
+            [class.active]="variable.variable.code === activeCode"  [style.border-color]="'transparent'"
             [style.background]="variable?.readings[0]?.color || '#d1d1d1'" class="variable pointer">
+
             <span [style.color]="  'black' " class="variable-name">
 
               {{variable.variable.abbreviation_en }}
@@ -61,6 +64,7 @@
       {{content?.description}}
     </div>
   </div>
+</div>
 
   <div class="aqi-instructions d-flex">
 

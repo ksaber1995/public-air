@@ -1,14 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
+import { BehaviorSubject } from 'rxjs';
 import { ExtendedStation } from '../../../shared/models/Station';
 import { ColorsSequence } from '../../../shared/models/colors';
+import { VariablesCodes } from '../../../shared/models/variables';
+import { LocalizationService } from '../../../shared/services/localization.service';
 import { SwaggerService } from './../../../shared/services/swagger.service';
 import { EnStationContent, StationContent, lightColors } from './model';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map } from 'rxjs';
-import { LocalizationService } from '../../../shared/services/localization.service';
-import { CdkDrag, CdkDragStart, CdkDragMove, CdkDragEnd } from '@angular/cdk/drag-drop';
-import { VariablesCodes } from '../../../shared/models/variables';
 
 interface IModalData {
   station: ExtendedStation,
