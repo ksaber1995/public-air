@@ -91,9 +91,10 @@ li {
     border-radius: 50%;
 }
 
-@media (min-width: 800) {
+@media (max-width: 992px) {
     .station-details-modal {
         min-width: 90% !important;
+        width: 90% !important;
     }
 }
 
