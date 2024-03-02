@@ -1,2 +1,5 @@
-<app-headers></app-headers>
-<router-outlet></router-outlet>
+
+<ng-container *ngIf="isLoading">
+    <app-headers></app-headers>
+    <router-outlet></router-outlet>
+</ng-container>

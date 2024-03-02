@@ -1,10 +1,7 @@
-import { arContent } from '../../../../lang/ar';
-import { enContent } from '../../../../lang/en';
-import {
-  Lang,
-  LocalizationService,
-} from './../../../shared/services/localization.service';
 import { Component } from '@angular/core';
+import {
+  LocalizationService
+} from './../../../shared/services/localization.service';
 
 @Component({
   selector: 'app-headers',

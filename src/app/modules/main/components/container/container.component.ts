@@ -6,19 +6,21 @@ import { LocalizationService } from '../../../shared/services/localization.servi
   templateUrl: './container.component.html',
   styleUrl: './container.component.scss'
 })
-export class ContainerComponent implements OnInit{
-
+export class ContainerComponent implements OnInit {
+  isLoading: boolean = false;
   constructor(
     private localization: LocalizationService
 
-    ) {}
+  ) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoading = true
+    }, 1000);
     this.setLangs()
   }
 
-  setLangs()
-  {
+  setLangs() {
     this.localization.getCurrentLanguage().subscribe(lang => {
       const title = document.getElementById('app-title');
       const body = document.getElementById('app-body');
