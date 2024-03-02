@@ -61,12 +61,6 @@
       </div>
 
 
-
-      <app-station-marker *ngFor="let station of stations$ | async">
-      </app-station-marker>
-
-
-
       <div *ngFor="let station of stations$ | async" [title]="lang == 'ar' ? station.name_ar : station.name_en"
         class="">
 

@@ -200,7 +200,7 @@ $right_left_position_small_screens: 30px;
         .bar-wrapper {
 
             left: unset;
-            right: -220px;
+            right: -280px;
         }
 
         .last-update {
@@ -229,6 +229,10 @@ $right_left_position_small_screens: 30px;
     }
 
     .map-wrapper {
+        .bar-wrapper {
+
+            left: -200px;
+        }
 
 
 
@@ -262,7 +266,8 @@ $right_left_position_small_screens: 30px;
 
         .map-wrapper {
             .bar-wrapper {
-                right: -100px;
+
+                right: -200px;
             }
 
             .last-update {
