@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
     clickable: true,
     // animation: google.maps.Animation.BOUNCE
     zIndex: 5000,
-
+    
     // label: {
     //   text:'',
     //   fontSize: '20px',
@@ -87,7 +87,6 @@ export class HomeComponent implements OnInit {
       //   lat: 21.4735,
       //   lng: 55.9754
       // },
-
       center:  { lat: 21.4735, lng: 58.545284 },
 
       fullscreenControl: false,

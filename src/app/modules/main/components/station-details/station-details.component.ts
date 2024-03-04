@@ -38,12 +38,17 @@ export class StationDetailsComponent implements OnInit {
   constructor(private swagger: SwaggerService, private http: HttpClient, private localization: LocalizationService) {
     this.station = this.nzModalData.station
     this.activeCode = this.nzModalData.activeItemId
-    
     const pm10 = this.station.variables.find(res=> res.variable.code === VariablesCodes.PM10)
     const pm25 = this.station.variables.find(res=> res.variable.code === VariablesCodes.PM25)
 
-    this.station.variables = [pm10, pm25, ...this.station.variables.filter(res=> res.variable.code !== VariablesCodes.PM10 && res.variable.code !== VariablesCodes.PM25)]
-
+    this.station.variables = [ ...this.station.variables.filter(res=> res.variable.code !== VariablesCodes.PM10 && res.variable.code !== VariablesCodes.PM25)]
+    
+    if(pm25){
+      this.station.variables.unshift(pm25)
+    }
+    if(pm10){
+      this.station.variables.unshift(pm10)
+    }
     this.lang$.subscribe(res => {
       if (res === 'ar') {
 
