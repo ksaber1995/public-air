@@ -1,7 +1,6 @@
-import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
-import { LocalizationService } from '../../../shared/services/localization.service';
+import { Component, OnInit } from '@angular/core';
 import { delay } from 'rxjs';
-import { DOCUMENT } from '@angular/common';
+import { LocalizationService } from '../../../shared/services/localization.service';
 
 @Component({
   selector: 'app-container',
@@ -12,28 +11,30 @@ export class ContainerComponent implements OnInit {
   isLoading: boolean = true;
   constructor(
     private localization: LocalizationService,
-    private renderer: Renderer2
 
+    
   ) { }
 
   ngOnInit(): void {
 
     this.localization.getCurrentLanguage().pipe(delay(1000))
       .subscribe(res => {
+        // ar en 
         this.loadGoogleMapsScript(res)
       })
-
+    this.setLangs()
   }
 
 
-  loadGoogleMapsScript(language: string) {
+  loadGoogleMapsScript(language: string) { // ar en
     this.isLoading = true
+    
     const existingScript = document.getElementById('google-maps-script');
     if (existingScript) {
-      this.renderer.removeChild(document.body, existingScript);
+      document.body.removeChild(existingScript);
     }
 
-    const script = this.renderer.createElement('script');
+    const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDDQ3S08D_41Ll3a2GjTE28KGQR-G6XvmM&libraries=places&language=${language}`;
     script.id = 'google-maps-script';
     script.async = true;
@@ -49,7 +50,7 @@ export class ContainerComponent implements OnInit {
       console.error('Error loading Google Maps API script.');
     };
 
-    this.renderer.appendChild(document.body, script);
+    document.body.appendChild( script);
 
   }
 

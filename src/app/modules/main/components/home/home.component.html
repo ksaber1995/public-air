@@ -54,7 +54,17 @@
         </div>
       </div>
 
-      <div class="contact">
+      <div *ngIf="(lang$ | async) === 'en'" class="contact">
+        <div routerLink="/requestData">
+          <img src="assets/icons/informationRequestIcon.svg">
+          Request Information
+        </div>
+        <div class="line"></div>
+        <div routerLink="/contact"><img src="assets/icons/contactIcon.svg">Contact Us </div>
+      </div>
+
+      
+      <div *ngIf="(lang$ | async) === 'ar'" class="contact">
         <div routerLink="/requestData">
           <img src="assets/icons/informationRequestIcon.svg">طلب المعلومات
         </div>
