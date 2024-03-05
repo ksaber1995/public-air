@@ -1,10 +1,11 @@
 <!-- <app-tab> -->
 
+
 <div *ngIf="isLoaded" class="main-wrapper" [class.ltr-body]=" (lang$ | async) === 'en'">
   <div *ngIf="lang$ | async as lang" class="map-wrapper">
 
-    <google-map [lang]="'en'" id="custom-map" [mapTypeId]="mapType" [zoom]="zoom" #googleMap [options]="options"
-      height="100%" width="100%" #map>
+    <google-map id="custom-map" [mapTypeId]="mapType" [zoom]="zoom" #googleMap [options]="options" height="100%"
+      width="100%" #map>
 
       <div class="zoom-inout">
         <button (click)="zoomIn(googleMap)" nz-button nzType="text">
@@ -54,8 +55,9 @@
       </div>
 
       <div class="contact">
-        <div routerLink="/requestData" >
-          <img src="assets/icons/informationRequestIcon.svg" >طلب المعلومات  </div>
+        <div routerLink="/requestData">
+          <img src="assets/icons/informationRequestIcon.svg">طلب المعلومات
+        </div>
         <div class="line"></div>
         <div routerLink="/contact"><img src="assets/icons/contactIcon.svg">تواصل معنا</div>
       </div>
