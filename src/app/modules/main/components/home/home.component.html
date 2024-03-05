@@ -20,7 +20,7 @@
 
       <div (click)="toggleSatelliteView(googleMap)" class="pointer satellite-wrapper">
         <img *ngIf="mapType === 'roadmap'" src="assets/icons/satellite.svg">
-        <img *ngIf="mapType === 'satellite'" src="assets/icons/terrain.svg">
+        <img *ngIf="mapType === 'hybrid'" src="assets/icons/terrain.svg">
       </div>
 
       <div *ngIf="lang == 'ar'" class="last-update">

@@ -64,7 +64,6 @@ export class HomeComponent implements OnInit {
   breakPoints: BreakPointsResponse;
   activeBreakPoints: BreakPoint[] = [];
   unit: string = 'ug/m3';
-  satelliteViewEnabled: boolean;
   mapType: google.maps.MapTypeId = google.maps.MapTypeId.ROADMAP
 
   anchor = new google.maps.Point(15, 15);
@@ -210,7 +209,7 @@ export class HomeComponent implements OnInit {
   }
 
   toggleSatelliteView(map: GoogleMap): void {
-    this.mapType = this.mapType === google.maps.MapTypeId.ROADMAP ? google.maps.MapTypeId.SATELLITE : google.maps.MapTypeId.ROADMAP;
+    this.mapType = this.mapType === google.maps.MapTypeId.ROADMAP ? google.maps.MapTypeId.HYBRID : google.maps.MapTypeId.ROADMAP;
 
   }
 
