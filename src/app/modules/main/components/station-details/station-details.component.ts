@@ -3,7 +3,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { BehaviorSubject } from 'rxjs';
 import { ExtendedStation } from '../../../shared/models/Station';
-import { ColorsSequence } from '../../../shared/models/colors';
 import { VariablesCodes } from '../../../shared/models/variables';
 import { LocalizationService } from '../../../shared/services/localization.service';
 import { SwaggerService } from './../../../shared/services/swagger.service';
@@ -26,7 +25,6 @@ export class StationDetailsComponent implements OnInit {
   title
   subtitle
   lightColors = lightColors
-  ColorsSequence = ColorsSequence
   readonly nzModalData: IModalData = inject(NZ_MODAL_DATA);
   readonly #modal = inject(NzModalRef);
   station: ExtendedStation

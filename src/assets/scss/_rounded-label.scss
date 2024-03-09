@@ -1,3 +1,5 @@
+
+
 @for $i from 1 through 360 {
   .rounded-label-#{$i} {
     position: relative;
@@ -29,13 +31,158 @@
       justify-content: center;
       width: 60px;
       height: 60px;
-      content: "#{$i}";
+      content: "NA";
+
       position: absolute;
       color: #fff;
       top: -8%;
       left: -6%;
       font-size: .8rem;
       // transform: translateY( -12%);
+    }
+  }
+}
+
+
+@for $i from 0 through 22 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'N';
+    }
+  }
+}
+
+@for $i from 23 through 45 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'NNE';
+    }
+  }
+}
+
+@for $i from 46 through 67 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'NE';
+    }
+  }
+}
+
+@for $i from 68 through 90 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'ENE';
+      top: -7%;
+      left: -2%;
+    }
+  }
+}
+
+@for $i from 91 through 112 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'E';
+      top: -3%;
+      left: 1%;
+    }
+  }
+}
+
+@for $i from 113 through 135 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'ESE';
+  
+    }
+  }
+}
+
+@for $i from 136 through 157 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'SE';
+      top: -3%;
+      left: -1%;
+    }
+  }
+}
+
+@for $i from 158 through 180 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'SSE';
+      top: 0;
+      left: -2%;
+    }
+  }
+}
+
+@for $i from 181 through 202 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'S';
+      top: -1%;
+      left: -4%;
+    }
+  }
+}
+
+@for $i from 203 through 225 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'SSW';
+      top: 0%;
+    }
+  }
+}
+
+@for $i from 226 through 247 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'SW';
+      top: -1%;
+    }
+  }
+}
+
+@for $i from 248 through 270 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'WSW';
+      top: -2% !important;
+      left: -9%;
+    }
+  }
+}
+
+@for $i from 271 through 292 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'W';
+    }
+  }
+}
+
+@for $i from 293 through 315 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'WNW';
+    }
+  }
+}
+
+@for $i from 316 through 337 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'NW';
+    }
+  }
+}
+
+@for $i from 338 through 360 {
+  .rounded-label-#{$i} {
+    &::after {
+      content: 'NNW';
     }
   }
 }

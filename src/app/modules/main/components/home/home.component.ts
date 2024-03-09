@@ -4,7 +4,6 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { combineLatest, map } from 'rxjs';
 import { ExtendedStation } from '../../../shared/models/Station';
 import { BreakPoint } from '../../../shared/models/breakPoint';
-import { ColorsSequence } from '../../../shared/models/colors';
 import { VariablesCodes } from '../../../shared/models/variables';
 import { BreakPointsResponse, SwaggerService } from '../../../shared/services/swagger.service';
 import { convertToUTC4 } from '../../../shared/services/utilities/date';
@@ -31,7 +30,6 @@ export class HomeComponent implements OnInit {
   lang$ = this.localization.getCurrentLanguage();
   // lang = this.localization.getCurrentLanguageValue()
 
-  ColorsSequence = ColorsSequence
   MapClasses = MapClasses
   navigatorPosition
   public options: google.maps.MapOptions

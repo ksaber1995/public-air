@@ -3,10 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, map, shareReplay } from 'rxjs';
 import { AqiData, ExtendedStation, HistoryData, Station } from '../models/Station';
 import { BreakPoint, VariableBreakPoint } from '../models/breakPoint';
-import { ColorsSequence } from '../models/colors';
 import { VariablesCodes } from './../models/variables';
 import { convertToUTC4 } from './utilities/date';
-import { WindConverter } from './utilities/wind-converter';
 
 
 const BaseUrl = 'https://graphql.naqi.dal2.com/api/rest/v1/public'
