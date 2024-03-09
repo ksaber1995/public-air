@@ -1,4 +1,4 @@
-<h3 class="map-title">{{history.dates[this.currentIndex].date}}</h3>
+<h3 class="map-title">{{history?.dates[this.currentIndex].date}}</h3>
 <div class="main-wrapper">
 
     <button class="rounded btn-wrapper" (click)="changeDataSet('prev')" [disabled]="currentIndex === 0" nz-button>
@@ -19,7 +19,7 @@
     </div>
 
     <button class="rounded btn-wrapper" (click)="changeDataSet('next')"
-        [disabled]="currentIndex === (history.dates.length - 1)" nz-button>
+        [disabled]="currentIndex === (history?.dates.length - 1)" nz-button>
         <span class="seaGreen" nz-icon nzType="right" nzTheme="outline"></span>
     </button>
 </div>

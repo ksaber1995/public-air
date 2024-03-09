@@ -115,7 +115,14 @@ export class StationDetailsComponent implements OnInit {
     } else {
 
       const activeHistoryData = this.history.variables.find(item => item.variable.code === code)
-      this.activeHistoryData$.next(activeHistoryData);
+      if(!!activeHistoryData){
+
+        this.activeHistoryData$.next(activeHistoryData);
+      }else{
+        this.activeHistoryData$.next(this.history);
+      
+      }
+        
 
 
     }

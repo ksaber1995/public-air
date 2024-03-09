@@ -38,6 +38,7 @@ export class HistoryChartComponent implements OnInit {
   }
 
   setDataSets() {
+    debugger
     this.barChartLabels = this.history.dates[this.currentIndex].data.map(res => formatTime( convertToUTC4( new Date(res.aggregated_at) ) ))
     this.barChartData = [
       {
