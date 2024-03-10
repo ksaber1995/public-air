@@ -92,16 +92,21 @@
 
     &.horizontal{ 
 
+
         .level{
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 95px;
+            min-width: 70px;
+            max-width: 95px;
             height: 30px;
             position: relative;
             font-size: .6rem;
             // font-weight: 600;
             
+
+            
+
             .text{
                 padding: 3px;
                 color: #fff;
@@ -127,17 +132,11 @@
             .bar-value{
                 text-wrap: nowrap;
                 // font-weight: bold;
-                font-size: .8rem;
+                font-size: .6rem;
             }
             
             
-            .level:first-child{
-                .bar-value{
-                    position: relative;
-                    right: 0;
-                }
-                
-            }
+
             
             
         }

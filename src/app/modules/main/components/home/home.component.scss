@@ -64,17 +64,17 @@ $right_left_position_small_screens: 30px;
     .bar-wrapper {
         position: absolute;
         // top: 100px;
-        bottom: 50%;
+        bottom: 46%;
         transform: translateY(-50%);
-        left: -280px;
+        left: -230px;
 
         max-width: 80%;
     }
 
     .last-update {
         position: absolute;
-        bottom: 50px;
-        left: 40px;
+        bottom: 30px;
+        left: 30px;
         padding: .5rem;
         border-radius: 10px;
         background-color: #fff;
@@ -202,12 +202,12 @@ $right_left_position_small_screens: 30px;
         .bar-wrapper {
 
             left: unset !important;
-            right: -280px;
+            right: -230px;
         }
 
         .last-update {
             left: unset !important;
-            right: 40px;
+            right: 30px;
         }
 
         .controllers {
