@@ -24,8 +24,8 @@ export class HistoryChartComponent implements OnInit {
   currentIndex = 0;
 
   constructor() {
-  
-   
+
+
   }
 
   ngOnInit(): void {
@@ -38,7 +38,6 @@ export class HistoryChartComponent implements OnInit {
   }
 
   setDataSets() {
-    debugger
     this.barChartLabels = this.history.dates[this.currentIndex].data.map(res => formatTime( convertToUTC4( new Date(res.aggregated_at) ) ))
     this.barChartData = [
       {
@@ -47,19 +46,19 @@ export class HistoryChartComponent implements OnInit {
         label: this.history.dates[this.currentIndex].date,
         borderRadius: 7,
         barThickness: 15,
-        
+
         // minBarLength: 7
-        
+
       }
     ]
   }
 
   barChartOptions: ChartOptions = {
-  
+
     responsive: true,
     maintainAspectRatio: false,
 
-   
+
     scales: {
 
       x: {
@@ -76,14 +75,14 @@ export class HistoryChartComponent implements OnInit {
           stepSize: 1,
           count : 6,
           includeBounds: true,
-          
-          // step 
+
+          // step
         },
 
         grid: {
           display: false,
-          
-          
+
+
         }
       }
     }

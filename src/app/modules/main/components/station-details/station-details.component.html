@@ -4,67 +4,66 @@
   </button>
 
   <h1 class="station-name text-center">
-    {{station.name_en}}
+    {{lang === 'ar' ? station.name_ar : station.name_en}}
   </h1>
 
   <div class="content-body">
 
-  <div class="content-wrapper">
+    <div class="content-wrapper">
 
-    <div class="content">
-      <!-- <div [style.background]="lightColors [station.aqi[0].sequence || 0]" class="img">
+      <div class="content">
+        <!-- <div [style.background]="lightColors [station.aqi[0].sequence || 0]" class="img">
       <img [src]="'assets/icons/details/' + station.aqi[0].sequence + '.svg'" alt="">
 
       <span [style.color]="station.aqi[0].color" class="aqi">AQI</span>
     </div> -->
 
 
-      <button (click)="changeActiveItem(null)"
-        [style.background]="station.brief?.['AQI']?.color || '#d1d1d1'" [style.border-color]="'transparent'"
-        [class.active]="!activeCode" class="variable aqi pointer">
-        <span [style.color]="  'black' " class="variable-name">
-          AQI
+        <button (click)="changeActiveItem(null)" [style.background]="station.brief?.['AQI']?.color || '#d1d1d1'"
+          [style.border-color]="'transparent'" [class.active]="!activeCode" class="variable aqi pointer">
+          <span [style.color]="  'black' " class="variable-name">
+            AQI
 
-        </span>
+          </span>
 
-        <span class="variable-value">
+          <span class="variable-value">
 
-          <!-- {{variable.readings[0].average}} {{variable.unit.code}} -->
-        </span>
-      </button>
-
-
-      <div class="variables-wrapper">
+            <!-- {{variable.readings[0].average}} {{variable.unit.code}} -->
+          </span>
+        </button>
 
 
-        <div class="variables">
+        <div class="variables-wrapper">
 
 
-          <button (click)="changeActiveItem(variable.variable.code)" *ngFor="let variable of station.variables"
-            [class.active]="variable.variable.code === activeCode"  [style.border-color]="'transparent'"
-            [style.background]="variable?.readings[0]?.color || '#d1d1d1'" class="variable pointer">
+          <div class="variables">
 
-            <span [style.color]="  'black' " class="variable-name">
 
-              {{variable.variable.abbreviation_en }}
-            </span>
+            <button (click)="changeActiveItem(variable.variable.code)" *ngFor="let variable of station.variables"
+              [class.active]="variable.variable.code === activeCode" [style.border-color]="'transparent'"
+              [style.background]="variable?.readings[0]?.color || '#d1d1d1'" class="variable pointer">
 
-            <span class="variable-value">
+              <span [style.color]="  'black' " class="variable-name">
 
-              <!-- {{variable.readings[0].average}} {{variable.unit.code}} -->
-            </span>
-          </button>
+                {{variable.variable.abbreviation_en }}
+              </span>
+
+              <span class="variable-value">
+
+                <!-- {{variable.readings[0].average}} {{variable.unit.code}} -->
+              </span>
+            </button>
+          </div>
         </div>
+
+
       </div>
 
-
-    </div>
-
-    <div class="brief text-center">
-      {{content?.description}}
+      <div class="brief text-center">
+        {{content?.description}}
+      </div>
     </div>
   </div>
-</div>
 
   <div class="aqi-instructions d-flex">
 
@@ -88,9 +87,8 @@
 
     <div class="history">
 
-      <app-history-chart  cdkDrag (cdkDragStarted)="onDragStarted($event)" 
-      (cdkDragMoved)="onDragMoved($event)" 
-      (cdkDragEnded)="onDragEnded($event)" [history$]="activeHistoryData$"></app-history-chart>
+      <app-history-chart cdkDrag (cdkDragStarted)="onDragStarted($event)" (cdkDragMoved)="onDragMoved($event)"
+        (cdkDragEnded)="onDragEnded($event)" [history$]="activeHistoryData$"></app-history-chart>
     </div>
   </ng-container>
 
