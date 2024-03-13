@@ -1,24 +1,25 @@
-<div class="container" *ngIf="lang$ | async as lang">
+<div nz-row   class="container" *ngIf="lang$ | async as lang">
 
-  <div class="form-wrapper">
+  <div nzMd="20" nz-col class="form-wrapper">
     <h1>{{content.requestInformation}}</h1>
 
     <form nz-row [formGroup]="informationForm" [nzGutter]="25">
 
-      <div nz-col nzSpan="12" class="form-item-wrapper">
-        <mat-form-field>
-          <label class="form-label" for="name">{{content.name}}</label>
+      <div nz-col nzXs="24" nzLg="12" class="form-item-wrapper">
+        <label class="form-label" for="name">{{content.name}}</label>
+        <mat-form-field appearance="outline">
+          <!-- <mat-label class="form-label" for="name">{{content.name}}</mat-label> -->
           <input matInput id="name" type="text" formControlName="name" placeholder="{{content.name}}">
           <mat-error>{{content.nameError}}</mat-error>
         </mat-form-field>
       </div>
 
-      <div nz-col nzSpan="12" class="form-item-wrapper">
+      <div nz-col nzXs="24" nzLg="12" class="form-item-wrapper">
         <div class="number">
-          <label class="phoneNumber" for="phoneNumber">{{content.phoneNumber}}</label>
+          <label class="form-label" for="phoneNumber">{{content.phoneNumber}}</label>
           <div class="phone-wrapper">
-            <mat-form-field>
-              <ngx-mat-intl-tel-input placeholder="phone number" [enableSearch]="true" name="phone"
+            <mat-form-field appearance="outline">
+              <ngx-mat-intl-tel-input [preferredCountries]="['om']" placeholder="phone number" [enableSearch]="true" name="phone"
                 formControlName="phone_number"></ngx-mat-intl-tel-input>
               <mat-error>{{content.PhoneNumberError}}</mat-error>
             </mat-form-field>
@@ -26,46 +27,52 @@
         </div>
       </div>
 
-      <div nz-col nzSpan="12" class="form-item-wrapper">
-        <mat-form-field>
-          <label class="form-label" for="email">{{content.email}}</label>
+      <div nz-col nzXs="24" nzLg="12" class="form-item-wrapper">
+        <label class="form-label" for="email">{{content.email}}</label>
+
+        <mat-form-field appearance="outline">
+          <!-- <mat-label class="form-label" for="email">{{content.email}}</mat-label> -->
           <input matInput id="email" type="email" formControlName="email" placeholder="{{content.email}}">
           <mat-error>{{content.emailError}}</mat-error>
         </mat-form-field>
       </div>
 
-      <div nz-col nzSpan="12" class="form-item-wrapper">
-        <mat-form-field>
-          <label class="form-label" for="staion">{{content.station}}</label>
-          <select matNativeControl id="station" formControlName="station">
-            <option class="select-option" value="" disabled selected>
-              {{content.stationPlaceholder}}
-            </option>
-            <option class="select-option" *ngFor="let station of stations">
+      <div nz-col nzXs="24" nzLg="12" class="form-item-wrapper">
+        <label class="form-label" for="staion">{{content.station}}</label>
+        <mat-form-field appearance="outline">
+          <mat-select placeholder="{{content.stationPlaceholder}}" matNativeControl id="station"
+            formControlName="station">
+            <mat-option [value]="station.code" *ngFor="let station of stations">
               {{ lang ==='ar' ? station.name_ar : station.name_en }}
-            </option>
-          </select>
+            </mat-option>
+          </mat-select>
 
           <mat-error>{{content.stationError}}</mat-error>
         </mat-form-field>
       </div>
 
-      <div nz-col nzSpan="12" class="form-item-wrapper">
-        <mat-form-field >
-          <label class="form-label" for="startDate">{{content.startDate}}</label>
-          <input matInput [matDatepicker]="picker1"  formControlName="startDate" placeholder="{{content.datePlaceholder}}">
-          <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+      <div nz-col nzXs="24" nzLg="12" class="form-item-wrapper">
+        <label class="form-label" for="startDate">{{content.startDate}}</label>
+
+        <mat-form-field appearance="outline">
+          <!-- <mat-label class="form-label" for="startDate">{{content.startDate}}</mat-label> -->
+          <input (click)="picker1.open()" matInput [max]="informationForm.get('endDate').value" [matDatepicker]="picker1" formControlName="startDate"
+            placeholder="{{content.datePlaceholder}}">
+
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
           <mat-error>{{content.startDateError}}</mat-error>
         </mat-form-field>
+
       </div>
 
-      <div nz-col nzSpan="12" class="form-item-wrapper">
-        <mat-form-field >
-          <label class="form-label" for="endDate">{{content.endDate}}</label>
-          <input matInput [matDatepicker]="picker2"  formControlName="endDate" placeholder="{{content.datePlaceholder}}">
+      <div nz-col nzXs="24" nzLg="12" class="form-item-wrapper">
+        <label class="form-label" for="endDate">{{content.endDate}}</label>
+        <mat-form-field appearance="outline">
+          <!-- <mat-label class="form-label" for="endDate">{{content.endDate}}</mat-label> -->
+          <input matInput (click)="picker2.open()" [min]="informationForm.get('startDate').value" [matDatepicker]="picker2" formControlName="endDate" placeholder="{{content.datePlaceholder}}">
           <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-          <mat-datepicker #picker2></mat-datepicker>
+          <mat-datepicker  #picker2></mat-datepicker>
           <mat-error>{{content.endDateError}}</mat-error>
         </mat-form-field>
       </div>
@@ -73,7 +80,7 @@
     </form>
 
 
-    <div class="itemsContainer">
+    <div class="items-container">
       <h3>{{content.items}}</h3>
 
 
@@ -83,11 +90,11 @@
       <nz-checkbox-wrapper (nzOnChange)="onVariablesChange()">
         <div class="inline-flex" style="max-width: 600px;" nz-row [nzGutter]="5">
           <div nzSpan="8" nz-col class="check-item">
-            <label nz-checkbox (ngModelChange)="toggleSelectAll()"
-              [(ngModel)]="allValuesChecked">{{content.all}}</label>
+            <mat-label nz-checkbox (ngModelChange)="toggleSelectAll()"
+              [(ngModel)]="allValuesChecked">{{content.all}}</mat-label>
           </div>
           <div *ngFor="let variable of variables" nzSpan="8" nz-col class="check-item">
-            <label nz-checkbox [(ngModel)]="variable.checked">{{variable.name}}</label>
+            <mat-label nz-checkbox [(ngModel)]="variable.checked">{{variable.name}}</mat-label>
           </div>
         </div>
       </nz-checkbox-wrapper>
@@ -95,13 +102,13 @@
 
     </div>
 
-    <re-captcha  (error)="captchaError($event)" (resolved)="resolve($event)"
-    siteKey="6LeQOJQpAAAAANb9FxklR4LfUE4XGkj8KFKg-PEN">
-  </re-captcha>
+    <re-captcha (error)="captchaError($event)" (resolved)="resolve($event)"
+      siteKey="6LeQOJQpAAAAANb9FxklR4LfUE4XGkj8KFKg-PEN">
+    </re-captcha>
 
     <button [disabled]="!recaptcha_token || informationForm.invalid" (click)="save()">{{content.send}}</button>
   </div>
 
-  <div class="left">
+  <div nzMd="4" nz-col class="left">
   </div>
 </div>
