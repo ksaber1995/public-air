@@ -5,6 +5,7 @@ import { AqiData, ExtendedStation, HistoryData, Station } from '../models/Statio
 import { BreakPoint, VariableBreakPoint } from '../models/breakPoint';
 import { VariablesCodes } from './../models/variables';
 import { convertToUTC4 } from './utilities/date';
+import { Contact, ContactWithToken } from '../models/Contact';
 
 
 const BaseUrl = 'https://graphql.naqi.dal2.com/api/rest/v1/public'
@@ -75,12 +76,12 @@ export class SwaggerService {
               color: '#fff',
               iconPath: 'assets/icons/marker/wrapper.svg',
 
-              class: 'custom-map-label wind-label' 
+              class: 'custom-map-label wind-label'
 
             },
 
             [VariablesCodes.WIND]: {
-              label:  ' ' , 
+              label:  ' ' ,
               // isDegree: true,
               color: '#fff',
 
@@ -155,7 +156,7 @@ export class SwaggerService {
           variable.dates = Object.entries(v_dates).map(([key, value]) => ({ date: key, data: value as AqiData[] }));
         })
 
-        
+
 
         return { ...station, dates: datesArray }
       }))
@@ -168,6 +169,19 @@ export class SwaggerService {
     const url = BaseUrl + '/breakpoints'
 
     return this.http.get<BreakPointsResponse>(url)
+  }
+
+  contactUs(body: ContactWithToken){
+    // 1- call goolge caput
+    // 2- get taken
+    // generate ContactWith capture // post
+    //
+   return  this.http.post('https://functions.naqi.dal2.com/v1/feedback/validate', body);
+  }
+
+  requestData(body){
+    return this.http.post(' https://functions.naqi.dal2.com/v1/data-access/validate', body);
+
   }
 }
 

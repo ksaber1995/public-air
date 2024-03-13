@@ -7,36 +7,44 @@
 
     <ul *ngIf="lang$ | async as lang">
       <li *ngIf="lang === 'ar'">
-  
+
         <a nz-dropdown [nzDropdownMenu]="menu">
           <div class="language">
             <img src="../../../../../assets/icons/languageIcon.svg" class="lang">
-           العربية 
+           العربية
             <img src="../../../../../assets/icons/arrowDown.svg" class="arrow">
           </div>
         </a>
-  
-  
+
+
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu>
-            <li (click)="setLang('en')" nz-menu-item>الانجليزية</li>
+            <li (click)="setLang('en')" nz-menu-item class="langChoose">
+              <img src="../../../../../assets/icons/united-kingdom-logo-svg-vector.svg" class="englishImage">
+              الانجليزية
+             </li>
+
           </ul>
         </nz-dropdown-menu>
       </li>
-  
+
       <li *ngIf="lang === 'en'">
-  
+
         <a nz-dropdown [nzDropdownMenu]="menu">
           <div class="language">
+            <img src="../../../../../assets/icons/united-kingdom-logo-svg-vector.svg" class="englishImage">
             English
             <img src="../../../../../assets/icons/arrowDown.svg" class="arrow">
           </div>
         </a>
-  
-  
+
+
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu>
-            <li (click)="setLang('ar')" nz-menu-item>العربية</li>
+            <li (click)="setLang('ar')" nz-menu-item class="langChoose">
+              <img src="../../../../../assets/icons/languageIcon.svg" class="lang">
+              العربية
+            </li>
           </ul>
         </nz-dropdown-menu>
       </li>

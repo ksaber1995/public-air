@@ -21,5 +21,14 @@ export const enContent= {
     'endDate':'To',
     'items':'Items',
     'all':'All',
+    'address': 'Title',
+    'emailError':'Invalid Email',
+    'nameError':'The length must be  from 5 character to 100',
+    'PhoneNumberError':'Invalid phoneNumber',
+    'addresError':'The length must be from 5 character to 100',
+    'notesError':'The length must be from 5 character to 5000',
+    'stationError': 'You must choose station',
+    'startDateError': "You must choose start Date",
+    'endDateError': "You must choose end date",
 
 }

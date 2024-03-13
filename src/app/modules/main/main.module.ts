@@ -20,8 +20,16 @@ import { ContainerComponent } from './components/container/container.component';
 import { FormsModule } from '@angular/forms';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { CookieService } from 'ngx-cookie-service';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NgSelectModule } from '@ng-select/ng-select';
 
-
+import { RecaptchaModule } from "ng-recaptcha";
+import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input-v16';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -46,11 +54,19 @@ import { CookieService } from 'ngx-cookie-service';
     SharedModule,
     NgChartsModule,
     FormsModule,
+    NgxMatIntlTelInputComponent,
     NzCheckboxModule,
-
+    RecaptchaModule,
+    NzInputModule,
+    NgSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatSelectModule
   ],
   providers:[
-    CookieService
+    CookieService,
+    provideNativeDateAdapter()
   ]
 })
 export class MainModule { }

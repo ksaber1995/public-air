@@ -3,6 +3,8 @@
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 @import 'rounded-label';
+@import "@ng-select/ng-select/themes/material.theme.css";
+
 
 @font-face {
     font-family: 'Neo Sans Arabic Regular';
@@ -104,3 +106,6 @@ li {
 }
 
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

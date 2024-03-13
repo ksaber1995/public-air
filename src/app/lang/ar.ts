@@ -21,4 +21,13 @@ export const arContent  = {
     'endDate':'الي',
     'items':'العناصر',
     'all':'الكل',
+    'address': 'العنوان',
+    'emailError':'بريد ألكتروني غير صحيح',
+    'nameError':'  يجب ان يكون الاسم مكون من 5 احرف علي الاقل ',
+    'PhoneNumberError':'رقم التليفون غير صحيح',
+    'addresError':' يجب ان يكون العنوان مكون من 5 احرف علي الاقل',
+    'notesError':'يجب ان تكون الملاحظات مكونة من 5 احرف علي الاقل ',
+    'stationError' : 'يجب اختيار محطة',
+    'startDateError': "يجب اختيار تاريخ بدأ",
+    'endDateError': "يحب اختيار تاريخ نهاية",
 }

@@ -1,25 +1,55 @@
 <div class="container">
   <div class="form-wrapper">
-
     <form [formGroup]="informationForm">
       <h1>{{content.title}}</h1>
+      <div class="item">
+        <mat-form-field>
+          <label for="name">{{content.name}}</label>
+          <input matInput id="name" type="text" formControlName="name" placeholder="{{content.name}}">
+          <mat-error>{{content.nameError}}</mat-error>
+        </mat-form-field>
 
-      <label for="name">{{content.name}}</label>
-      <input id="name" type="text" formControlName="name">
+      </div>
 
-      <label for="phoneNumber">{{content.phoneNumber}}</label>
-      <input id="phoneNumber" type="tel" formControlName="phoneNumber">
+      <div class="number">
+        <label class="phoneNumber" for="phoneNumber">{{content.phoneNumber}}</label>
+        <div class="phone-wrapper">
+          <mat-form-field>
+            <ngx-mat-intl-tel-input placeholder="phone number" [enableSearch]="true" name="phone"
+              formControlName="phone_number"></ngx-mat-intl-tel-input>
+            <mat-error>{{content.PhoneNumberError}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
 
-      <label for="email">{{content.email}}</label>
-      <input id="email" type="email" formControlName="email">
+        <mat-form-field>
+          <label for="email">{{content.email}}</label>
+          <input matInput id="email" type="email" formControlName="email" placeholder="{{content.email}}">
+          <mat-error>{{content.emailErorr}}</mat-error>
+        </mat-form-field>
 
-      <label for="notes">{{content.notes}}</label>
-      <textarea type="text" id="notes" cols="105" rows="10" formControlName="notes"></textarea>
-      <button routerLink="/successMessage">{{content.send}}</button>
+        <mat-form-field>
+          <label for="email">{{content.address}}</label>
+          <input matInput id="title" type="text" formControlName="title" placeholder="{{content.address}}">
+          <mat-error>{{content.addresError}}</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field>
+          <label for="notes">{{content.notes}}</label>
+          <textarea matInput type="text" id="notes" cols="105" rows="10" formControlName="notes"></textarea>
+          <mat-error>{{content.notesError}}</mat-error>
+        </mat-form-field>
+
+      <re-captcha  (error)="captchaError($event)" (resolved)="resolve($event)"
+        siteKey="6LeQOJQpAAAAANb9FxklR4LfUE4XGkj8KFKg-PEN">
+      </re-captcha>
+
+      <button  [disabled]="!recaptcha_token || informationForm.invalid" (click)="save()">{{content.send}}</button>
     </form>
   </div>
 
   <div class="left">
-    <img  src="assets/icons/contact-image.png" alt="">
+    <img src="assets/icons/contact-image.png" alt="">
   </div>
 </div>

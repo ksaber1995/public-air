@@ -16,7 +16,8 @@ export class RequestDataComponent {
   lang$ = this.local.getCurrentLanguage();
   stations;
   content;
-
+  recaptcha_token;
+  isCaptchaError: any;
   allValuesChecked = false
 
   variables = [
@@ -29,13 +30,13 @@ export class RequestDataComponent {
 
 
   informationForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    phoneNumber: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required , Validators.minLength(5), Validators.maxLength(100)]),
+    phone_number: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required ] ),
     station: new FormControl('', [Validators.required]),
     startDate: new FormControl('', [Validators.required]),
     endDate: new FormControl('', [Validators.required]),
-    variables: new FormControl('')
+    variables: new FormControl(''),
   });
 
 
@@ -46,7 +47,7 @@ export class RequestDataComponent {
   ) { }
 
   ngOnInit(): void {
-    this.local.getCurrentContent().subscribe((res) => {
+      this.local.getCurrentContent().subscribe((res) => {
       this.content = res;
     });
     this.swagger.getStations().subscribe(res => {
@@ -69,5 +70,36 @@ export class RequestDataComponent {
     } else {
       this.variables.forEach(variable => variable.checked = true)
     }
+  }
+
+  save(){
+    const subject_obj = {
+      station_code: this.informationForm.value.station,
+      from_date: this.informationForm.value.startDate,
+      to_date: this.informationForm.value.endDate,
+      variables:[this.variables.filter(res=> res.checked).map(res=> res.name)]  // [{name: '', checked:''}]
+    }
+
+    const subject = JSON.stringify(subject_obj)
+
+    const body = {
+      subject,
+      fullname: this.informationForm.value.name,
+      title: this.informationForm.value.name,
+      recaptcha_token: this.recaptcha_token,
+    }
+
+    this.swagger.requestData(body).subscribe(res=>{
+
+    })
+  }
+  resolve(e) {
+
+    this.recaptcha_token = e;
+  }
+
+  captchaError(error){
+    this.recaptcha_token = null;
+    this.isCaptchaError = error
   }
 }
