@@ -107,5 +107,18 @@ li {
 
 
 
-html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-mdc-form-field-infix{
+  margin-bottom: 0 !important;
+  padding-bottom:0 !important ;
+}
+.mat-mdc-form-field-error-wrapper {
+  padding: 0 !important;
+  display: block;
+}
+
+mat-error{
+  margin-bottom: 10px !important;
+
+}

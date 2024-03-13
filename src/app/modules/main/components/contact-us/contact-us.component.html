@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="form-wrapper">
+<div nz-row class="container">
+  <div nz-col  nzLg="12" nzXs="24"  class="form-wrapper">
     <form [formGroup]="informationForm">
       <h1>{{content.title}}</h1>
       <div class="item">
@@ -15,41 +15,53 @@
         <label class="phoneNumber" for="phoneNumber">{{content.phoneNumber}}</label>
         <div class="phone-wrapper">
           <mat-form-field>
-            <ngx-mat-intl-tel-input placeholder="phone number" [enableSearch]="true" name="phone"
-              formControlName="phone_number"></ngx-mat-intl-tel-input>
+            <ngx-mat-intl-tel-input [preferredCountries]="['om']" placeholder="phone number" [enableSearch]="true"
+              name="phone" formControlName="phone_number"></ngx-mat-intl-tel-input>
             <mat-error>{{content.PhoneNumberError}}</mat-error>
           </mat-form-field>
         </div>
       </div>
 
-        <mat-form-field>
-          <label for="email">{{content.email}}</label>
-          <input matInput id="email" type="email" formControlName="email" placeholder="{{content.email}}">
-          <mat-error>{{content.emailErorr}}</mat-error>
-        </mat-form-field>
+      <mat-form-field>
+        <label for="email">{{content.email}}</label>
+        <input matInput id="email" type="email" formControlName="email" placeholder="{{content.email}}">
+        <mat-error>{{content.emailErorr}}</mat-error>
+      </mat-form-field>
 
-        <mat-form-field>
-          <label for="email">{{content.address}}</label>
-          <input matInput id="title" type="text" formControlName="title" placeholder="{{content.address}}">
-          <mat-error>{{content.addresError}}</mat-error>
-        </mat-form-field>
+      <mat-form-field>
+        <label for="email">{{content.address}}</label>
+        <input matInput id="title" type="text" formControlName="title" placeholder="{{content.address}}">
+        <mat-error>{{content.addresError}}</mat-error>
+      </mat-form-field>
 
 
-        <mat-form-field>
-          <label for="notes">{{content.notes}}</label>
-          <textarea matInput type="text" id="notes" cols="105" rows="10" formControlName="notes"></textarea>
-          <mat-error>{{content.notesError}}</mat-error>
-        </mat-form-field>
+      <mat-form-field>
+        <label for="notes">{{content.notes}}</label>
+        <textarea matInput type="text" id="notes" cols="105" rows="10" formControlName="notes"></textarea>
+        <mat-error>{{content.notesError}}</mat-error>
+      </mat-form-field>
 
-      <re-captcha  (error)="captchaError($event)" (resolved)="resolve($event)"
+      <re-captcha class="re-captcha" (error)="captchaError($event)" (resolved)="resolve($event)"
         siteKey="6LeQOJQpAAAAANb9FxklR4LfUE4XGkj8KFKg-PEN">
       </re-captcha>
 
-      <button  [disabled]="!recaptcha_token || informationForm.invalid" (click)="save()">{{content.send}}</button>
+      <button class="submit-btn" [disabled]="!recaptcha_token || informationForm.invalid"
+        (click)="save()">{{content.send}}</button>
     </form>
   </div>
 
-  <div class="left">
-    <img src="assets/icons/contact-image.png" alt="">
+  <div  nz-col nzLg="12" nzXs="0"  class="hidden-md main-img-container">
+    <div style="height: 100%;" nz-row class="img-container">
+
+
+      <div nz-col nzSpan="12" class="img-item">
+        <img src="assets/icons/contact-image.png" alt="">
+      </div>
+
+
+      <div nz-col nzSpan="12" class="main-img-wrapper">
+
+      </div>
+    </div>
   </div>
 </div>
