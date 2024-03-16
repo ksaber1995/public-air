@@ -24,7 +24,7 @@ const routes: Routes = [
         component: RequestDataComponent,
       },
       {
-        path: 'successMessage',
+        path: 'success-request',
         component: SuccessMessageComponent,
       },
     ],

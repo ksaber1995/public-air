@@ -1,0 +1,1 @@
+export const CaptchaKey = '6LfEVIQpAAAAAPzvEpzYUuA5NflnOdFDx7N4hRxi'

@@ -4,6 +4,9 @@ import { ContactWithToken } from '../../../shared/models/Contact';
 import { SwaggerService } from '../../../shared/services/swagger.service';
 import { LocalizationService } from './../../../shared/services/localization.service';
 import { Codes } from './model';
+import { CaptchaKey } from '../../../../constants/keys';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact-us',
@@ -13,15 +16,15 @@ import { Codes } from './model';
 export class ContactUsComponent {
   lang = this.local.getCurrentLanguage();
   content;
-
+  CaptchaKey = CaptchaKey
   recaptcha_token;
 
   informationForm = new FormGroup({
-    name: new FormControl('kairm', [Validators.required, ,Validators.minLength(5), Validators.maxLength(100)]),
-    phone_number: new FormControl('', [Validators.required]),
-    email: new FormControl('karimali201094@gmail.com', [Validators.required]),
-    title: new FormControl('karim test', [Validators.required,Validators.minLength(5), Validators.maxLength(100)]),
-    notes: new FormControl('s', [Validators.required,Validators.minLength(5), Validators.maxLength(5000)]),
+    name: new FormControl(null, [Validators.required, ,Validators.minLength(5), Validators.maxLength(100)]),
+    phone_number: new FormControl(null, [Validators.required]),
+    email: new FormControl(null , [Validators.required]),
+    title: new FormControl(null , [Validators.required,Validators.minLength(5), Validators.maxLength(100)]),
+    notes: new FormControl(null , [Validators.required,Validators.minLength(5), Validators.maxLength(5000)]),
   });
 
   myError = (controlName: string, errorName: string) => {
@@ -33,7 +36,9 @@ export class ContactUsComponent {
 
   constructor(
     private local: LocalizationService,
-    private swager: SwaggerService
+    private swagger: SwaggerService,
+    private message: NzMessageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -64,8 +69,17 @@ export class ContactUsComponent {
       recaptcha_token: this.recaptcha_token,
     };
 
-    this.swager.contactUs(body).subscribe((res) => {
+    this.swagger.contactUs(body).subscribe((res) => {
       console.log(res, 'result');
+      debugger
+      this.router.navigate(['/success-request'])
+    },err=>{
+      if(err?.status === 200){
+        this.router.navigate(['/success-request'])
+      }else{
+        this.message.create('error', err?.error?.error || "Can't send your request");
+      }
+
     });
   }
 
