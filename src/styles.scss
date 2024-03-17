@@ -122,3 +122,11 @@ mat-error{
   margin-bottom: 10px !important;
 
 }
+
+
+button[disabled]{
+    opacity: .7;
+    &:hover{
+        cursor: not-allowed !important;
+    }
+}
