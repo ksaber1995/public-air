@@ -180,7 +180,7 @@ export class SwaggerService {
   }
 
   requestData(body){
-    return this.http.post(' https://functions.naqi.dal2.com/v2/data-access/validate', body);
+    return this.http.post('https://functions.naqi.dal2.com/v2/data-access/validate', body);
 
   }
 }

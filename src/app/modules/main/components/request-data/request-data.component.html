@@ -103,7 +103,7 @@
     </div>
 
     <re-captcha (error)="captchaError($event)" (resolved)="resolve($event)"
-      siteKey="6LeQOJQpAAAAANb9FxklR4LfUE4XGkj8KFKg-PEN">
+      [siteKey]="CaptchaKey">
     </re-captcha>
 
     <button [disabled]="!recaptcha_token || informationForm.invalid" (click)="save()">{{content.send}}</button>

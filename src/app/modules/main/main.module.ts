@@ -22,7 +22,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { CookieService } from 'ngx-cookie-service';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { NzMessageModule } from 'ng-zorro-antd/message';
 import { RecaptchaModule } from "ng-recaptcha";
 import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input-v16';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -58,6 +58,7 @@ import {MatSelectModule} from '@angular/material/select';
     NzCheckboxModule,
     RecaptchaModule,
     NzInputModule,
+    NzMessageModule,
     NgSelectModule,
     MatFormFieldModule,
     MatInputModule,
