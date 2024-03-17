@@ -176,11 +176,11 @@ export class SwaggerService {
     // 2- get taken
     // generate ContactWith capture // post
     //
-   return  this.http.post('https://functions.naqi.dal2.com/v1/feedback/validate', body);
+   return  this.http.post('https://functions.naqi.dal2.com/v2/feedback/validate', body);
   }
 
   requestData(body){
-    return this.http.post(' https://functions.naqi.dal2.com/v1/data-access/validate', body);
+    return this.http.post(' https://functions.naqi.dal2.com/v2/data-access/validate', body);
 
   }
 }
