@@ -1,9 +1,9 @@
 <div class="header">
   <img src="assets/icons/LogoImage.svg" routerLink="" alt="">
   <div class="container">
-    <button routerLink="/requestData"><img src="assets/icons/informationRequestIcon.svg" class="information">
+    <button routerLink="/requestData" routerLinkActive="active-link"><img src="assets/icons/informationRequestIcon.svg" class="information">
       {{content.information}} </button>
-    <button routerLink="/contact"><img src="assets/icons/contactIcon.svg"> {{content.contact}}</button>
+    <button routerLink="/contact" routerLinkActive="active-link"><img src="assets/icons/contactIcon.svg"> {{content.contact}}</button>
 
     <ul *ngIf="lang$ | async as lang">
       <li *ngIf="lang === 'ar'">

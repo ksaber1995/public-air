@@ -83,11 +83,11 @@ export class RequestDataComponent {
       from: this.informationForm.value.startDate,
       to: this.informationForm.value.endDate,
       stations: [{ station_code: this.informationForm.value.station }],
-      
+
       variables: this.variables.filter(res => res.checked).map(res => ({ variable_code: res.name }))
     }
-    
-    
+
+
     const body = {
       title: this.informationForm.value.name,
       email: this.informationForm.value.email,
@@ -98,7 +98,7 @@ export class RequestDataComponent {
     }
 
     this.swagger.requestData(body).subscribe(res => {
-
+      this.router.navigate(['/success-request'])
     }, err => {
       if (err?.status === 200) {
         this.router.navigate(['/success-request'])

@@ -147,4 +147,12 @@
   &:hover {
     cursor: pointer;
   }
+  &[disabled] {
+    opacity: .7;
+
+    &:hover {
+      cursor: not-allowed;
+    }
+
+}
 }

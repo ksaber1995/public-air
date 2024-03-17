@@ -1,6 +1,5 @@
 @import "colors";
 .container {
-
   h1 {
     font-size: 40px;
     color: #4f4f4f;
@@ -15,7 +14,6 @@
     form {
       justify-content: center;
 
-
       .form-item-wrapper {
         margin-bottom: 10px;
 
@@ -27,8 +25,6 @@
           color: #4f4f4f;
           display: inline-block;
         }
-
-
       }
     }
   }
@@ -144,9 +140,7 @@ mat-form-field {
     padding: 0;
     width: 90px;
   }
-
 }
-
 
 :host ::ng-deep .sr-only {
   display: none !important;
@@ -156,11 +150,9 @@ mat-form-field {
   background-color: #fff !important;
 }
 
-
 :host ::ng-deep .mdc-text-field--filled:not(.mdc-text-filed-disabled) {
   background-color: transparent !important;
 }
-
 
 button {
   width: 40%;
@@ -177,4 +169,14 @@ button {
   &:hover {
     cursor: pointer;
   }
+
+}
+
+button[disabled] {
+  opacity: .7;
+
+  &:hover {
+    cursor: not-allowed;
+  }
+
 }
