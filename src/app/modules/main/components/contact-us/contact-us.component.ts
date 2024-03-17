@@ -50,12 +50,6 @@ export class ContactUsComponent {
 
     this.lang.subscribe(lang=>{
       this.codes = Codes.map(res=> ({...res, label: lang === 'ar' ? res.arab_name + res.country_code : res.country_name + res.country_code}))
-
-    })
-
-    this.informationForm.valueChanges.subscribe(res=>{
-      console.log(res)
-      // console.log(this.informationForm.get('title').errors)
     })
   }
 
@@ -70,8 +64,6 @@ export class ContactUsComponent {
     };
 
     this.swagger.contactUs(body).subscribe((res) => {
-      console.log(res, 'result');
-      debugger
       this.router.navigate(['/success-request'])
     },err=>{
       if(err?.status === 200){
