@@ -1,15 +1,17 @@
 @import 'colors';
 
 ::ng-deep .station-details-modal .ant-modal-content {
-
-
     border-radius: 20px;
 }
 
+p{
+    margin-bottom: 0;
+}
 
 .station-name {
     text-align: center;
-    margin: 1rem 0;
+    margin: 0;
+    margin-bottom: .5rem;
     font-weight: bold;
 }
 
@@ -38,7 +40,7 @@
 
 .variable {
     border-radius: 5px;
-    height: 35px;
+    height: 30px;
     font-size: 1rem;
     display: flex;
     align-items: center;
@@ -48,7 +50,7 @@
     max-width: 90px;
     &.active {
 
-        height: 50px;
+        height: 45px;
         box-shadow: 0 3px 0px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
         border: 1px solid #333 !important;
     }
@@ -59,7 +61,7 @@
     box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
     border-radius: 15px;
     background-color: #fff;
-    padding: 1rem;
+    padding: .5rem 1rem;
     margin: 0 2rem;
 
     .brief {
@@ -101,7 +103,7 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        padding: 2rem;
+        padding: 1rem 2rem;
         gap: 1rem;
 
 
@@ -129,15 +131,15 @@
 .aqi-instructions {
     justify-content: center;
     gap: 2rem;
-    margin: 2rem;
+    margin: 1rem 2rem;
     align-items: flex-start;
 
     .instruct-img-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 70px;
-        height: 60px;
+        width: 65px;
+        height: 55px;
         border-radius: 10px;
     }
 
@@ -147,9 +149,9 @@
         gap: 1rem;
 
         .instruction-title {
-            max-width: 240px;
+            max-width: 260px;
             text-align: center;
-            font-size: 1rem;
+            font-size: .75rem;
             color: #333;
             line-height: 17px;
             font-weight: 500;
@@ -177,7 +179,7 @@
     }
 
     p {
-        font-size: 1rem;
+        font-size: .8rem;
     }
 }
 
@@ -218,7 +220,7 @@
 .close-btn {
     color: $SeaGreen;
     border: 1px solid $SeaGreen;
-
+    position: absolute;
     padding: 10px 30px;
     border-radius: 8px;
 
@@ -240,7 +242,6 @@
 }
 
 
-
 @media(max-width: 992px){    
     .station-name {
         margin: .5rem 0;
@@ -254,19 +255,19 @@
     
     
     .variable {
-        height: 30px;
-        font-size: .8rem;
+        height: 25px;
+        font-size: .7rem;
         min-width: 40px;
         max-width: 80px;
         &.active {
-            height: 50px;
+            height: 45px;
         }
     }
     
     
     .content-wrapper {
         padding: .4rem;
-        margin: 0 1rem;
+        margin: .5rem 1rem;
     
         .brief {
             font-size: 1rem;
